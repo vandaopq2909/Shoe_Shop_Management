@@ -12,14 +12,14 @@ namespace DTO
         {
             OrderID = GenerateOrderID();
         }
-        public OrdersDTO(DateTimeOffset createdTime, double totalAmount, int status, string? description, string? userID)
+        public OrdersDTO(DateTimeOffset createdTime, double totalAmount, int status, string? description, string? userName)
         {
             OrderID = GenerateOrderID();
             CreatedTime = createdTime;
             TotalAmount = totalAmount;
             Status = status;
             Description = description;
-            UserID = userID;
+            UserName = userName;
         }
 
         public string OrderID { get; set; }
@@ -27,7 +27,7 @@ namespace DTO
         public double TotalAmount { get; set; } = 0;
         public int Status { get; set; } = 0;
         public string? Description { get; set; }
-        public string? UserID { get; set; }
+        public string? UserName { get; set; }
         private string GenerateOrderID()
         {
             return "ORD" + Guid.NewGuid().ToString("N");

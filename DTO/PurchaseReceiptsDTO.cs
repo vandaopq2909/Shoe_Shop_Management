@@ -13,20 +13,20 @@ namespace DTO
             PReceiptID = GeneratePReceiptID();
         }
         public PurchaseReceiptsDTO(DateTimeOffset CreatedTime, double TotalPrice,
-            int Status, string UserID, string SupplierID)
+            int Status, string UserName, string SupplierID)
         {
             PReceiptID = GeneratePReceiptID();
             this.CreatedTime = CreatedTime;
             this.TotalPrice = TotalPrice;
             this.Status = Status;
-            this.UserID = UserID;
+            this.UserName = UserName;
             this.SupplierID = SupplierID;
         }
         public string PReceiptID { get; set; }
         public DateTimeOffset? CreatedTime { get; set; }
         public double TotalPrice { get; set; } = 0;
         public int Status { get; set; } = 0;
-        public string? UserID { get; set; }
+        public string? UserName { get; set; }
         public string? SupplierID { get; set; }
         private string GeneratePReceiptID()
         {
