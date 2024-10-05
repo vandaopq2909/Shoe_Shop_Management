@@ -9,13 +9,13 @@ namespace BUL
         {
             usersDAL = new UsersDAL();
         }
-        public bool kiemTraTonTai(UsersDTO user)
+        public bool isValid(UsersDTO user)
         {
-            return usersDAL.kiemTraTonTai(user);
+            return usersDAL.isValid(user);
         }
-        public bool kiemTraTrung(string userName)
+        public bool isDuplicated(string userName)
         {
-            return usersDAL.kiemTraTrung(userName);
+            return usersDAL.isDuplicated(userName);
         }
     }
 }
