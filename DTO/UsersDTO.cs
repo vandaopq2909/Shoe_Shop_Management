@@ -27,5 +27,10 @@ namespace DTO
             DateOfBirth = dateOfBirth;
             Address = address;
         }
+        public UsersDTO(string? userName, string? password)
+        {
+            UserName = userName;
+            Password = password;
+        }
     }
 }
