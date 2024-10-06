@@ -12,7 +12,7 @@ namespace DTO
         {
             OrderID = GenerateOrderID();
         }
-        public OrdersDTO(DateTimeOffset createdTime, double totalAmount, int status, string? description, string? userName)
+        public OrdersDTO(DateTimeOffset createdTime, double totalAmount, string? status, string? description, string? userName)
         {
             OrderID = GenerateOrderID();
             CreatedTime = createdTime;
@@ -25,7 +25,7 @@ namespace DTO
         public string OrderID { get; set; }
         public DateTimeOffset CreatedTime { get; set; }
         public double TotalAmount { get; set; } = 0;
-        public int Status { get; set; } = 0;
+        public string? Status { get; set; }
         public string? Description { get; set; }
         public string? UserName { get; set; }
         private string GenerateOrderID()

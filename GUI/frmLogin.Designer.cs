@@ -1,4 +1,7 @@
-﻿namespace GUI
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace GUI
 {
     partial class frmLogin
     {
@@ -28,116 +31,124 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            txtUserName = new TextBox();
-            txtPassword = new TextBox();
-            ckbShowPass = new CheckBox();
-            btnLogin = new Button();
-            btnRegister = new Button();
-            SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtUserName = new System.Windows.Forms.TextBox();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.ckbShowPass = new System.Windows.Forms.CheckBox();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnRegister = new System.Windows.Forms.Button();
+            this.SuspendLayout();
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.FromArgb(0, 192, 0);
-            label1.Location = new Point(311, 61);
-            label1.Name = "label1";
-            label1.Size = new Size(194, 46);
-            label1.TabIndex = 0;
-            label1.Text = "Đăng nhập";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label1.Location = new System.Drawing.Point(311, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(194, 46);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Đăng nhập";
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(81, 149);
-            label2.Name = "label2";
-            label2.Size = new Size(152, 28);
-            label2.TabIndex = 1;
-            label2.Text = "Tên đăng nhập";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(81, 119);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(152, 28);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Tên đăng nhập";
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(81, 220);
-            label3.Name = "label3";
-            label3.Size = new Size(102, 28);
-            label3.TabIndex = 2;
-            label3.Text = "Mât khẩu";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(81, 176);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 28);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Mât khẩu";
             // 
             // txtUserName
             // 
-            txtUserName.Font = new Font("Segoe UI", 12F);
-            txtUserName.Location = new Point(311, 149);
-            txtUserName.Name = "txtUserName";
-            txtUserName.Size = new Size(408, 34);
-            txtUserName.TabIndex = 3;
+            this.txtUserName.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtUserName.Location = new System.Drawing.Point(311, 119);
+            this.txtUserName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtUserName.Name = "txtUserName";
+            this.txtUserName.Size = new System.Drawing.Size(408, 34);
+            this.txtUserName.TabIndex = 3;
             // 
             // txtPassword
             // 
-            txtPassword.Font = new Font("Segoe UI", 12F);
-            txtPassword.Location = new Point(311, 223);
-            txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(408, 34);
-            txtPassword.TabIndex = 4;
+            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtPassword.Location = new System.Drawing.Point(311, 178);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(408, 34);
+            this.txtPassword.TabIndex = 4;
             // 
             // ckbShowPass
             // 
-            ckbShowPass.AutoSize = true;
-            ckbShowPass.Checked = true;
-            ckbShowPass.CheckState = CheckState.Checked;
-            ckbShowPass.Font = new Font("Segoe UI", 12F);
-            ckbShowPass.Location = new Point(311, 287);
-            ckbShowPass.Name = "ckbShowPass";
-            ckbShowPass.Size = new Size(188, 32);
-            ckbShowPass.TabIndex = 5;
-            ckbShowPass.Text = "Hiển thị mật khẩu";
-            ckbShowPass.UseVisualStyleBackColor = true;
-            ckbShowPass.CheckedChanged += ckbShowPass_CheckedChanged;
+            this.ckbShowPass.AutoSize = true;
+            this.ckbShowPass.Checked = true;
+            this.ckbShowPass.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbShowPass.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.ckbShowPass.Location = new System.Drawing.Point(311, 230);
+            this.ckbShowPass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ckbShowPass.Name = "ckbShowPass";
+            this.ckbShowPass.Size = new System.Drawing.Size(188, 32);
+            this.ckbShowPass.TabIndex = 5;
+            this.ckbShowPass.Text = "Hiển thị mật khẩu";
+            this.ckbShowPass.UseVisualStyleBackColor = true;
+            this.ckbShowPass.Click += new System.EventHandler(this.ckbShowPass_CheckedChanged);
             // 
             // btnLogin
             // 
-            btnLogin.Font = new Font("Segoe UI", 12F);
-            btnLogin.Location = new Point(311, 355);
-            btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(154, 52);
-            btnLogin.TabIndex = 6;
-            btnLogin.Text = "Đăng nhập";
-            btnLogin.UseVisualStyleBackColor = true;
-            btnLogin.Click += btnLogin_Click;
+            this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnLogin.Location = new System.Drawing.Point(311, 284);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(154, 42);
+            this.btnLogin.TabIndex = 6;
+            this.btnLogin.Text = "Đăng nhập";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // btnRegister
             // 
-            btnRegister.Font = new Font("Segoe UI", 12F);
-            btnRegister.Location = new Point(565, 355);
-            btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(154, 52);
-            btnRegister.TabIndex = 7;
-            btnRegister.Text = "Đăng kí";
-            btnRegister.UseVisualStyleBackColor = true;
-            btnRegister.Click += btnRegister_Click;
+            this.btnRegister.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnRegister.Location = new System.Drawing.Point(565, 284);
+            this.btnRegister.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(154, 42);
+            this.btnRegister.TabIndex = 7;
+            this.btnRegister.Text = "Đăng kí";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // frmLogin
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(839, 485);
-            Controls.Add(btnRegister);
-            Controls.Add(btnLogin);
-            Controls.Add(ckbShowPass);
-            Controls.Add(txtPassword);
-            Controls.Add(txtUserName);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Name = "frmLogin";
-            Text = "Form1";
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(839, 388);
+            this.Controls.Add(this.btnRegister);
+            this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.ckbShowPass);
+            this.Controls.Add(this.txtPassword);
+            this.Controls.Add(this.txtUserName);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Name = "frmLogin";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.frmLogin_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

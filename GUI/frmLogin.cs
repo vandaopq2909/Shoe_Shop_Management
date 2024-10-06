@@ -1,5 +1,7 @@
 ﻿using BUL;
 using DTO;
+using System;
+using System.Windows.Forms;
 
 namespace GUI
 {
@@ -7,6 +9,12 @@ namespace GUI
     {
         Form frmMNGroupUser, frmMNListScreen, frmMNRole, frmMNUser_GroupUser, frmMNUser;
         public string? userName { get; set; }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public frmLogin()
         {
             InitializeComponent();

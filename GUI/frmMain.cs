@@ -1,9 +1,11 @@
 ﻿
 using DTO;
 using GUI.DSShoeShopTableAdapters;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Net;
-using System.Reflection.PortableExecutable;
+using System.Windows.Forms;
 
 namespace GUI
 {

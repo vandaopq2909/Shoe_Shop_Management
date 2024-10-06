@@ -8,7 +8,7 @@ namespace DAL
     public class UsersDAL
     {
         SqlConnection conn;
-        string strConnection = ConfigurationManager.ConnectionStrings["MyDatabase"].ConnectionString;
+        string strConnection = ConfigurationManager.ConnectionStrings["ShoeShop"].ConnectionString;
 
         public UsersDAL()
         {
