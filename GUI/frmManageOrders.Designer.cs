@@ -78,6 +78,7 @@
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetails)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -184,6 +185,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.button3);
             this.groupBox4.Controls.Add(this.dateTimePicker1);
             this.groupBox4.Controls.Add(this.textBox5);
             this.groupBox4.Controls.Add(this.textBox4);
@@ -443,7 +445,7 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(110, 37);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(493, 24);
+            this.comboBox1.Size = new System.Drawing.Size(443, 24);
             this.comboBox1.TabIndex = 6;
             // 
             // textBox2
@@ -548,6 +550,15 @@
             this.textBox14.Size = new System.Drawing.Size(100, 22);
             this.textBox14.TabIndex = 18;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(559, 30);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(44, 38);
+            this.button3.TabIndex = 12;
+            this.button3.Text = "+";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // frmManageOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -637,5 +648,6 @@
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.TextBox textBox13;
         private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.Button button3;
     }
 }
