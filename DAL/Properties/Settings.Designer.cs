@@ -26,8 +26,8 @@ namespace DAL.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-K6TE4RL\\VANDAO;Initial Catalog=ShoeShop2;Persist Security Inf" +
-            "o=True;User ID=sa;Encrypt=True;TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=ShoeShop;Persist Security Info=True;User ID=sa;Pass" +
+            "word=123;Encrypt=True;TrustServerCertificate=True")]
         public string ShoeShop2ConnectionString {
             get {
                 return ((string)(this["ShoeShop2ConnectionString"]));

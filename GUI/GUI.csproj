@@ -77,6 +77,12 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmManageCategories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageCategories.Designer.cs">
+      <DependentUpon>frmManageCategories.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmManageGroupUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +100,12 @@
     </Compile>
     <Compile Include="frmManageOrders.Designer.cs">
       <DependentUpon>frmManageOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageProducts.Designer.cs">
+      <DependentUpon>frmManageProducts.cs</DependentUpon>
     </Compile>
     <Compile Include="frmManageRole.cs">
       <SubType>Form</SubType>
@@ -136,6 +148,9 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmManageCategories.resx">
+      <DependentUpon>frmManageCategories.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmManageGroupUser.resx">
       <DependentUpon>frmManageGroupUser.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmManageOrders.resx">
       <DependentUpon>frmManageOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageProducts.resx">
+      <DependentUpon>frmManageProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmManageRole.resx">
       <DependentUpon>frmManageRole.cs</DependentUpon>
@@ -161,7 +179,7 @@
       <DependentUpon>frmRegister.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -199,6 +217,10 @@
     <ProjectReference Include="..\BUL\BUL.csproj">
       <Project>{62fcca42-6dba-4d8f-b982-6aff5ea84b04}</Project>
       <Name>BUL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{c3bafef7-e8a8-4dee-9f63-09ea20526a79}</Project>
+      <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{7ff5fb42-6e0a-4b0a-ba0b-f294c144f79d}</Project>
