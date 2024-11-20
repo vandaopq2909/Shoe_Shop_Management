@@ -15,6 +15,20 @@ namespace GUI
         public frmMain()
         {
             InitializeComponent();
+            
+        }
+        public void AddControl(Form f)
+        {
+            panelCenter.Controls.Clear();
+            f.Dock = DockStyle.Fill;
+            f.TopLevel = false;
+            panelCenter.Controls.Add(f);
+            f.Show();
+        }
+
+        private void btnQLNhanVien_Click(object sender, EventArgs e)
+        {
+            AddControl(new frmManageEmployees());
         }
     }
 }
