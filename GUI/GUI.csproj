@@ -83,6 +83,12 @@
     <Compile Include="frmManageCategories.Designer.cs">
       <DependentUpon>frmManageCategories.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmManageEmployees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageEmployees.Designer.cs">
+      <DependentUpon>frmManageEmployees.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmManageGroupUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmManageCategories.resx">
       <DependentUpon>frmManageCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageEmployees.resx">
+      <DependentUpon>frmManageEmployees.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmManageGroupUser.resx">
       <DependentUpon>frmManageGroupUser.cs</DependentUpon>
@@ -235,6 +244,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ShoeLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\search.png" />
+    <None Include="Resources\search1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
