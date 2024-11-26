@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BUL;
-using DAL;
 
 namespace GUI
 {
@@ -16,8 +13,9 @@ namespace GUI
     {
         private ProductBUL _productBUL;
         private CategoriesBUL _categoriesBUL;
-        bool flagInsert = false;
-        bool flagUpdate = false;
+
+        // Biến lưu đường dẫn ảnh đã chọn
+        private string selectedImagePath = string.Empty;
 
         public frmManageProducts()
         {
@@ -31,105 +29,38 @@ namespace GUI
             Load_Product();
             Load_ComboBox();
         }
+
         void Load_Product()
         {
             var pro = _productBUL.GetProducts().ToList();
             dgvProducts.DataSource = pro;
         }
+
         void Load_ComboBox()
         {
             var cat = _categoriesBUL.GetCategories().ToList();
 
-            cbxCategoryName.DataSource = cat;
-            cbxCategoryName.DisplayMember = "CategoryName";  
-            cbxCategoryName.ValueMember = "CategoryID";     
+            cbxTenLoai.DataSource = cat;
+            cbxTenLoai.DisplayMember = "CategoryName";
+            cbxTenLoai.ValueMember = "CategoryID";
         }
 
         void clearText()
         {
-            cbxCategoryName.SelectedIndex = 0;
-            txtBrand.Clear();
-            txtProductID.Clear();
-            txtProductName.Clear();
-            txtSize.Clear();
-            txtPrice.Clear();
-            txtImage.Clear();
-            txtDescription.Clear();
-            txtColor.Clear();
-            txtProductID.Focus();
-        }
-        private void btnAddPro_Click(object sender, EventArgs e)
-        {
-            flagInsert = true;
-            flagUpdate = false;
-            MessageBox.Show("Nhập thông tin để thêm dữ liệu!\n Bấm 'Lưu' để hoàn tất thao tác.");
-            clearText();
-        }
-
-        private void btnDeletePro_Click(object sender, EventArgs e)
-        {
-            _productBUL.DeleteProduct(txtProductID.Text);
-            Load_Product();
-            MessageBox.Show("Đã xóa thành công!");
-            clearText();
-        }
-
-        private void btnUpdatePro_Click(object sender, EventArgs e)
-        {
-            flagUpdate = true;
-            flagInsert = false;
-            MessageBox.Show("Nhập thông tin để sửa dữ liệu!\n Bấm 'Lưu' để hoàn tất thao tác.");
-            clearText();
-        }
-
-        private void btnSavePro_Click(object sender, EventArgs e)
-        {
-            string catID = cbxCategoryName.SelectedValue.ToString();
-            string proID = txtProductID.Text;
-            string name = txtProductName.Text;
-            decimal prize = decimal.Parse(txtPrice.Text);
-            string des = txtDescription.Text;
-            int size = int.Parse(txtSize.Text);
-            string color = txtColor.Text;
-            string brand = txtBrand.Text;
-            string img = txtImage.Text;
-
-            try
-            {
-                if (flagInsert)
-                {
-                    _productBUL.AddProduct(catID, proID, name, prize, des, size, color, brand, img);
-                    Load_Product();
-                    MessageBox.Show("Đã thêm thành công!");                    
-                }
-                if (flagUpdate)
-                {
-                    _productBUL.UpdateProduct(catID, proID, name, prize, des, size, color, brand, img);
-                    Load_Product();
-                    MessageBox.Show("Đã sửa thành công!");                    
-                }
-
-                flagUpdate = false;
-                flagInsert = false;
-                clearText();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }            
-        }
-
-        private void btnRefreshPro_Click(object sender, EventArgs e)
-        {
-
-            flagUpdate = false;
-            flagInsert = false;
-            clearText();
-        }
-
-        private void btnExitPro_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            cbxTenLoai.SelectedIndex = 0;
+            txtGiaBan.Clear();
+            txtKichThuoc.Clear();
+            txtMaSP.Clear();
+            txtMauSac.Clear();
+            txtMoTa.Clear();
+            txtSearch.Clear();
+            txtTenSP.Clear();
+            txtThuongHieu.Clear();
+            ckbTrangThai.Checked = false;
+            nudSoLuong.Value = 0;
+            ptbSanPham.Image = null;
+            selectedImagePath = string.Empty;
+            txtTenSP.Focus();
         }
 
         private void dgvProducts_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -138,17 +69,187 @@ namespace GUI
             {
                 DataGridViewRow row = dgvProducts.Rows[e.RowIndex];
 
-                txtProductID.Text = row.Cells["ProductID"].Value.ToString();
-                txtProductName.Text = row.Cells["ProductName"].Value.ToString();
-                txtSize.Text = row.Cells["Size"].Value.ToString();
-                txtPrice.Text = row.Cells["ProductPrice"].Value.ToString();
-                txtDescription.Text = row.Cells["Description"].Value.ToString();
-                txtColor.Text = row.Cells["Color"].Value.ToString();
-                txtImage.Text = row.Cells["Image"].Value.ToString();
-                txtBrand.Text = row.Cells["Brand"].Value.ToString();
+                txtMaSP.Text = row.Cells["ProductID"].Value.ToString();
+                txtTenSP.Text = row.Cells["ProductName"].Value.ToString();
+                txtKichThuoc.Text = row.Cells["Size"].Value.ToString();
+                txtGiaBan.Text = row.Cells["ProductPrice"].Value.ToString();
+                txtMoTa.Text = row.Cells["Description"].Value.ToString();
+                txtMauSac.Text = row.Cells["Color"].Value.ToString();
+                txtThuongHieu.Text = row.Cells["Brand"].Value.ToString();
+                ckbTrangThai.Checked = row.Cells["Status"].Value.ToString() == "Còn hàng";
+                nudSoLuong.Value = Convert.ToDecimal(row.Cells["Quantity"].Value);
+                cbxTenLoai.SelectedValue = row.Cells["CategoryID"].Value;
 
-                cbxCategoryName.SelectedValue = row.Cells["CategoryID"].Value;
+                // Hiển thị ảnh nếu có
+                string img = row.Cells["Image"].Value?.ToString();
+                if (!string.IsNullOrEmpty(img))
+                {
+                    string imagePath = Path.Combine(Application.StartupPath, "Images", img);
+                    if (File.Exists(imagePath))
+                    {
+                        ptbSanPham.Image = Image.FromFile(imagePath);
+                        ptbSanPham.Tag = img; // Lưu tên ảnh vào Tag
+                    }
+                    else
+                    {
+                        ptbSanPham.Image = null;
+                        ptbSanPham.Tag = null;
+                    }
+                }
+                else 
+                { 
+                    img = "";
+                } 
             }
+        }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int catID = int.Parse(cbxTenLoai.SelectedValue.ToString());
+                string name = txtTenSP.Text;
+                float prize = float.Parse(txtGiaBan.Text);
+                string des = txtMoTa.Text;
+                int quantity = Convert.ToInt32(nudSoLuong.Value);
+                string size = txtKichThuoc.Text;
+                string color = txtMauSac.Text;
+                string brand = txtThuongHieu.Text;
+                string status = ckbTrangThai.Checked ? "Còn hàng" : "Hết hàng";
+                string img = "";
+
+                if (!string.IsNullOrEmpty(selectedImagePath))
+                {
+                    img = Path.GetFileName(selectedImagePath);
+                    string targetPath = Path.Combine(Application.StartupPath, "Images", img);
+                    if (!Directory.Exists(Path.Combine(Application.StartupPath, "Images")))
+                        Directory.CreateDirectory(Path.Combine(Application.StartupPath, "Images"));
+
+                    if (!File.Exists(targetPath))
+                        File.Copy(selectedImagePath, targetPath);
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn ảnh!");
+                    return;
+                }
+
+                _productBUL.AddProduct(catID, name, prize, des, quantity, size, color, brand, status, img);
+                Load_Product();
+                MessageBox.Show("Thêm sản phẩm thành công!");
+                clearText();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi thêm sản phẩm: " + ex.Message);
+            }
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _productBUL.DeleteProduct(Convert.ToInt32(txtMaSP.Text));
+                Load_Product();
+                MessageBox.Show("Xóa sản phẩm thành công!");
+                clearText();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi xóa sản phẩm: " + ex.Message);
+            }
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int catID = int.Parse(cbxTenLoai.SelectedValue.ToString());
+                int proID = int.Parse(txtMaSP.Text);
+                string name = txtTenSP.Text;
+                float prize = float.Parse(txtGiaBan.Text);
+                string des = txtMoTa.Text;
+                int quantity = Convert.ToInt32(nudSoLuong.Value);
+                string size = txtKichThuoc.Text;
+                string color = txtMauSac.Text;
+                string brand = txtThuongHieu.Text;
+                string status = ckbTrangThai.Checked ? "Còn hàng" : "Hết hàng";
+                string img = ptbSanPham.Tag?.ToString() ?? "";
+
+                if (!string.IsNullOrEmpty(selectedImagePath))
+                {
+                    img = Path.GetFileName(selectedImagePath);
+                    string targetPath = Path.Combine(Application.StartupPath, "Images", img);
+                    if (!File.Exists(targetPath))
+                        File.Copy(selectedImagePath, targetPath);
+                }
+
+                _productBUL.UpdateProduct(catID, proID, name, prize, des, quantity, size, color, brand, status, img);
+                Load_Product();
+                MessageBox.Show("Sửa sản phẩm thành công!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi sửa sản phẩm: " + ex.Message);
+            }
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            clearText();
+        }
+
+        private void btnChonAnhSP_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+                ofd.Title = "Chọn hình ảnh";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    selectedImagePath = ofd.FileName;
+                    ptbSanPham.Image = new Bitmap(selectedImagePath);
+                    ptbSanPham.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+            }
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                string searchText = txtSearch.Text.Trim().ToLower();
+                var result = _productBUL.GetProducts()
+                                        .Where(p => p.ProductID.ToString().Contains(searchText) ||
+                                                    p.ProductName.ToLower().Contains(searchText))
+                                        .ToList();
+                dgvProducts.DataSource = result;
+
+                if (result.Count == 0)
+                {
+                    MessageBox.Show("Không tìm thấy sản phẩm.");
+                }
+            }
+        }
+
+        private void txtGiaBan_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Cho phép các ký tự số và dấu chấm thập phân
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true; // Ngăn nhập các ký tự không hợp lệ
+            }
+
+            // Chỉ cho phép một dấu chấm thập phân
+            if (e.KeyChar == '.' && txtGiaBan.Text.Contains("."))
+            {
+                e.Handled = true; // Ngăn nhập dấu chấm thập phân thứ hai
+            }
+        }
+
+        private void txtSearch_Click(object sender, EventArgs e)
+        {
+            txtSearch.Clear();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
@@ -10,6 +11,7 @@ namespace BUL
     public class ProductBUL
     {
         private ProductDAL _productDAL;
+        
         public ProductBUL()
         {
             _productDAL = new ProductDAL();
@@ -20,25 +22,28 @@ namespace BUL
             return _productDAL.getProduct();
         }
 
-        public void AddProduct(string catID, string proID, string name, decimal price, string des, int size, string color, string brand, string img)
+        public void AddProduct(int catID, string name, float price, string des, int quantity,
+            string size, string color, string brand, string status, string img)
         {
             var pro = new Product
             {
                 CategoryID = catID,
-                ProductID = proID,
+                //ProductID = proID,
                 ProductName = name,
                 ProductPrice = price,
+                Quantity = quantity,
                 Description = des,
                 Size = size,
                 Color = color,
                 Brand = brand,
-                Image = img
+                Image = img,
+                Status = status
 
             };
             _productDAL.addProduct(pro);
         }
 
-        public void DeleteProduct(string id)
+        public void DeleteProduct(int id)
         {
             var pro = _productDAL.getProductByID(id);
             if (pro != null)
@@ -47,18 +52,23 @@ namespace BUL
             }
         }
 
-        public void UpdateProduct(string catID, string proID, string name, decimal price, string des, int size, string color, string brand, string img)
+        public void UpdateProduct(int catID, int proID, string name, float price, string des, int quantity,
+            string size, string color, string brand, string status, string img)
         {
             var pro = _productDAL.getProductByID(proID);
             if (pro != null)
             {
-                pro.CategoryID = catID;
+                var category = _productDAL.getCategoryByID(catID);
+
+                pro.Category = category;
                 pro.ProductName = name;
                 pro.ProductPrice = price;
+                pro.Quantity = quantity;
                 pro.Description = des;
                 pro.Size = size;
                 pro.Color = color;
                 pro.Brand = brand;
+                pro.Status = status;
                 pro.Image = img;
                 _productDAL.updateProduct(pro);
             }

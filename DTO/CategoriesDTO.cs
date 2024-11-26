@@ -8,20 +8,20 @@ namespace DTO
 {
     public class CategoriesDTO
     {
-        public CategoriesDTO()
-        {
-            this.CategoriesID = GenerateCategoriesID();
-        }
-        public string CategoriesID {  get; set; }
+        //public CategoriesDTO()
+        //{
+        //    this.CategoriesID = GenerateCategoriesID();
+        //}
+        public int CategoriesID {  get; set; }
         public string CategoriesName { get; set; }
-        public CategoriesDTO(string id, string name)
+        public CategoriesDTO(int id, string name)
         {
             CategoriesID = id;
             this.CategoriesName = name;
         }
-        private string GenerateCategoriesID()
-        {
-            return "CAT" + Guid.NewGuid().ToString("N");
-        }
+        //private string GenerateCategoriesID()
+        //{
+        //    return "CAT" + Guid.NewGuid().ToString("N");
+        //}
     }
 }

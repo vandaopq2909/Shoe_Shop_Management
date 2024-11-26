@@ -14,9 +14,7 @@ namespace GUI
 {
     public partial class frmManageCategories : Form
     {
-        private CategoriesBUL _categoriesBUL;
-        bool flagInsert = false;
-        bool flagUpdate = false;
+        private CategoriesBUL _categoriesBUL;        
 
         public frmManageCategories()
         {
@@ -36,83 +34,9 @@ namespace GUI
         }
         void clearText()
         {
-            txtCategoryID.Clear();
-            txtCategoryName.Clear();
-            txtCategoryID.Focus();
-        }
-
-        private void btnAddCat_Click(object sender, EventArgs e)
-        {
-            flagInsert = true;
-            flagUpdate = false;
-            MessageBox.Show("Nhập thông tin để thêm dữ liệu!\n Bấm 'Lưu' để hoàn tất thao tác.");
-            clearText();            
-        }
-
-        private void btnDeleteCat_Click(object sender, EventArgs e)
-        {
-            _categoriesBUL.DeleteCategory(txtCategoryID.Text);
-            Load_Categories();
-            MessageBox.Show("Đã xóa thành công!");
-            clearText();
-        }
-
-        private void btnUpdateCat_Click(object sender, EventArgs e)
-        {
-            flagUpdate = true;
-            flagInsert = false;
-            MessageBox.Show("Nhập thông tin để sửa dữ liệu!\n Bấm 'Lưu' để hoàn tất thao tác.");
-            clearText();
-        }
-
-        private void btnSaveCat_Click(object sender, EventArgs e)
-        {
-            if(!flagInsert && !flagUpdate)
-            {
-                MessageBox.Show("Bạn chưa chọn chức năng");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(txtCategoryID.Text) || string.IsNullOrEmpty(txtCategoryName.Text))
-            {
-                MessageBox.Show("ID hoặc Tên danh mục không được để trống");
-                return;
-            }
-            try
-            {
-                if (flagInsert)
-                {
-                    _categoriesBUL.AddCategory(txtCategoryID.Text, txtCategoryName.Text);
-                    MessageBox.Show("Đã thêm thành công!");
-                    Load_Categories();
-                }
-
-                if (flagUpdate)
-                {
-                    _categoriesBUL.UpdateCategory(txtCategoryID.Text, txtCategoryName.Text);
-                    MessageBox.Show("Đã sửa thành công!");
-                    Load_Categories();
-                }
-                flagInsert = false;
-                flagUpdate = false;
-                clearText();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void btnRefreshCat_Click(object sender, EventArgs e)
-        {
-            flagInsert = false;
-            flagUpdate = false;
-            clearText();            
-        }
-
-        private void btnExitCat_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            txtMaLoai.Clear();
+            txtTenLoai.Clear();
+            txtMaLoai.Focus();
         }
 
         private void dgvCategories_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -121,9 +45,84 @@ namespace GUI
             {
                 DataGridViewRow row = dgvCategories.Rows[e.RowIndex];
 
-                txtCategoryID.Text = row.Cells["CategoryID"].Value.ToString();
-                txtCategoryName.Text = row.Cells["CategoryName"].Value.ToString();
+                txtMaLoai.Text = row.Cells["CategoryID"].Value.ToString();
+                txtTenLoai.Text = row.Cells["CategoryName"].Value.ToString();
             }
+        }
+
+        private void btnThemLoai_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtTenLoai.Text))
+            {
+                MessageBox.Show("Tên danh mục không được để trống");
+                return;
+            }
+            //int ma = int.Parse(txtMaLoai.Text);
+            _categoriesBUL.AddCategory(txtTenLoai.Text);
+            MessageBox.Show("Đã thêm thành công!");
+            Load_Categories();
+            clearText();
+        }
+
+        private void btnXoaLoai_Click(object sender, EventArgs e)
+        {
+            int ma = int.Parse(txtMaLoai.Text);
+            _categoriesBUL.DeleteCategory(ma);
+            Load_Categories();
+            MessageBox.Show("Đã xóa thành công!");
+            clearText();
+        }
+
+        private void btnSuaLoai_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaLoai.Text) || string.IsNullOrEmpty(txtTenLoai.Text))
+            {
+                MessageBox.Show("ID hoặc Tên danh mục không được để trống");
+                return;
+            }
+            int ma = int.Parse(txtMaLoai.Text);
+            _categoriesBUL.UpdateCategory(ma, txtTenLoai.Text);
+            MessageBox.Show("Đã sửa thành công!");
+            Load_Categories();
+            clearText();
+        }
+
+        private void btnLamMoiLoai_Click(object sender, EventArgs e)
+        {
+            clearText();
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)  // Kiểm tra xem người dùng có nhấn Enter không
+            {
+                string searchText = txtSearch.Text.Trim().ToLower();
+
+                if (string.IsNullOrEmpty(searchText))
+                {
+                    MessageBox.Show("Vui lòng nhập mã loại hoặc tên loại để tìm kiếm.");
+                    return;
+                }
+
+                // Tìm kiếm sản phẩm theo mã sản phẩm hoặc tên loại
+                var searchResult = _categoriesBUL.GetCategories()
+                                              .Where(c => c.CategoryID.ToString().Contains(searchText) ||
+                                                          c.CategoryName.ToLower().Contains(searchText))
+                                              .ToList();
+
+                // Hiển thị kết quả tìm kiếm lên DataGridView
+                dgvCategories.DataSource = searchResult;
+
+                if (searchResult.Count == 0)
+                {
+                    MessageBox.Show("Không tìm thấy loại nào khớp với tìm kiếm.");
+                }                
+            }
+        }
+
+        private void txtSearch_Click(object sender, EventArgs e)
+        {
+            txtSearch.Clear();
         }
     }
 }

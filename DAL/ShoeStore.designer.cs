@@ -22,8 +22,8 @@ namespace DAL
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ShoeShop2")]
-	public partial class ShoeShopDataContext : System.Data.Linq.DataContext
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ShoeShop")]
+	public partial class ShoeStoreDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -36,9 +36,6 @@ namespace DAL
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
-    partial void InsertListScreen(ListScreen instance);
-    partial void UpdateListScreen(ListScreen instance);
-    partial void DeleteListScreen(ListScreen instance);
     partial void InsertOrderDetail(OrderDetail instance);
     partial void UpdateOrderDetail(OrderDetail instance);
     partial void DeleteOrderDetail(OrderDetail instance);
@@ -54,42 +51,39 @@ namespace DAL
     partial void InsertPurchaseReceipt(PurchaseReceipt instance);
     partial void UpdatePurchaseReceipt(PurchaseReceipt instance);
     partial void DeletePurchaseReceipt(PurchaseReceipt instance);
+    partial void InsertRole(Role instance);
+    partial void UpdateRole(Role instance);
+    partial void DeleteRole(Role instance);
     partial void InsertSupplier(Supplier instance);
     partial void UpdateSupplier(Supplier instance);
     partial void DeleteSupplier(Supplier instance);
-    partial void InsertUser_UserGroup(User_UserGroup instance);
-    partial void UpdateUser_UserGroup(User_UserGroup instance);
-    partial void DeleteUser_UserGroup(User_UserGroup instance);
-    partial void InsertUserGroup(UserGroup instance);
-    partial void UpdateUserGroup(UserGroup instance);
-    partial void DeleteUserGroup(UserGroup instance);
     #endregion
 		
-		public ShoeShopDataContext() : 
-				base(global::DAL.Properties.Settings.Default.ShoeShop2ConnectionString, mappingSource)
+		public ShoeStoreDataContext() : 
+				base(global::DAL.Properties.Settings.Default.ShoeShopConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public ShoeShopDataContext(string connection) : 
+		public ShoeStoreDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public ShoeShopDataContext(System.Data.IDbConnection connection) : 
+		public ShoeStoreDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public ShoeShopDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public ShoeStoreDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public ShoeShopDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public ShoeStoreDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -108,14 +102,6 @@ namespace DAL
 			get
 			{
 				return this.GetTable<User>();
-			}
-		}
-		
-		public System.Data.Linq.Table<ListScreen> ListScreens
-		{
-			get
-			{
-				return this.GetTable<ListScreen>();
 			}
 		}
 		
@@ -174,22 +160,6 @@ namespace DAL
 				return this.GetTable<Supplier>();
 			}
 		}
-		
-		public System.Data.Linq.Table<User_UserGroup> User_UserGroups
-		{
-			get
-			{
-				return this.GetTable<User_UserGroup>();
-			}
-		}
-		
-		public System.Data.Linq.Table<UserGroup> UserGroups
-		{
-			get
-			{
-				return this.GetTable<UserGroup>();
-			}
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Categories")]
@@ -198,7 +168,7 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _CategoryID;
+		private int _CategoryID;
 		
 		private string _CategoryName;
 		
@@ -208,7 +178,7 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCategoryIDChanging(string value);
+    partial void OnCategoryIDChanging(int value);
     partial void OnCategoryIDChanged();
     partial void OnCategoryNameChanging(string value);
     partial void OnCategoryNameChanged();
@@ -220,8 +190,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string CategoryID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CategoryID
 		{
 			get
 			{
@@ -240,7 +210,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryName", DbType="NVarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
 		public string CategoryName
 		{
 			get
@@ -328,13 +298,17 @@ namespace DAL
 		
 		private string _Address;
 		
-		private System.Nullable<int> _IsActive;
+		private System.Nullable<int> _isActive;
+		
+		private System.Nullable<int> _RoleID;
+		
+		private string _Image;
 		
 		private EntitySet<Order> _Orders;
 		
 		private EntitySet<PurchaseReceipt> _PurchaseReceipts;
 		
-		private EntitySet<User_UserGroup> _User_UserGroups;
+		private EntityRef<Role> _Role;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -356,19 +330,23 @@ namespace DAL
     partial void OnDateOfBirthChanged();
     partial void OnAddressChanging(string value);
     partial void OnAddressChanged();
-    partial void OnIsActiveChanging(System.Nullable<int> value);
-    partial void OnIsActiveChanged();
+    partial void OnisActiveChanging(System.Nullable<int> value);
+    partial void OnisActiveChanged();
+    partial void OnRoleIDChanging(System.Nullable<int> value);
+    partial void OnRoleIDChanged();
+    partial void OnImageChanging(string value);
+    partial void OnImageChanged();
     #endregion
 		
 		public User()
 		{
 			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
 			this._PurchaseReceipts = new EntitySet<PurchaseReceipt>(new Action<PurchaseReceipt>(this.attach_PurchaseReceipts), new Action<PurchaseReceipt>(this.detach_PurchaseReceipts));
-			this._User_UserGroups = new EntitySet<User_UserGroup>(new Action<User_UserGroup>(this.attach_User_UserGroups), new Action<User_UserGroup>(this.detach_User_UserGroups));
+			this._Role = default(EntityRef<Role>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
 		public string UserName
 		{
 			get
@@ -388,7 +366,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
 		public string Password
 		{
 			get
@@ -408,7 +386,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="NVarChar(100)")]
 		public string FullName
 		{
 			get
@@ -428,7 +406,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(100)")]
 		public string Email
 		{
 			get
@@ -448,7 +426,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(20)")]
 		public string PhoneNumber
 		{
 			get
@@ -488,7 +466,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfBirth", DbType="DateTime")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfBirth", DbType="Date")]
 		public System.Nullable<System.DateTime> DateOfBirth
 		{
 			get
@@ -528,22 +506,66 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Int")]
-		public System.Nullable<int> IsActive
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isActive", DbType="Int")]
+		public System.Nullable<int> isActive
 		{
 			get
 			{
-				return this._IsActive;
+				return this._isActive;
 			}
 			set
 			{
-				if ((this._IsActive != value))
+				if ((this._isActive != value))
 				{
-					this.OnIsActiveChanging(value);
+					this.OnisActiveChanging(value);
 					this.SendPropertyChanging();
-					this._IsActive = value;
-					this.SendPropertyChanged("IsActive");
-					this.OnIsActiveChanged();
+					this._isActive = value;
+					this.SendPropertyChanged("isActive");
+					this.OnisActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", DbType="Int")]
+		public System.Nullable<int> RoleID
+		{
+			get
+			{
+				return this._RoleID;
+			}
+			set
+			{
+				if ((this._RoleID != value))
+				{
+					if (this._Role.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRoleIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoleID = value;
+					this.SendPropertyChanged("RoleID");
+					this.OnRoleIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="NVarChar(255)")]
+		public string Image
+		{
+			get
+			{
+				return this._Image;
+			}
+			set
+			{
+				if ((this._Image != value))
+				{
+					this.OnImageChanging(value);
+					this.SendPropertyChanging();
+					this._Image = value;
+					this.SendPropertyChanged("Image");
+					this.OnImageChanged();
 				}
 			}
 		}
@@ -574,16 +596,37 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_User_UserGroup", Storage="_User_UserGroups", ThisKey="UserName", OtherKey="UserName")]
-		public EntitySet<User_UserGroup> User_UserGroups
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_User", Storage="_Role", ThisKey="RoleID", OtherKey="RoleID", IsForeignKey=true)]
+		public Role Role
 		{
 			get
 			{
-				return this._User_UserGroups;
+				return this._Role.Entity;
 			}
 			set
 			{
-				this._User_UserGroups.Assign(value);
+				Role previousValue = this._Role.Entity;
+				if (((previousValue != value) 
+							|| (this._Role.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Role.Entity = null;
+						previousValue.Users.Remove(this);
+					}
+					this._Role.Entity = value;
+					if ((value != null))
+					{
+						value.Users.Add(this);
+						this._RoleID = value.RoleID;
+					}
+					else
+					{
+						this._RoleID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Role");
+				}
 			}
 		}
 		
@@ -630,104 +673,6 @@ namespace DAL
 			this.SendPropertyChanging();
 			entity.User = null;
 		}
-		
-		private void attach_User_UserGroups(User_UserGroup entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_User_UserGroups(User_UserGroup entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ListScreen")]
-	public partial class ListScreen : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _ScreenID;
-		
-		private string _ScreenName;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnScreenIDChanging(string value);
-    partial void OnScreenIDChanged();
-    partial void OnScreenNameChanging(string value);
-    partial void OnScreenNameChanged();
-    #endregion
-		
-		public ListScreen()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScreenID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ScreenID
-		{
-			get
-			{
-				return this._ScreenID;
-			}
-			set
-			{
-				if ((this._ScreenID != value))
-				{
-					this.OnScreenIDChanging(value);
-					this.SendPropertyChanging();
-					this._ScreenID = value;
-					this.SendPropertyChanged("ScreenID");
-					this.OnScreenIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScreenName", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ScreenName
-		{
-			get
-			{
-				return this._ScreenName;
-			}
-			set
-			{
-				if ((this._ScreenName != value))
-				{
-					this.OnScreenNameChanging(value);
-					this.SendPropertyChanging();
-					this._ScreenName = value;
-					this.SendPropertyChanged("ScreenName");
-					this.OnScreenNameChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OrderDetails")]
@@ -736,15 +681,15 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _OrderDetailID;
+		private int _OrderID;
 		
-		private string _OrderID;
-		
-		private string _ProductID;
+		private int _ProductID;
 		
 		private System.Nullable<int> _Quantity;
 		
-		private System.Nullable<decimal> _TotalAmount;
+		private System.Nullable<double> _Price;
+		
+		private System.Nullable<double> _TotalAmount;
 		
 		private EntityRef<Order> _Order;
 		
@@ -754,15 +699,15 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnOrderDetailIDChanging(string value);
-    partial void OnOrderDetailIDChanged();
-    partial void OnOrderIDChanging(string value);
+    partial void OnOrderIDChanging(int value);
     partial void OnOrderIDChanged();
-    partial void OnProductIDChanging(string value);
+    partial void OnProductIDChanging(int value);
     partial void OnProductIDChanged();
     partial void OnQuantityChanging(System.Nullable<int> value);
     partial void OnQuantityChanged();
-    partial void OnTotalAmountChanging(System.Nullable<decimal> value);
+    partial void OnPriceChanging(System.Nullable<double> value);
+    partial void OnPriceChanged();
+    partial void OnTotalAmountChanging(System.Nullable<double> value);
     partial void OnTotalAmountChanged();
     #endregion
 		
@@ -773,28 +718,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderDetailID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string OrderDetailID
-		{
-			get
-			{
-				return this._OrderDetailID;
-			}
-			set
-			{
-				if ((this._OrderDetailID != value))
-				{
-					this.OnOrderDetailIDChanging(value);
-					this.SendPropertyChanging();
-					this._OrderDetailID = value;
-					this.SendPropertyChanged("OrderDetailID");
-					this.OnOrderDetailIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", DbType="VarChar(50)")]
-		public string OrderID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int OrderID
 		{
 			get
 			{
@@ -817,8 +742,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="VarChar(50)")]
-		public string ProductID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ProductID
 		{
 			get
 			{
@@ -861,8 +786,28 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAmount", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> TotalAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Float")]
+		public System.Nullable<double> Price
+		{
+			get
+			{
+				return this._Price;
+			}
+			set
+			{
+				if ((this._Price != value))
+				{
+					this.OnPriceChanging(value);
+					this.SendPropertyChanging();
+					this._Price = value;
+					this.SendPropertyChanged("Price");
+					this.OnPriceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAmount", DbType="Float")]
+		public System.Nullable<double> TotalAmount
 		{
 			get
 			{
@@ -908,7 +853,7 @@ namespace DAL
 					}
 					else
 					{
-						this._OrderID = default(string);
+						this._OrderID = default(int);
 					}
 					this.SendPropertyChanged("Order");
 				}
@@ -942,7 +887,7 @@ namespace DAL
 					}
 					else
 					{
-						this._ProductID = default(string);
+						this._ProductID = default(int);
 					}
 					this.SendPropertyChanged("Product");
 				}
@@ -976,13 +921,15 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _OrderID;
+		private int _OrderID;
 		
-		private System.Nullable<decimal> _TotalAmount;
+		private System.Nullable<double> _TotalAmount;
 		
 		private string _Status;
 		
 		private string _Description;
+		
+		private System.Nullable<System.DateTime> _DateCreated;
 		
 		private string _UserName;
 		
@@ -994,14 +941,16 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnOrderIDChanging(string value);
+    partial void OnOrderIDChanging(int value);
     partial void OnOrderIDChanged();
-    partial void OnTotalAmountChanging(System.Nullable<decimal> value);
+    partial void OnTotalAmountChanging(System.Nullable<double> value);
     partial void OnTotalAmountChanged();
     partial void OnStatusChanging(string value);
     partial void OnStatusChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
+    partial void OnDateCreatedChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateCreatedChanged();
     partial void OnUserNameChanging(string value);
     partial void OnUserNameChanged();
     #endregion
@@ -1013,8 +962,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string OrderID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OrderID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int OrderID
 		{
 			get
 			{
@@ -1033,8 +982,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAmount", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> TotalAmount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAmount", DbType="Float")]
+		public System.Nullable<double> TotalAmount
 		{
 			get
 			{
@@ -1073,7 +1022,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(255)")]
 		public string Description
 		{
 			get
@@ -1093,7 +1042,27 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="Date")]
+		public System.Nullable<System.DateTime> DateCreated
+		{
+			get
+			{
+				return this._DateCreated;
+			}
+			set
+			{
+				if ((this._DateCreated != value))
+				{
+					this.OnDateCreatedChanging(value);
+					this.SendPropertyChanging();
+					this._DateCreated = value;
+					this.SendPropertyChanged("DateCreated");
+					this.OnDateCreatedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(100)")]
 		public string UserName
 		{
 			get
@@ -1203,23 +1172,27 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _ProductID;
+		private int _ProductID;
 		
 		private string _ProductName;
 		
-		private System.Nullable<decimal> _ProductPrice;
+		private System.Nullable<double> _ProductPrice;
+		
+		private System.Nullable<int> _Quantity;
 		
 		private string _Description;
 		
-		private System.Nullable<int> _Size;
+		private string _Size;
 		
 		private string _Color;
 		
 		private string _Brand;
 		
+		private string _Status;
+		
 		private string _Image;
 		
-		private string _CategoryID;
+		private System.Nullable<int> _CategoryID;
 		
 		private EntitySet<OrderDetail> _OrderDetails;
 		
@@ -1231,23 +1204,27 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnProductIDChanging(string value);
+    partial void OnProductIDChanging(int value);
     partial void OnProductIDChanged();
     partial void OnProductNameChanging(string value);
     partial void OnProductNameChanged();
-    partial void OnProductPriceChanging(System.Nullable<decimal> value);
+    partial void OnProductPriceChanging(System.Nullable<double> value);
     partial void OnProductPriceChanged();
+    partial void OnQuantityChanging(System.Nullable<int> value);
+    partial void OnQuantityChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
-    partial void OnSizeChanging(System.Nullable<int> value);
+    partial void OnSizeChanging(string value);
     partial void OnSizeChanged();
     partial void OnColorChanging(string value);
     partial void OnColorChanged();
     partial void OnBrandChanging(string value);
     partial void OnBrandChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
     partial void OnImageChanging(string value);
     partial void OnImageChanged();
-    partial void OnCategoryIDChanging(string value);
+    partial void OnCategoryIDChanging(System.Nullable<int> value);
     partial void OnCategoryIDChanged();
     #endregion
 		
@@ -1259,8 +1236,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ProductID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ProductID
 		{
 			get
 			{
@@ -1279,7 +1256,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductName", DbType="NVarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
 		public string ProductName
 		{
 			get
@@ -1299,8 +1276,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductPrice", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> ProductPrice
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductPrice", DbType="Float")]
+		public System.Nullable<double> ProductPrice
 		{
 			get
 			{
@@ -1319,7 +1296,27 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int")]
+		public System.Nullable<int> Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this.OnQuantityChanging(value);
+					this.SendPropertyChanging();
+					this._Quantity = value;
+					this.SendPropertyChanged("Quantity");
+					this.OnQuantityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(255)")]
 		public string Description
 		{
 			get
@@ -1339,8 +1336,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Size", DbType="Int")]
-		public System.Nullable<int> Size
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Size", DbType="NVarChar(50)")]
+		public string Size
 		{
 			get
 			{
@@ -1379,7 +1376,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Brand", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Brand", DbType="NVarChar(100)")]
 		public string Brand
 		{
 			get
@@ -1399,7 +1396,27 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(50)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Image", DbType="NVarChar(255)")]
 		public string Image
 		{
 			get
@@ -1419,8 +1436,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="VarChar(50)")]
-		public string CategoryID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int")]
+		public System.Nullable<int> CategoryID
 		{
 			get
 			{
@@ -1496,7 +1513,7 @@ namespace DAL
 					}
 					else
 					{
-						this._CategoryID = default(string);
+						this._CategoryID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Category");
 				}
@@ -1554,13 +1571,13 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _PReceiptID;
+		private int _PReceiptID;
 		
-		private string _ProductID;
+		private int _ProductID;
 		
 		private System.Nullable<int> _Quantity;
 		
-		private System.Nullable<decimal> _Price;
+		private System.Nullable<double> _Price;
 		
 		private EntityRef<Product> _Product;
 		
@@ -1570,13 +1587,13 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnPReceiptIDChanging(string value);
+    partial void OnPReceiptIDChanging(int value);
     partial void OnPReceiptIDChanged();
-    partial void OnProductIDChanging(string value);
+    partial void OnProductIDChanging(int value);
     partial void OnProductIDChanged();
     partial void OnQuantityChanging(System.Nullable<int> value);
     partial void OnQuantityChanged();
-    partial void OnPriceChanging(System.Nullable<decimal> value);
+    partial void OnPriceChanging(System.Nullable<double> value);
     partial void OnPriceChanged();
     #endregion
 		
@@ -1587,8 +1604,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PReceiptID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string PReceiptID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PReceiptID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int PReceiptID
 		{
 			get
 			{
@@ -1611,8 +1628,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ProductID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ProductID
 		{
 			get
 			{
@@ -1655,8 +1672,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Decimal(18,2)")]
-		public System.Nullable<decimal> Price
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Float")]
+		public System.Nullable<double> Price
 		{
 			get
 			{
@@ -1702,14 +1719,14 @@ namespace DAL
 					}
 					else
 					{
-						this._ProductID = default(string);
+						this._ProductID = default(int);
 					}
 					this.SendPropertyChanged("Product");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PurchaseReceipt_PurchaseReceiptDetail", Storage="_PurchaseReceipt", ThisKey="PReceiptID", OtherKey="ReceiptID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PurchaseReceipt_PurchaseReceiptDetail", Storage="_PurchaseReceipt", ThisKey="PReceiptID", OtherKey="PReceiptID", IsForeignKey=true)]
 		public PurchaseReceipt PurchaseReceipt
 		{
 			get
@@ -1732,11 +1749,11 @@ namespace DAL
 					if ((value != null))
 					{
 						value.PurchaseReceiptDetails.Add(this);
-						this._PReceiptID = value.ReceiptID;
+						this._PReceiptID = value.PReceiptID;
 					}
 					else
 					{
-						this._PReceiptID = default(string);
+						this._PReceiptID = default(int);
 					}
 					this.SendPropertyChanged("PurchaseReceipt");
 				}
@@ -1770,13 +1787,17 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _ReceiptID;
+		private int _PReceiptID;
 		
-		private System.Nullable<System.DateTime> _ReceiptDate;
+		private System.Nullable<System.DateTime> _DateCreated;
+		
+		private System.Nullable<double> _TotalAmount;
+		
+		private string _Status;
 		
 		private string _UserName;
 		
-		private string _SupplierID;
+		private System.Nullable<int> _SupplierID;
 		
 		private EntitySet<PurchaseReceiptDetail> _PurchaseReceiptDetails;
 		
@@ -1788,13 +1809,17 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnReceiptIDChanging(string value);
-    partial void OnReceiptIDChanged();
-    partial void OnReceiptDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnReceiptDateChanged();
+    partial void OnPReceiptIDChanging(int value);
+    partial void OnPReceiptIDChanged();
+    partial void OnDateCreatedChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateCreatedChanged();
+    partial void OnTotalAmountChanging(System.Nullable<double> value);
+    partial void OnTotalAmountChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
     partial void OnUserNameChanging(string value);
     partial void OnUserNameChanged();
-    partial void OnSupplierIDChanging(string value);
+    partial void OnSupplierIDChanging(System.Nullable<int> value);
     partial void OnSupplierIDChanged();
     #endregion
 		
@@ -1806,47 +1831,87 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiptID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ReceiptID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PReceiptID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int PReceiptID
 		{
 			get
 			{
-				return this._ReceiptID;
+				return this._PReceiptID;
 			}
 			set
 			{
-				if ((this._ReceiptID != value))
+				if ((this._PReceiptID != value))
 				{
-					this.OnReceiptIDChanging(value);
+					this.OnPReceiptIDChanging(value);
 					this.SendPropertyChanging();
-					this._ReceiptID = value;
-					this.SendPropertyChanged("ReceiptID");
-					this.OnReceiptIDChanged();
+					this._PReceiptID = value;
+					this.SendPropertyChanged("PReceiptID");
+					this.OnPReceiptIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiptDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ReceiptDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="Date")]
+		public System.Nullable<System.DateTime> DateCreated
 		{
 			get
 			{
-				return this._ReceiptDate;
+				return this._DateCreated;
 			}
 			set
 			{
-				if ((this._ReceiptDate != value))
+				if ((this._DateCreated != value))
 				{
-					this.OnReceiptDateChanging(value);
+					this.OnDateCreatedChanging(value);
 					this.SendPropertyChanging();
-					this._ReceiptDate = value;
-					this.SendPropertyChanged("ReceiptDate");
-					this.OnReceiptDateChanged();
+					this._DateCreated = value;
+					this.SendPropertyChanged("DateCreated");
+					this.OnDateCreatedChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAmount", DbType="Float")]
+		public System.Nullable<double> TotalAmount
+		{
+			get
+			{
+				return this._TotalAmount;
+			}
+			set
+			{
+				if ((this._TotalAmount != value))
+				{
+					this.OnTotalAmountChanging(value);
+					this.SendPropertyChanging();
+					this._TotalAmount = value;
+					this.SendPropertyChanged("TotalAmount");
+					this.OnTotalAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="NVarChar(50)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(100)")]
 		public string UserName
 		{
 			get
@@ -1870,8 +1935,8 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SupplierID", DbType="VarChar(50)")]
-		public string SupplierID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SupplierID", DbType="Int")]
+		public System.Nullable<int> SupplierID
 		{
 			get
 			{
@@ -1894,7 +1959,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PurchaseReceipt_PurchaseReceiptDetail", Storage="_PurchaseReceiptDetails", ThisKey="ReceiptID", OtherKey="PReceiptID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PurchaseReceipt_PurchaseReceiptDetail", Storage="_PurchaseReceiptDetails", ThisKey="PReceiptID", OtherKey="PReceiptID")]
 		public EntitySet<PurchaseReceiptDetail> PurchaseReceiptDetails
 		{
 			get
@@ -1968,7 +2033,7 @@ namespace DAL
 					}
 					else
 					{
-						this._SupplierID = default(string);
+						this._SupplierID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Supplier");
 				}
@@ -2009,47 +2074,73 @@ namespace DAL
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Role")]
-	public partial class Role
+	public partial class Role : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
-		private string _UserGroupID;
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _ScreenID;
+		private int _RoleID;
+		
+		private string _RoleName;
 		
 		private System.Nullable<int> _IsActive;
 		
+		private EntitySet<User> _Users;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnRoleIDChanging(int value);
+    partial void OnRoleIDChanged();
+    partial void OnRoleNameChanging(string value);
+    partial void OnRoleNameChanged();
+    partial void OnIsActiveChanging(System.Nullable<int> value);
+    partial void OnIsActiveChanged();
+    #endregion
+		
 		public Role()
 		{
+			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGroupID", DbType="VarChar(50)")]
-		public string UserGroupID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int RoleID
 		{
 			get
 			{
-				return this._UserGroupID;
+				return this._RoleID;
 			}
 			set
 			{
-				if ((this._UserGroupID != value))
+				if ((this._RoleID != value))
 				{
-					this._UserGroupID = value;
+					this.OnRoleIDChanging(value);
+					this.SendPropertyChanging();
+					this._RoleID = value;
+					this.SendPropertyChanged("RoleID");
+					this.OnRoleIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ScreenID", DbType="VarChar(50)")]
-		public string ScreenID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(100)")]
+		public string RoleName
 		{
 			get
 			{
-				return this._ScreenID;
+				return this._RoleName;
 			}
 			set
 			{
-				if ((this._ScreenID != value))
+				if ((this._RoleName != value))
 				{
-					this._ScreenID = value;
+					this.OnRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._RoleName = value;
+					this.SendPropertyChanged("RoleName");
+					this.OnRoleNameChanged();
 				}
 			}
 		}
@@ -2065,9 +2156,58 @@ namespace DAL
 			{
 				if ((this._IsActive != value))
 				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
 					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
 				}
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Role_User", Storage="_Users", ThisKey="RoleID", OtherKey="RoleID")]
+		public EntitySet<User> Users
+		{
+			get
+			{
+				return this._Users;
+			}
+			set
+			{
+				this._Users.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.Role = this;
+		}
+		
+		private void detach_Users(User entity)
+		{
+			this.SendPropertyChanging();
+			entity.Role = null;
 		}
 	}
 	
@@ -2077,7 +2217,7 @@ namespace DAL
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _SupplierID;
+		private int _SupplierID;
 		
 		private string _SupplierName;
 		
@@ -2093,7 +2233,7 @@ namespace DAL
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnSupplierIDChanging(string value);
+    partial void OnSupplierIDChanging(int value);
     partial void OnSupplierIDChanged();
     partial void OnSupplierNameChanging(string value);
     partial void OnSupplierNameChanged();
@@ -2111,8 +2251,8 @@ namespace DAL
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SupplierID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string SupplierID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SupplierID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int SupplierID
 		{
 			get
 			{
@@ -2131,7 +2271,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SupplierName", DbType="NVarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SupplierName", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
 		public string SupplierName
 		{
 			get
@@ -2151,7 +2291,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(20)")]
 		public string PhoneNumber
 		{
 			get
@@ -2171,7 +2311,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(100)")]
 		public string Email
 		{
 			get
@@ -2191,7 +2331,7 @@ namespace DAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="NVarChar(255)")]
 		public string Address
 		{
 			get
@@ -2254,336 +2394,6 @@ namespace DAL
 		{
 			this.SendPropertyChanging();
 			entity.Supplier = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.User_UserGroup")]
-	public partial class User_UserGroup : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _UserName;
-		
-		private string _UserGroupID;
-		
-		private string _Note;
-		
-		private EntityRef<User> _User;
-		
-		private EntityRef<UserGroup> _UserGroup;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    partial void OnUserGroupIDChanging(string value);
-    partial void OnUserGroupIDChanged();
-    partial void OnNoteChanging(string value);
-    partial void OnNoteChanged();
-    #endregion
-		
-		public User_UserGroup()
-		{
-			this._User = default(EntityRef<User>);
-			this._UserGroup = default(EntityRef<UserGroup>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGroupID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string UserGroupID
-		{
-			get
-			{
-				return this._UserGroupID;
-			}
-			set
-			{
-				if ((this._UserGroupID != value))
-				{
-					if (this._UserGroup.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserGroupIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserGroupID = value;
-					this.SendPropertyChanged("UserGroupID");
-					this.OnUserGroupIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string Note
-		{
-			get
-			{
-				return this._Note;
-			}
-			set
-			{
-				if ((this._Note != value))
-				{
-					this.OnNoteChanging(value);
-					this.SendPropertyChanging();
-					this._Note = value;
-					this.SendPropertyChanged("Note");
-					this.OnNoteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_User_UserGroup", Storage="_User", ThisKey="UserName", OtherKey="UserName", IsForeignKey=true)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.User_UserGroups.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.User_UserGroups.Add(this);
-						this._UserName = value.UserName;
-					}
-					else
-					{
-						this._UserName = default(string);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserGroup_User_UserGroup", Storage="_UserGroup", ThisKey="UserGroupID", OtherKey="UserGroupID", IsForeignKey=true)]
-		public UserGroup UserGroup
-		{
-			get
-			{
-				return this._UserGroup.Entity;
-			}
-			set
-			{
-				UserGroup previousValue = this._UserGroup.Entity;
-				if (((previousValue != value) 
-							|| (this._UserGroup.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._UserGroup.Entity = null;
-						previousValue.User_UserGroups.Remove(this);
-					}
-					this._UserGroup.Entity = value;
-					if ((value != null))
-					{
-						value.User_UserGroups.Add(this);
-						this._UserGroupID = value.UserGroupID;
-					}
-					else
-					{
-						this._UserGroupID = default(string);
-					}
-					this.SendPropertyChanged("UserGroup");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.UserGroup")]
-	public partial class UserGroup : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _UserGroupID;
-		
-		private string _UserGroupName;
-		
-		private string _Note;
-		
-		private EntitySet<User_UserGroup> _User_UserGroups;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserGroupIDChanging(string value);
-    partial void OnUserGroupIDChanged();
-    partial void OnUserGroupNameChanging(string value);
-    partial void OnUserGroupNameChanged();
-    partial void OnNoteChanging(string value);
-    partial void OnNoteChanged();
-    #endregion
-		
-		public UserGroup()
-		{
-			this._User_UserGroups = new EntitySet<User_UserGroup>(new Action<User_UserGroup>(this.attach_User_UserGroups), new Action<User_UserGroup>(this.detach_User_UserGroups));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGroupID", DbType="VarChar(50) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string UserGroupID
-		{
-			get
-			{
-				return this._UserGroupID;
-			}
-			set
-			{
-				if ((this._UserGroupID != value))
-				{
-					this.OnUserGroupIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserGroupID = value;
-					this.SendPropertyChanged("UserGroupID");
-					this.OnUserGroupIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserGroupName", DbType="NVarChar(255)")]
-		public string UserGroupName
-		{
-			get
-			{
-				return this._UserGroupName;
-			}
-			set
-			{
-				if ((this._UserGroupName != value))
-				{
-					this.OnUserGroupNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserGroupName = value;
-					this.SendPropertyChanged("UserGroupName");
-					this.OnUserGroupNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Note", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string Note
-		{
-			get
-			{
-				return this._Note;
-			}
-			set
-			{
-				if ((this._Note != value))
-				{
-					this.OnNoteChanging(value);
-					this.SendPropertyChanging();
-					this._Note = value;
-					this.SendPropertyChanged("Note");
-					this.OnNoteChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="UserGroup_User_UserGroup", Storage="_User_UserGroups", ThisKey="UserGroupID", OtherKey="UserGroupID")]
-		public EntitySet<User_UserGroup> User_UserGroups
-		{
-			get
-			{
-				return this._User_UserGroups;
-			}
-			set
-			{
-				this._User_UserGroups.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_User_UserGroups(User_UserGroup entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserGroup = this;
-		}
-		
-		private void detach_User_UserGroups(User_UserGroup entity)
-		{
-			this.SendPropertyChanging();
-			entity.UserGroup = null;
 		}
 	}
 }

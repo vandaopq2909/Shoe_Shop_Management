@@ -8,16 +8,16 @@ namespace DAL
 {
     public class CategoriesDAL
     {
-        private ShoeShopDataContext _context;
+        private ShoeStoreDataContext _context;
         public CategoriesDAL()
         {
-            _context = new ShoeShopDataContext();
+            _context = new ShoeStoreDataContext();
         }
         public IQueryable<Category> getCategories()
         {
             return _context.Categories;
         }
-        public Category getCategoryByID(string id)
+        public Category getCategoryByID(int id)
         {
             return _context.Categories.SingleOrDefault(cat => cat.CategoryID == id);
         }
@@ -36,6 +36,11 @@ namespace DAL
         public void updateCategory(Category cat)
         {          
             _context.SubmitChanges();                       
+        }
+
+        public List<Category> GetAllCategories()
+        {
+            throw new NotImplementedException();
         }
     }
 }

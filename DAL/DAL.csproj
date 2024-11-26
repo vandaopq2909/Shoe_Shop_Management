@@ -54,25 +54,26 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ShoeShop.designer.cs">
+    <Compile Include="ShoeStore.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ShoeShop.dbml</DependentUpon>
+      <DependentUpon>ShoeStore.dbml</DependentUpon>
     </Compile>
     <Compile Include="UsersDAL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="ShoeShop.dbml">
+    <None Include="ShoeStore.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>ShoeShop.designer.cs</LastGenOutput>
+      <LastGenOutput>ShoeStore.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="ShoeShop.dbml.layout">
-      <DependentUpon>ShoeShop.dbml</DependentUpon>
+    <None Include="ShoeStore.dbml.layout">
+      <DependentUpon>ShoeStore.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

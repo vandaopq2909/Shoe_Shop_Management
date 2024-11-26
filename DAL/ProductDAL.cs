@@ -8,19 +8,25 @@ namespace DAL
 {
     public class ProductDAL
     {
-        private ShoeShopDataContext _context;
+        private ShoeStoreDataContext _context;
         public ProductDAL()
         {
-            _context = new ShoeShopDataContext();
+            _context = new ShoeStoreDataContext();
         }
         public IQueryable<Product> getProduct()
         {
             return _context.Products;
         }
-        public Product getProductByID(string id)
+        public Product getProductByID(int id)
         {
             return _context.Products.SingleOrDefault(pro => pro.ProductID == id);
         }
+
+        public Category getCategoryByID(int id)
+        {
+            return _context.Categories.SingleOrDefault(cat => cat.CategoryID == id);
+        }
+
         public void addProduct(Product pro)
         {
             _context.Products.InsertOnSubmit(pro);
