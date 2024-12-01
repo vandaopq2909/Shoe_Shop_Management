@@ -53,9 +53,7 @@
     <Compile Include="PurchaseReceiptsDTO.cs" />
     <Compile Include="Roles.cs" />
     <Compile Include="SupliersDTO.cs" />
-    <Compile Include="UserGroupsDTO.cs" />
     <Compile Include="UsersDTO.cs" />
-    <Compile Include="User_UserGroupDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
