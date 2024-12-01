@@ -30,5 +30,15 @@ namespace GUI
         {
             AddControl(new frmManageEmployees());
         }
+
+        private void btnQLLoai_Click(object sender, EventArgs e)
+        {
+            AddControl(new frmManageCategories());
+        }
+
+        private void btnQLSanPham_Click(object sender, EventArgs e)
+        {
+            AddControl(new frmManageProducts());
+        }
     }
 }

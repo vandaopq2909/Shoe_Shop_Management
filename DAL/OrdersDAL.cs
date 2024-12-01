@@ -9,7 +9,7 @@ namespace DAL
 {
     public class OrdersDAL
     {
-        public ShoeShopDataContext DBContext;
+        public ShoeStoreDataContext DBContext;
         public List<OrdersDTO> getListOrders()
         {
             //return DBContext.Orders.Select(o => new OrdersDTO

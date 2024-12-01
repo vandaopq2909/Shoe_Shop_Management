@@ -18,17 +18,18 @@ namespace BUL
         {
             return _categoriesDAL.getCategories();
         }
-        public void AddCategory(string id, string name)
+
+        public void AddCategory(string name)
         {
             var cat = new Category
             {
-                CategoryID = id,
+                //CategoryID = id,
                 CategoryName = name
             };
             _categoriesDAL.addCategory(cat);
         }
 
-        public void DeleteCategory(string id)
+        public void DeleteCategory(int id)
         {
             var cat = _categoriesDAL.getCategoryByID(id);
             if (cat != null)
@@ -37,7 +38,7 @@ namespace BUL
             }            
         }
 
-        public void UpdateCategory(string id, string name)
+        public void UpdateCategory(int id, string name)
         {
             var cat = _categoriesDAL.getCategoryByID(id);
             if (cat != null)
@@ -45,6 +46,10 @@ namespace BUL
                 cat.CategoryName = name;
                 _categoriesDAL.updateCategory(cat);
             }
+        }
+        public List<Category> GetProducts()
+        {
+            return _categoriesDAL.GetAllCategories(); 
         }
     }
 }

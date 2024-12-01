@@ -28,9 +28,9 @@ namespace DAL.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=ShoeShop;Persist Security Info=True;User ID=sa;Pass" +
             "word=123;Encrypt=True;TrustServerCertificate=True")]
-        public string ShoeShop2ConnectionString {
+        public string ShoeShopConnectionString {
             get {
-                return ((string)(this["ShoeShop2ConnectionString"]));
+                return ((string)(this["ShoeShopConnectionString"]));
             }
         }
     }

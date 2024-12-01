@@ -10,12 +10,12 @@ namespace DTO
     {
         public ProductsDTO()
         {
-            this.ProductID = GenerateProductID();
+            //this.ProductID = GenerateProductID();
         }
-        public ProductsDTO(string ProductName, string Image, double ProductPrice, int Quantity,
-            string Description, int Size, string Color, string Brand, int Status, string CategoryID)
+        public ProductsDTO(string ProductName, string Image, float ProductPrice, int Quantity,
+            string Description, string Size, string Color, string Brand, string Status, int CategoryID)
         {
-            ProductID = GenerateProductID();
+            //ProductID = GenerateProductID();
             this.ProductName = ProductName;
             this.Image = Image;
             this.ProductPrice = ProductPrice;
@@ -27,20 +27,20 @@ namespace DTO
             this.Status = Status;
             this.CategoryID = CategoryID;
         }
-        public string ProductID { get; set; }
+        public int ProductID { get; set; }
         public string? ProductName { get; set; }
         public string? Image { get; set; }
-        public double ProductPrice { get; set; } = 0;
+        public float ProductPrice { get; set; } = 0;
         public int Quantity { get; set; } = 0;
         public string? Description { get; set; }
-        public int Size { get; set; } = 0;
+        public string? Size { get; set; }
         public string? Color { get; set; }
         public string? Brand { get; set; }
-        public int? Status { get; set; } = 0;
-        public string? CategoryID { get; set; }
-        private string GenerateProductID()
-        {
-            return "PRO" + Guid.NewGuid().ToString("N");
-        }
+        public string? Status { get; set; }
+        public int? CategoryID { get; set; }
+        //private string GenerateProductID()
+        //{
+        //    return "PRO" + Guid.NewGuid().ToString("N");
+        //}
     }
 }
