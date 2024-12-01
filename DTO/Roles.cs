@@ -8,15 +8,15 @@ namespace DTO
 {
     public class Roles
     {
-        public string? UsergroupID { get; set; }
-        public string? ScreenID {  get; set; }
-        public int isActive { get; set; } = 0;
+        public int? RoleID { get; set; }
+        public string? RoleName {  get; set; }
+        public int IsActive { get; set; } = 1;
         public Roles() { }
-        public Roles(string? usergroupID, string? screenID, int isActive)
+        public Roles(int? roleID, string? roleName, int isActive)
         {
-            UsergroupID = usergroupID;
-            ScreenID = screenID;
-            this.isActive = isActive;
+            RoleID = roleID;
+            RoleName = roleName;
+            IsActive = isActive;
         }
     }
 }

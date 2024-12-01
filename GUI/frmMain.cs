@@ -40,5 +40,10 @@ namespace GUI
         {
             AddControl(new frmManageProducts());
         }
+
+        private void btnQLKhachHang_Click(object sender, EventArgs e)
+        {
+            AddControl(new frmManageCustomers());
+        }
     }
 }
