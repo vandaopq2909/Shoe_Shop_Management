@@ -37,10 +37,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnQLNhanVien = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnDoiMK = new Guna.UI2.WinForms.Guna2Button();
+            this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
             this.lblNameAndRole = new System.Windows.Forms.Label();
             this.panelCenter = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
-            this.btnDoiMK = new Guna.UI2.WinForms.Guna2Button();
+            this.btnQuanLyNhapHang = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2Panel2.SuspendLayout();
@@ -49,6 +50,7 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
+            this.guna2Panel1.Controls.Add(this.btnQuanLyNhapHang);
             this.guna2Panel1.Controls.Add(this.btnQLKhachHang);
             this.guna2Panel1.Controls.Add(this.btnQLSanPham);
             this.guna2Panel1.Controls.Add(this.btnQLLoai);
@@ -171,25 +173,28 @@
             this.guna2Panel2.Size = new System.Drawing.Size(1405, 44);
             this.guna2Panel2.TabIndex = 1;
             // 
-            // lblNameAndRole
+            // btnDoiMK
             // 
-            this.lblNameAndRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblNameAndRole.AutoSize = true;
-            this.lblNameAndRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNameAndRole.Location = new System.Drawing.Point(6, 9);
-            this.lblNameAndRole.Name = "lblNameAndRole";
-            this.lblNameAndRole.Size = new System.Drawing.Size(132, 29);
-            this.lblNameAndRole.TabIndex = 0;
-            this.lblNameAndRole.Text = "Tên và vai";
-            // 
-            // panelCenter
-            // 
-            this.panelCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCenter.Location = new System.Drawing.Point(376, 44);
-            this.panelCenter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelCenter.Name = "panelCenter";
-            this.panelCenter.Size = new System.Drawing.Size(1405, 667);
-            this.panelCenter.TabIndex = 2;
+            this.btnDoiMK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDoiMK.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnDoiMK.BorderRadius = 10;
+            this.btnDoiMK.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            this.btnDoiMK.BorderThickness = 2;
+            this.btnDoiMK.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnDoiMK.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnDoiMK.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnDoiMK.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnDoiMK.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
+            this.btnDoiMK.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDoiMK.ForeColor = System.Drawing.Color.White;
+            this.btnDoiMK.Location = new System.Drawing.Point(951, 4);
+            this.btnDoiMK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDoiMK.Name = "btnDoiMK";
+            this.btnDoiMK.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnDoiMK.Size = new System.Drawing.Size(241, 38);
+            this.btnDoiMK.TabIndex = 58;
+            this.btnDoiMK.Text = "Đổi mật khẩu";
+            this.btnDoiMK.Click += new System.EventHandler(this.btnDoiMK_Click);
             // 
             // btnDangXuat
             // 
@@ -214,28 +219,43 @@
             this.btnDangXuat.Text = "Đăng xuất";
             this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
-            // btnDoiMK
+            // lblNameAndRole
             // 
-            this.btnDoiMK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDoiMK.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnDoiMK.BorderRadius = 10;
-            this.btnDoiMK.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            this.btnDoiMK.BorderThickness = 2;
-            this.btnDoiMK.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnDoiMK.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnDoiMK.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnDoiMK.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnDoiMK.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
-            this.btnDoiMK.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDoiMK.ForeColor = System.Drawing.Color.White;
-            this.btnDoiMK.Location = new System.Drawing.Point(951, 4);
-            this.btnDoiMK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDoiMK.Name = "btnDoiMK";
-            this.btnDoiMK.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnDoiMK.Size = new System.Drawing.Size(241, 38);
-            this.btnDoiMK.TabIndex = 58;
-            this.btnDoiMK.Text = "Đổi mật khẩu";
-            this.btnDoiMK.Click += new System.EventHandler(this.btnDoiMK_Click);
+            this.lblNameAndRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNameAndRole.AutoSize = true;
+            this.lblNameAndRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameAndRole.Location = new System.Drawing.Point(6, 9);
+            this.lblNameAndRole.Name = "lblNameAndRole";
+            this.lblNameAndRole.Size = new System.Drawing.Size(132, 29);
+            this.lblNameAndRole.TabIndex = 0;
+            this.lblNameAndRole.Text = "Tên và vai";
+            // 
+            // panelCenter
+            // 
+            this.panelCenter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCenter.Location = new System.Drawing.Point(376, 44);
+            this.panelCenter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelCenter.Name = "panelCenter";
+            this.panelCenter.Size = new System.Drawing.Size(1405, 667);
+            this.panelCenter.TabIndex = 2;
+            // 
+            // btnQuanLyNhapHang
+            // 
+            this.btnQuanLyNhapHang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnQuanLyNhapHang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnQuanLyNhapHang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnQuanLyNhapHang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnQuanLyNhapHang.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
+            this.btnQuanLyNhapHang.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnQuanLyNhapHang.ForeColor = System.Drawing.Color.Black;
+            this.btnQuanLyNhapHang.Location = new System.Drawing.Point(0, 530);
+            this.btnQuanLyNhapHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnQuanLyNhapHang.Name = "btnQuanLyNhapHang";
+            this.btnQuanLyNhapHang.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
+            this.btnQuanLyNhapHang.Size = new System.Drawing.Size(376, 59);
+            this.btnQuanLyNhapHang.TabIndex = 6;
+            this.btnQuanLyNhapHang.Text = "Quản lý nhập hàng";
+            this.btnQuanLyNhapHang.Click += new System.EventHandler(this.btnQuanLyNhapHang_Click);
             // 
             // frmMain
             // 
@@ -276,5 +296,6 @@
         private Guna.UI2.WinForms.Guna2Button btnQLKhachHang;
         private Guna.UI2.WinForms.Guna2Button btnDangXuat;
         private Guna.UI2.WinForms.Guna2Button btnDoiMK;
+        private Guna.UI2.WinForms.Guna2Button btnQuanLyNhapHang;
     }
 }
