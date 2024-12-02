@@ -244,6 +244,14 @@
       <Project>{7ff5fb42-6e0a-4b0a-ba0b-f294c144f79d}</Project>
       <Name>DTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UC_Control\UC_Control.csproj">
+      <Project>{f4e13a92-238c-4016-941f-42edfe82d54d}</Project>
+      <Name>UC_Control</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{018edb0b-9a72-4bc2-bb4e-8533467c3005}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\image_user.png" />
