@@ -86,5 +86,20 @@ namespace BUL
             }
                 usersDAL.ResetPassword(customer);
         }
+
+        public bool IsExistEmployee(string maNV, string matKhau)
+        {
+            return usersDAL.IsExistEmployee(maNV, matKhau);
+        }
+
+        public User LoadInfoUserByMaNV(string maNhanVien)
+        {
+            return usersDAL.LoadInfoUserByMaNV(maNhanVien);
+        }
+
+        public bool ChangePass(string maNV, string mkCu, string mkMoi)
+        {
+            return usersDAL.ChangePass(maNV, mkCu, mkMoi);
+        }
     }
 }

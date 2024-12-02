@@ -30,18 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnQLKhachHang = new Guna.UI2.WinForms.Guna2Button();
             this.btnQLSanPham = new Guna.UI2.WinForms.Guna2Button();
             this.btnQLLoai = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnQLNhanVien = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblNameAndRole = new System.Windows.Forms.Label();
             this.panelCenter = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnQLKhachHang = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
+            this.btnDoiMK = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
-            this.guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            this.guna2Panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // guna2Panel1
@@ -59,6 +61,24 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(376, 711);
             this.guna2Panel1.TabIndex = 0;
+            // 
+            // btnQLKhachHang
+            // 
+            this.btnQLKhachHang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnQLKhachHang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnQLKhachHang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnQLKhachHang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnQLKhachHang.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
+            this.btnQLKhachHang.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnQLKhachHang.ForeColor = System.Drawing.Color.Black;
+            this.btnQLKhachHang.Location = new System.Drawing.Point(0, 467);
+            this.btnQLKhachHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnQLKhachHang.Name = "btnQLKhachHang";
+            this.btnQLKhachHang.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
+            this.btnQLKhachHang.Size = new System.Drawing.Size(376, 59);
+            this.btnQLKhachHang.TabIndex = 6;
+            this.btnQLKhachHang.Text = "Quản lý khách hàng";
+            this.btnQLKhachHang.Click += new System.EventHandler(this.btnQLKhachHang_Click);
             // 
             // btnQLSanPham
             // 
@@ -96,6 +116,18 @@
             this.btnQLLoai.Text = "Quản lý Loại sản phẩm";
             this.btnQLLoai.Click += new System.EventHandler(this.btnQLLoai_Click);
             // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.Image = global::GUI.Properties.Resources.sneakers;
+            this.guna2PictureBox1.ImageRotate = 0F;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(83, 2);
+            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.Size = new System.Drawing.Size(208, 187);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox1.TabIndex = 3;
+            this.guna2PictureBox1.TabStop = false;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -129,7 +161,9 @@
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.Color.White;
-            this.guna2Panel2.Controls.Add(this.label1);
+            this.guna2Panel2.Controls.Add(this.btnDoiMK);
+            this.guna2Panel2.Controls.Add(this.btnDangXuat);
+            this.guna2Panel2.Controls.Add(this.lblNameAndRole);
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel2.Location = new System.Drawing.Point(376, 0);
             this.guna2Panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -137,15 +171,16 @@
             this.guna2Panel2.Size = new System.Drawing.Size(1405, 44);
             this.guna2Panel2.TabIndex = 1;
             // 
-            // label1
+            // lblNameAndRole
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1261, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(132, 29);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tên và vai";
+            this.lblNameAndRole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNameAndRole.AutoSize = true;
+            this.lblNameAndRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameAndRole.Location = new System.Drawing.Point(6, 9);
+            this.lblNameAndRole.Name = "lblNameAndRole";
+            this.lblNameAndRole.Size = new System.Drawing.Size(132, 29);
+            this.lblNameAndRole.TabIndex = 0;
+            this.lblNameAndRole.Text = "Tên và vai";
             // 
             // panelCenter
             // 
@@ -156,35 +191,51 @@
             this.panelCenter.Size = new System.Drawing.Size(1405, 667);
             this.panelCenter.TabIndex = 2;
             // 
-            // btnQLKhachHang
+            // btnDangXuat
             // 
-            this.btnQLKhachHang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnQLKhachHang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnQLKhachHang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnQLKhachHang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnQLKhachHang.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
-            this.btnQLKhachHang.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.btnQLKhachHang.ForeColor = System.Drawing.Color.Black;
-            this.btnQLKhachHang.Location = new System.Drawing.Point(0, 467);
-            this.btnQLKhachHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnQLKhachHang.Name = "btnQLKhachHang";
-            this.btnQLKhachHang.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
-            this.btnQLKhachHang.Size = new System.Drawing.Size(376, 59);
-            this.btnQLKhachHang.TabIndex = 6;
-            this.btnQLKhachHang.Text = "Quản lý khách hàng";
-            this.btnQLKhachHang.Click += new System.EventHandler(this.btnQLKhachHang_Click);
+            this.btnDangXuat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDangXuat.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
+            this.btnDangXuat.BorderRadius = 10;
+            this.btnDangXuat.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            this.btnDangXuat.BorderThickness = 2;
+            this.btnDangXuat.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnDangXuat.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnDangXuat.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnDangXuat.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnDangXuat.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
+            this.btnDangXuat.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDangXuat.ForeColor = System.Drawing.Color.White;
+            this.btnDangXuat.Location = new System.Drawing.Point(1198, 4);
+            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDangXuat.Name = "btnDangXuat";
+            this.btnDangXuat.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
+            this.btnDangXuat.Size = new System.Drawing.Size(204, 38);
+            this.btnDangXuat.TabIndex = 57;
+            this.btnDangXuat.Text = "Đăng xuất";
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
-            // guna2PictureBox1
+            // btnDoiMK
             // 
-            this.guna2PictureBox1.Image = global::GUI.Properties.Resources.sneakers;
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(83, 2);
-            this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(208, 187);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2PictureBox1.TabIndex = 3;
-            this.guna2PictureBox1.TabStop = false;
+            this.btnDoiMK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDoiMK.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnDoiMK.BorderRadius = 10;
+            this.btnDoiMK.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            this.btnDoiMK.BorderThickness = 2;
+            this.btnDoiMK.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnDoiMK.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnDoiMK.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnDoiMK.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnDoiMK.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
+            this.btnDoiMK.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDoiMK.ForeColor = System.Drawing.Color.White;
+            this.btnDoiMK.Location = new System.Drawing.Point(951, 4);
+            this.btnDoiMK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDoiMK.Name = "btnDoiMK";
+            this.btnDoiMK.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnDoiMK.Size = new System.Drawing.Size(241, 38);
+            this.btnDoiMK.TabIndex = 58;
+            this.btnDoiMK.Text = "Đổi mật khẩu";
+            this.btnDoiMK.Click += new System.EventHandler(this.btnDoiMK_Click);
             // 
             // frmMain
             // 
@@ -200,11 +251,13 @@
             this.Name = "frmMain";
             this.Text = "Shoes Store";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.guna2Panel2.ResumeLayout(false);
             this.guna2Panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -213,7 +266,7 @@
 
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblNameAndRole;
         private Guna.UI2.WinForms.Guna2Panel panelCenter;
         private Guna.UI2.WinForms.Guna2Button btnQLNhanVien;
         private System.Windows.Forms.Label label2;
@@ -221,5 +274,7 @@
         private Guna.UI2.WinForms.Guna2Button btnQLLoai;
         private Guna.UI2.WinForms.Guna2Button btnQLSanPham;
         private Guna.UI2.WinForms.Guna2Button btnQLKhachHang;
+        private Guna.UI2.WinForms.Guna2Button btnDangXuat;
+        private Guna.UI2.WinForms.Guna2Button btnDoiMK;
     }
 }

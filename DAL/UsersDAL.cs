@@ -75,5 +75,34 @@ namespace DAL
         {
             db.SubmitChanges();
         }
+
+        public bool IsExistEmployee(string maNV, string matKhau)
+        {
+            return db.Users.Where(x=> x.UserName == maNV && x.Password == matKhau).Any();
+        }
+
+        public User LoadInfoUserByMaNV(string maNhanVien)
+        {
+            return db.Users.Where(x => x.UserName == maNhanVien).FirstOrDefault();
+        }
+
+        public bool ChangePass(string maNV, string mkCu, string mkMoi)
+        {
+            try
+            {
+                User user = db.Users.Where(x => x.UserName == maNV && x.Password == mkCu).FirstOrDefault();
+                if (user != null)
+                {
+                    user.Password = mkMoi;
+                    db.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
