@@ -39,6 +39,7 @@
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.lblNameAndRole = new System.Windows.Forms.Label();
             this.panelCenter = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
             this.btnDoiMK = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
@@ -49,6 +50,7 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
+            this.guna2Panel1.Controls.Add(this.guna2Button1);
             this.guna2Panel1.Controls.Add(this.btnQLKhachHang);
             this.guna2Panel1.Controls.Add(this.btnQLSanPham);
             this.guna2Panel1.Controls.Add(this.btnQLLoai);
@@ -89,6 +91,7 @@
             this.btnQLSanPham.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
             this.btnQLSanPham.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnQLSanPham.ForeColor = System.Drawing.Color.Black;
+            this.btnQLSanPham.Location = new System.Drawing.Point(0, 405);
             this.btnQLSanPham.Location = new System.Drawing.Point(0, 402);
             this.btnQLSanPham.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQLSanPham.Name = "btnQLSanPham";
@@ -107,6 +110,7 @@
             this.btnQLLoai.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
             this.btnQLLoai.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnQLLoai.ForeColor = System.Drawing.Color.Black;
+            this.btnQLLoai.Location = new System.Drawing.Point(0, 338);
             this.btnQLLoai.Location = new System.Drawing.Point(0, 337);
             this.btnQLLoai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQLLoai.Name = "btnQLLoai";
@@ -191,6 +195,23 @@
             this.panelCenter.Size = new System.Drawing.Size(1405, 667);
             this.panelCenter.TabIndex = 2;
             // 
+            // guna2Button1
+            // 
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
+            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button1.Location = new System.Drawing.Point(0, 468);
+            this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
+            this.guna2Button1.Size = new System.Drawing.Size(376, 59);
+            this.guna2Button1.TabIndex = 6;
+            this.guna2Button1.Text = "POS";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // btnDangXuat
             // 
             this.btnDangXuat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -273,6 +294,7 @@
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2Button btnQLLoai;
         private Guna.UI2.WinForms.Guna2Button btnQLSanPham;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2Button btnQLKhachHang;
         private Guna.UI2.WinForms.Guna2Button btnDangXuat;
         private Guna.UI2.WinForms.Guna2Button btnDoiMK;
