@@ -27,14 +27,14 @@ namespace GUI
 
         private void loadCboTrangThai()
         {
-            // Tạo danh sách các KeyValuePair cho giới tính
-            List<KeyValuePair<string, int>> genderList = new List<KeyValuePair<string, int>>()
+            // Tạo danh sách các KeyValuePair cho trạng thái
+            List<KeyValuePair<string, int>> statusList = new List<KeyValuePair<string, int>>()
             {
                 new KeyValuePair<string, int>("Đã xóa", 0),
                 new KeyValuePair<string, int>("Hoạt động", 1)
             };
 
-            cboTrangThai.DataSource = genderList;
+            cboTrangThai.DataSource = statusList;
 
             cboTrangThai.DisplayMember = "Key";
             cboTrangThai.ValueMember = "Value";
@@ -44,10 +44,18 @@ namespace GUI
 
         private void loadCboGioiTinh()
         {
-            List<string> genderList = new List<string> { "Nam", "Nữ" };
+            List<KeyValuePair<string, int>> genderList = new List<KeyValuePair<string, int>>()
+            {
+                new KeyValuePair<string, int>("Nam", 0),
+                new KeyValuePair<string, int>("Nữ", 1)
+            };
 
             cboGioiTinh.DataSource = genderList;
-            cboGioiTinh.SelectedItem = "Nam";
+
+            cboGioiTinh.DisplayMember = "Key";
+            cboGioiTinh.ValueMember = "Value";
+
+            cboGioiTinh.SelectedIndex = 0;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -136,6 +144,7 @@ namespace GUI
             var customers = _usersBUL.GetAllCustomers();
             dgvCustomers.DataSource = customers;
             // Ẩn cột không cần thiết
+            dgvCustomers.Columns["DateOfBirth"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvCustomers.Columns["Password"].Visible = false;
             dgvCustomers.Columns["Image"].Visible = false;
             dgvCustomers.Columns["Role"].Visible = false;
@@ -148,7 +157,7 @@ namespace GUI
             {
                 string maKH = txtMaKH.Text;
                 string hoTen = txtHoTen.Text;
-                string gioiTinh = cboGioiTinh.SelectedValue.ToString();
+                string gioiTinh = cboGioiTinh.Text;
                 string SDT = txtSDT.Text;
                 DateTime ngaySinh = dtpNgaySinhKH.Value;
                 string email = txtEmail.Text;
@@ -166,11 +175,11 @@ namespace GUI
 
                 _usersBUL.UpdateCustomer(maKH, hoTen, gioiTinh, SDT, ngaySinh, email, diaChi, trangThai, image);
                 LoadDgvCustomers();
-                MessageBox.Show("Sửa sản phẩm thành công!");
+                MessageBox.Show("Sửa khách hàng thành công!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi sửa sản phẩm: " + ex.Message);
+                MessageBox.Show("Lỗi sửa khách hàng: " + ex.Message);
             }
         }
 
@@ -197,7 +206,7 @@ namespace GUI
 
                 txtMaKH.Text = row.Cells["UserName"].Value.ToString();
                 txtHoTen.Text = row.Cells["Fullname"].Value.ToString();
-                cboGioiTinh.SelectedText = row.Cells["Gender"].Value.ToString();
+                cboGioiTinh.SelectedValue = row.Cells["Gender"].Value.ToString() == "Nam" ? 0 : 1;
                 txtSDT.Text = row.Cells["PhoneNumber"].Value.ToString();
                 dtpNgaySinhKH.Value = (DateTime)row.Cells["DateOfBirth"].Value;
                 txtEmail.Text = row.Cells["Email"].Value.ToString();

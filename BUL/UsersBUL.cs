@@ -41,7 +41,7 @@ namespace BUL
                 Image = image,
                 RoleID = 3
             };
-            usersDAL.AddCustomer(customer);
+            usersDAL.AddUser(customer);
         }
 
         public List<User> GetAllCustomers()
@@ -69,12 +69,12 @@ namespace BUL
                 customer.isActive = trangThai;
                 customer.Image = image;
             }
-            usersDAL.UpdateCustomer(customer);
+            usersDAL.UpdateUser(customer);
         }
 
         public void DeleteCustomer(string maKH)
         {
-            usersDAL.DeleteCustomer(maKH);
+            usersDAL.DeleteUser(maKH);
         }
 
         public void ResetPassword(string maKH)
@@ -100,6 +100,53 @@ namespace BUL
         public bool ChangePass(string maNV, string mkCu, string mkMoi)
         {
             return usersDAL.ChangePass(maNV, mkCu, mkMoi);
+        }
+
+        public List<User> GetAllEmployees()
+        {
+            return usersDAL.GetAllEmployees();
+        }
+
+        public void AddEmployee(string maNV, string hoTen, string gioiTinh, string sDT, DateTime ngaySinh, string email, string diaChi, int trangThai, int quyen, string image)
+        {
+            var emp = new User
+            {
+                UserName = maNV,
+                Password = "123",
+                FullName = hoTen,
+                Gender = gioiTinh,
+                PhoneNumber = sDT,
+                DateOfBirth = ngaySinh,
+                Email = email,
+                Address = diaChi,
+                isActive = trangThai,
+                Image = image,
+                RoleID = quyen
+            };
+            usersDAL.AddUser(emp);
+        }
+
+        public void UpdateEmployee(string maKH, string hoTen, string gioiTinh, string sDT, DateTime ngaySinh, string email, string diaChi, int trangThai, int quyen, string image)
+        {
+            var emp = usersDAL.getCustomerByUserName(maKH);
+            if (emp != null)
+            {
+                emp.UserName = maKH;
+                emp.FullName = hoTen;
+                emp.Gender = gioiTinh;
+                emp.PhoneNumber = sDT;
+                emp.DateOfBirth = ngaySinh;
+                emp.Email = email;
+                emp.Address = diaChi;
+                emp.isActive = trangThai;
+                emp.Image = image;
+            }
+            usersDAL.UpdateUser(emp);
+        }
+
+        public void DeleteEmployee(string maNV)
+        {
+            usersDAL.DeleteUser(maNV);
         }
     }
 }
