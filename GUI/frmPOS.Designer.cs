@@ -49,6 +49,8 @@
             this.guna2CheckBox4 = new Guna.UI2.WinForms.Guna2CheckBox();
             this.guna2CheckBox5 = new Guna.UI2.WinForms.Guna2CheckBox();
             this.guna2CheckBox6 = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.cboKhachHang = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.guna2GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).BeginInit();
             this.guna2GroupBox3.SuspendLayout();
@@ -70,7 +72,6 @@
             // 
             this.panLoai.BackColor = System.Drawing.Color.White;
             this.panLoai.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panLoai.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.panLoai.Location = new System.Drawing.Point(0, 40);
             this.panLoai.Name = "panLoai";
             this.panLoai.Size = new System.Drawing.Size(215, 286);
@@ -118,6 +119,7 @@
             this.btnSave.Size = new System.Drawing.Size(219, 64);
             this.btnSave.TabIndex = 4;
             this.btnSave.Text = "LƯU";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnClear
             // 
@@ -159,12 +161,12 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.guna2DataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.guna2DataGridView1.Location = new System.Drawing.Point(985, 102);
+            this.guna2DataGridView1.Location = new System.Drawing.Point(985, 183);
             this.guna2DataGridView1.Name = "guna2DataGridView1";
             this.guna2DataGridView1.RowHeadersVisible = false;
             this.guna2DataGridView1.RowHeadersWidth = 51;
             this.guna2DataGridView1.RowTemplate.Height = 24;
-            this.guna2DataGridView1.Size = new System.Drawing.Size(666, 582);
+            this.guna2DataGridView1.Size = new System.Drawing.Size(666, 501);
             this.guna2DataGridView1.TabIndex = 6;
             this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -344,11 +346,38 @@
             this.guna2CheckBox6.UncheckedState.BorderThickness = 0;
             this.guna2CheckBox6.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             // 
+            // cboKhachHang
+            // 
+            this.cboKhachHang.BackColor = System.Drawing.Color.Transparent;
+            this.cboKhachHang.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboKhachHang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboKhachHang.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboKhachHang.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboKhachHang.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboKhachHang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.cboKhachHang.ItemHeight = 30;
+            this.cboKhachHang.Location = new System.Drawing.Point(1265, 116);
+            this.cboKhachHang.Name = "cboKhachHang";
+            this.cboKhachHang.Size = new System.Drawing.Size(386, 36);
+            this.cboKhachHang.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(1045, 116);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(198, 29);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Chọn khách hàng";
+            // 
             // frmPOS
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1680, 938);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.cboKhachHang);
             this.Controls.Add(this.guna2GroupBox3);
             this.Controls.Add(this.lblTongTien);
             this.Controls.Add(this.label1);
@@ -392,5 +421,7 @@
         private Guna.UI2.WinForms.Guna2CheckBox guna2CheckBox5;
         private Guna.UI2.WinForms.Guna2CheckBox guna2CheckBox6;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private Guna.UI2.WinForms.Guna2ComboBox cboKhachHang;
+        private System.Windows.Forms.Label label2;
     }
 }
