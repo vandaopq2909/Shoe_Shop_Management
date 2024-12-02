@@ -83,5 +83,12 @@ namespace GUI
             frm.maNV = maNhanVien;
             frm.ShowDialog();
         }
+
+        private void btnQuanLyNhapHang_Click(object sender, EventArgs e)
+        {
+            var form = new frmManagePurchaseReceipts();
+            form.MaNV = maNhanVien; 
+            AddControl(form);
+        }
     }
 }

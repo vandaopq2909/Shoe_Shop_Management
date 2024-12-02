@@ -76,5 +76,10 @@ namespace BUL
                 _productDAL.updateProduct(pro);
             }
         }
+
+        public double getGiaProductByID(int masp)
+        {
+            return _productDAL.getGiaProductByID(masp);
+        }
     }
 }
