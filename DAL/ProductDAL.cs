@@ -43,5 +43,11 @@ namespace DAL
         {
             _context.SubmitChanges();
         }
+
+        public double getGiaProductByID(int masp)
+        {
+            var sp = _context.Products.Where(x=> x.ProductID == masp).FirstOrDefault();
+            return sp.ProductPrice ?? 0;
+        }
     }
 }

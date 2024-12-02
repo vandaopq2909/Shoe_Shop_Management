@@ -119,6 +119,12 @@
     <Compile Include="frmManageProducts.Designer.cs">
       <DependentUpon>frmManageProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmManagePurchaseReceipts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManagePurchaseReceipts.Designer.cs">
+      <DependentUpon>frmManagePurchaseReceipts.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmManageRole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,12 +136,6 @@
     </Compile>
     <Compile Include="frmManageUsers.Designer.cs">
       <DependentUpon>frmManageUsers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmManageUser_GroupUser.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmManageUser_GroupUser.Designer.cs">
-      <DependentUpon>frmManageUser_GroupUser.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPerInformation.cs">
       <SubType>Form</SubType>
@@ -181,14 +181,14 @@
     <EmbeddedResource Include="frmManageProducts.resx">
       <DependentUpon>frmManageProducts.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmManagePurchaseReceipts.resx">
+      <DependentUpon>frmManagePurchaseReceipts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmManageRole.resx">
       <DependentUpon>frmManageRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmManageUsers.resx">
       <DependentUpon>frmManageUsers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmManageUser_GroupUser.resx">
-      <DependentUpon>frmManageUser_GroupUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPerInformation.resx">
       <DependentUpon>frmPerInformation.cs</DependentUpon>
