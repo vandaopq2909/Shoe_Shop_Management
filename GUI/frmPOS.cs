@@ -25,6 +25,19 @@ namespace GUI
         {
             LoadCategories();
             LoadProduct();
+            SetupDataGridView();
+        }
+        private void SetupDataGridView()
+        {
+            // Kiểm tra xem các cột đã tồn tại chưa, nếu chưa thì thêm vào
+            if (!guna2DataGridView1.Columns.Contains("ProductID"))
+            {
+                guna2DataGridView1.Columns.Add("ProductID", "Mã sản phẩm");
+                guna2DataGridView1.Columns.Add("ProductName", "Tên sản phẩm");
+                guna2DataGridView1.Columns.Add("dgvQty", "Số lượng");
+                guna2DataGridView1.Columns.Add("dgvPrice", "Giá");
+                guna2DataGridView1.Columns.Add("dgvAmount", "Tổng tiền");
+            }
         }
         private void LoadCategories()
         {
@@ -47,30 +60,44 @@ namespace GUI
                 image = image,
                 price = price,
                 id = Convert.ToInt32(id)
-
             };
 
             panSanPham.Controls.Add(pro);
             pro.onSelect += (ss, ee) =>
             {
                 var wdg = (ucProduct)ss;
+                bool isExist = false;
+
                 foreach (DataGridViewRow row in guna2DataGridView1.Rows)
                 {
-                    if (Convert.ToUInt32(row.Cells["ProductID"].Value) == wdg.id)
+                    if (Convert.ToInt32(row.Cells["ProductID"].Value) == wdg.id)
                     {
-                        row.Cells["dgvQty"].Value = int.Parse(row.Cells["dgvQty"].Value.ToString()) + 1;
-                        row.Cells["dgvAmount"].Value =
-                            (int.Parse(row.Cells["dgvQty"].Value.ToString())) *
-                            int.Parse(row.Cells["dgvPrice"].Value.ToString());
-                        return;
+                        isExist = true;
+
+                        row.Cells["dgvQty"].Value = Convert.ToInt32(row.Cells["dgvQty"].Value) + 1;
+                        row.Cells["dgvAmount"].Value = Convert.ToInt32(row.Cells["dgvQty"].Value) * Convert.ToDouble(row.Cells["dgvPrice"].Value);
+
+                        break;
                     }
                 }
-                guna2DataGridView1.Rows.Add(new object[] { 0, 0, wdg.id, wdg.name, wdg.price, 1, wdg.price });
+
+                if (!isExist)
+                {
+                    guna2DataGridView1.Rows.Add(new object[]
+                    {
+                guna2DataGridView1.Rows.Count + 1,  // Số thứ tự
+                wdg.id,                            // ProductID
+                wdg.name,                          // Tên sản phẩm
+                1,                                 // Số lượng mặc định = 1
+                wdg.price,                         // Giá sản phẩm
+                wdg.price                          // Tổng tiền ban đầu
+                    });
+                }
+
+                UpdateTotalAmount(); // Cập nhật tổng tiền
             };
         }
-        //Byte[] ImageArray = (byte[])(dt.Rows[0]["Image"]);
 
-        //byte[] ImageByArray = ImageArray;
         private void LoadProduct()
         {
             string qry = @"Select *from products";
@@ -90,7 +117,6 @@ namespace GUI
                         AddItem(row["ProductID"].ToString(), row["ProductName"].ToString(),
                              Image.FromFile(imagePath), Double.Parse(row["ProductPrice"].ToString()));
                     }
-               
                 }
                 else
                 {
@@ -110,5 +136,21 @@ namespace GUI
             }
             lblTongTien.Text=tot.ToString();
         }
+        private void UpdateTotalAmount()
+        {
+            double total = 0;
+
+            // Tính tổng tiền từ cột `dgvAmount`
+            foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+            {
+                if (row.Cells["dgvAmount"].Value != null)
+                {
+                    total += Convert.ToDouble(row.Cells["dgvAmount"].Value);
+                }
+            }
+
+            lblTongTien.Text = total.ToString("C"); // Hiển thị tổng tiền (vd: dạng tiền tệ)
+        }
+
     }
 }

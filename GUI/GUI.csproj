@@ -89,6 +89,12 @@
     <Compile Include="frmManageCategories.Designer.cs">
       <DependentUpon>frmManageCategories.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmManageCustomers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageCustomers.Designer.cs">
+      <DependentUpon>frmManageCustomers.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmManageEmployees.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +184,9 @@
     <EmbeddedResource Include="frmManageCategories.resx">
       <DependentUpon>frmManageCategories.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmManageCustomers.resx">
+      <DependentUpon>frmManageCustomers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmManageEmployees.resx">
       <DependentUpon>frmManageEmployees.cs</DependentUpon>
     </EmbeddedResource>
@@ -261,6 +270,10 @@
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{7ff5fb42-6e0a-4b0a-ba0b-f294c144f79d}</Project>
       <Name>DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UC_Control\UC_Control.csproj">
+      <Project>{f4e13a92-238c-4016-941f-42edfe82d54d}</Project>
+      <Name>UC_Control</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{018edb0b-9a72-4bc2-bb4e-8533467c3005}</Project>

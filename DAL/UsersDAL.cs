@@ -3,13 +3,16 @@ using System.Data.SqlClient;
 using System.Data;
 using DTO;
 using System.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 namespace DAL
 {
     public class UsersDAL
     {
         SqlConnection conn;
         string strConnection = ConfigurationManager.ConnectionStrings["MyDBShop"].ConnectionString;
-
+        private ShoeStoreDataContext db = new ShoeStoreDataContext();
         public UsersDAL()
         {
             conn = new SqlConnection(strConnection);
@@ -33,6 +36,78 @@ namespace DAL
             if (conn.State == ConnectionState.Open)
                 conn.Close();
             return kq > 0;
+        }
+
+        public void AddUser(User user)
+        {
+            db.Users.InsertOnSubmit(user);
+            db.SubmitChanges();
+        }
+
+        public List<User> GetAllCustomers()
+        {
+            return db.Users.Where(x => x.RoleID == 3).ToList();
+        }
+
+        public bool CheckDuplicateUsername(string maKH)
+        {
+            return db.Users.Any(x => x.UserName == maKH);
+        }
+
+        public User getCustomerByUserName(string maKH)
+        {
+            return db.Users.Where(x=> x.UserName == maKH).FirstOrDefault(); 
+        }
+
+        public void UpdateUser(User customer)
+        {
+            db.SubmitChanges();
+        }
+
+        public void DeleteUser(string maUser)
+        {
+            var deleteUser = db.Users.Where(x=> x.UserName == maUser).FirstOrDefault();
+            db.Users.DeleteOnSubmit(deleteUser);
+            db.SubmitChanges();
+        }
+
+        public void ResetPassword(User customer)
+        {
+            db.SubmitChanges();
+        }
+
+        public bool IsExistEmployee(string maNV, string matKhau)
+        {
+            return db.Users.Where(x=> x.UserName == maNV && x.Password == matKhau).Any();
+        }
+
+        public User LoadInfoUserByMaNV(string maNhanVien)
+        {
+            return db.Users.Where(x => x.UserName == maNhanVien).FirstOrDefault();
+        }
+
+        public bool ChangePass(string maNV, string mkCu, string mkMoi)
+        {
+            try
+            {
+                User user = db.Users.Where(x => x.UserName == maNV && x.Password == mkCu).FirstOrDefault();
+                if (user != null)
+                {
+                    user.Password = mkMoi;
+                    db.SubmitChanges();
+                    return true;
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public List<User> GetAllEmployees()
+        {
+            return db.Users.Where(x => x.RoleID == 1 || x.RoleID == 2).ToList();
         }
     }
 }
