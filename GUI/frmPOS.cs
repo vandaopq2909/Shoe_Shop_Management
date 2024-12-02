@@ -1,8 +1,10 @@
-﻿using DAL;
+﻿using BUL;
+using DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Text;
 using System.IO;
@@ -16,6 +18,7 @@ namespace GUI
 {
     public partial class frmPOS : Form
     {
+        private UsersBUL _usersBUL = new UsersBUL();
         public frmPOS()
         {
             InitializeComponent();
@@ -26,6 +29,7 @@ namespace GUI
             LoadCategories();
             LoadProduct();
             SetupDataGridView();
+            LoadComboboxKhachHang();
         }
         private void SetupDataGridView()
         {
@@ -38,6 +42,14 @@ namespace GUI
                 guna2DataGridView1.Columns.Add("dgvPrice", "Giá");
                 guna2DataGridView1.Columns.Add("dgvAmount", "Tổng tiền");
             }
+        }
+        void LoadComboboxKhachHang()
+        {
+            var customer = _usersBUL.GetAllCustomers().ToList();
+
+            cboKhachHang.DataSource = customer;
+            cboKhachHang.DisplayMember = "FullName";
+            cboKhachHang.ValueMember = "UserName";
         }
         private void LoadCategories()
         {
@@ -148,9 +160,129 @@ namespace GUI
                     total += Convert.ToDouble(row.Cells["dgvAmount"].Value);
                 }
             }
+            lblTongTien.Text = total.ToString();
+        }
+        private void SaveOrderToDatabase()
+        {
+            try
+            {
+                // Mở kết nối tới cơ sở dữ liệu
+                using (SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=ShoeShop;Integrated Security=True"))
+                {
+                    conn.Open();
 
-            lblTongTien.Text = total.ToString("C"); // Hiển thị tổng tiền (vd: dạng tiền tệ)
+                    // Kiểm tra và chuyển đổi TotalAmount
+                    double totalAmount = 0;
+                    if (!double.TryParse(lblTongTien.Text, out totalAmount))
+                    {
+                        MessageBox.Show("Tổng tiền không hợp lệ.");
+                        return;
+                    }
+                    string selectedUserName = cboKhachHang.SelectedValue.ToString();
+                    // Tạo câu lệnh SQL để chèn dữ liệu vào bảng Orders
+                    string query = @"
+                INSERT INTO Orders (TotalAmount, Status, DateCreated, UserName)
+                VALUES (@TotalAmount, @Status, @DateCreated, @UserName);
+                SELECT SCOPE_IDENTITY();";  // Trả về OrderID vừa được tạo
+
+                    // Khởi tạo đối tượng SqlCommand
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        // Thêm các tham số vào câu lệnh SQL
+                        cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
+                        cmd.Parameters.AddWithValue("@Status", "Pending");  // Ví dụ Status có thể là "Pending"
+                        cmd.Parameters.AddWithValue("@DateCreated", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@UserName", selectedUserName);  // Sử dụng tên người dùng hiện tại nếu có
+
+                        // Thực thi câu lệnh và lấy OrderID vừa được tạo
+                        var result = cmd.ExecuteScalar();
+
+                        // Kiểm tra kết quả trả về từ ExecuteScalar
+                        if (result != DBNull.Value)
+                        {
+                            int orderId = Convert.ToInt32(result);  // Lấy OrderID vừa được tạo
+
+                            // Sau khi lấy OrderID, tiếp tục thêm chi tiết đơn hàng vào OrderDetails
+                            AddOrderDetails(orderId);
+                            MessageBox.Show("Đơn hàng đã được lưu thành công!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không thể lấy OrderID.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu đơn hàng: " + ex.Message);
+            }
         }
 
+
+        // Hàm để thêm chi tiết đơn hàng vào bảng OrderDetails
+        private void AddOrderDetails(int orderId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=ShoeShop;Integrated Security=True"))
+                {
+                    conn.Open();
+
+                    // Tạo câu lệnh SQL để chèn dữ liệu vào bảng OrderDetails
+                    string query = @"
+                INSERT INTO OrderDetails (OrderID, ProductID, Quantity, Price, TotalAmount)
+                VALUES (@OrderID, @ProductID, @Quantity, @Price, @TotalAmount);";
+
+                    foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+                    {
+                        if (row.Cells["ProductID"].Value != null)
+                        {
+                            int productId = Convert.ToInt32(row.Cells["ProductID"].Value);
+                            int quantity = Convert.ToInt32(row.Cells["dgvQty"].Value);
+
+                            // Kiểm tra và chuyển đổi giá trị Price
+                            double price = 0;
+                            if (!double.TryParse(row.Cells["dgvPrice"].Value.ToString(), out price))
+                            {
+                                MessageBox.Show("Giá sản phẩm không hợp lệ.");
+                                return;
+                            }
+
+                            // Kiểm tra và chuyển đổi TotalAmount
+                            double totalAmount = 0;
+                            if (!double.TryParse(row.Cells["dgvAmount"].Value.ToString(), out totalAmount))
+                            {
+                                MessageBox.Show("Tổng tiền sản phẩm không hợp lệ.");
+                                return;
+                            }
+
+                            // Tạo đối tượng SqlCommand để chèn chi tiết đơn hàng
+                            using (SqlCommand cmd = new SqlCommand(query, conn))
+                            {
+                                cmd.Parameters.AddWithValue("@OrderID", orderId);
+                                cmd.Parameters.AddWithValue("@ProductID", productId);
+                                cmd.Parameters.AddWithValue("@Quantity", quantity);
+                                cmd.Parameters.AddWithValue("@Price", price);
+                                cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
+
+                                // Thực thi câu lệnh chèn dữ liệu vào OrderDetails
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lưu chi tiết đơn hàng: " + ex.Message);
+            }
+        }
+
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            SaveOrderToDatabase();
+        }
     }
 }
