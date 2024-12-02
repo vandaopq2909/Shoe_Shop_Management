@@ -8,13 +8,9 @@ namespace DTO
 {
     public class OrdersDTO
     {
-        public OrdersDTO()
-        {
-            OrderID = GenerateOrderID();
-        }
+ 
         public OrdersDTO(DateTimeOffset createdTime, double totalAmount, string? status, string? description, string? userName)
         {
-            OrderID = GenerateOrderID();
             CreatedTime = createdTime;
             TotalAmount = totalAmount;
             Status = status;
@@ -28,9 +24,6 @@ namespace DTO
         public string? Status { get; set; }
         public string? Description { get; set; }
         public string? UserName { get; set; }
-        private string GenerateOrderID()
-        {
-            return "ORD" + Guid.NewGuid().ToString("N");
-        }
+
     }
 }

@@ -21,6 +21,9 @@ namespace BUL
         {
             return _productDAL.getProduct();
         }
+        public Product getProductByID(int id) {
+            return _productDAL.getProductByID(id);
+        }
 
         public void AddProduct(int catID, string name, float price, string des, int quantity,
             string size, string color, string brand, string status, string img)

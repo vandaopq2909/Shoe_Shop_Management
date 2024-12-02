@@ -44,7 +44,10 @@ namespace GUI
         {
             AddControl(new frmManageProducts());
         }
-
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            AddControl(new frmPOS());
+	}
         private void btnQLKhachHang_Click(object sender, EventArgs e)
         {
             AddControl(new frmManageCustomers());
