@@ -38,9 +38,9 @@ namespace DAL
             return kq > 0;
         }
 
-        public void AddCustomer(User customer)
+        public void AddUser(User user)
         {
-            db.Users.InsertOnSubmit(customer);
+            db.Users.InsertOnSubmit(user);
             db.SubmitChanges();
         }
 
@@ -59,15 +59,15 @@ namespace DAL
             return db.Users.Where(x=> x.UserName == maKH).FirstOrDefault(); 
         }
 
-        public void UpdateCustomer(User customer)
+        public void UpdateUser(User customer)
         {
             db.SubmitChanges();
         }
 
-        public void DeleteCustomer(string maKH)
+        public void DeleteUser(string maUser)
         {
-            var deleteCustomer = db.Users.Where(x=> x.UserName == maKH).First();
-            db.Users.DeleteOnSubmit(deleteCustomer);
+            var deleteUser = db.Users.Where(x=> x.UserName == maUser).FirstOrDefault();
+            db.Users.DeleteOnSubmit(deleteUser);
             db.SubmitChanges();
         }
 
@@ -103,6 +103,11 @@ namespace DAL
             {
                 return false;
             }
+        }
+
+        public List<User> GetAllEmployees()
+        {
+            return db.Users.Where(x => x.RoleID == 1 || x.RoleID == 2).ToList();
         }
     }
 }
