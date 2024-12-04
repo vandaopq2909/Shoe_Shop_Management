@@ -1,5 +1,6 @@
 ﻿using BUL;
 using DAL;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +21,8 @@ namespace GUI
     public partial class frmPOS : Form
     {
         private UsersBUL _usersBUL = new UsersBUL();
+        private CategoriesBUL _categoriesBUL;
+        private ProductBUL _productBUL;
         public frmPOS()
         {
             InitializeComponent();
@@ -26,8 +30,11 @@ namespace GUI
 
         private void frmPOS_Load(object sender, EventArgs e)
         {
+            _categoriesBUL = new CategoriesBUL();
+            _productBUL=new ProductBUL();
             LoadCategories();
             LoadProduct();
+
             SetupDataGridView();
             LoadComboboxKhachHang();
         }
@@ -53,18 +60,73 @@ namespace GUI
         }
         private void LoadCategories()
         {
-            string qry = @"Select * from Categories";
-            DataTable dt = MainClass.GetData(qry);
-            foreach (DataRow row in dt.Rows)
+            var categories = _categoriesBUL.GetCategories();
+
+            foreach (var category in categories)
             {
                 Guna.UI2.WinForms.Guna2CheckBox ckb = new Guna.UI2.WinForms.Guna2CheckBox();
                 ckb.AutoSize = true;
-                ckb.Name = row["CategoryName"].ToString();
-                ckb.Text = row["CategoryName"].ToString();
-                panLoai.Controls.Add(ckb);
+                ckb.Name = category.CategoryName;
+                ckb.Text = category.CategoryName;
+                ckb.CheckedChanged += Ckb_CheckedChanged;
+                panLoai.Controls.Add(ckb);  // Thêm checkbox vào panel
             }
         }
-        private void AddItem(string id, string name, Image image, double price)
+        private void Ckb_CheckedChanged(object sender, EventArgs e)
+        {
+            // Lọc sản phẩm theo danh mục
+            FilterProductsByCategories();
+        }
+
+        private void FilterProductsByCategories()
+        {
+            var selectedCategories = panLoai.Controls.OfType<Guna.UI2.WinForms.Guna2CheckBox>()
+                                              .Where(ckb => ckb.Checked)
+                                              .Select(ckb => ckb.Name)
+                                              .ToList();
+            panSanPham.Controls.Clear();
+            // Nếu không chọn gì
+            if (selectedCategories.Count == 0)
+            {
+                LoadProduct(); // Load tất cả sản phẩm
+            }
+            else
+            {
+                var filteredProducts = _productBUL.GetProducts()
+                                                  .Where(p => selectedCategories.Contains(p.Category.CategoryName))
+                                                  .ToList();
+
+                LoadProductByCat(filteredProducts);
+            }
+         
+        }
+
+        private void LoadProductByCat(List<Product> filteredProducts)
+        {
+            panSanPham.Controls.Clear();
+
+            foreach (var product in filteredProducts)
+            {
+                string img = product.Image; 
+                if (!string.IsNullOrEmpty(img))
+                {
+                    string imagePath = Path.Combine(Application.StartupPath, "Images", img);
+                    if (File.Exists(imagePath))
+                    {
+                        AddItem(product.ProductID.ToString(), product.ProductName,
+                                Image.FromFile(imagePath), product.ProductPrice);
+                    }
+                }
+                else
+                {
+                    AddItem(product.ProductID.ToString(), product.ProductName,
+                            Properties.Resources.save, product.ProductPrice);
+                }
+            }
+        }
+
+
+        private void AddItem(string id, string name, Image image, double? price)
         {
             var pro = new ucProduct()
             {
@@ -75,34 +137,32 @@ namespace GUI
             };
 
             panSanPham.Controls.Add(pro);
-            pro.onSelect += (ss, ee) =>
+            pro.onSelect += (l, ee) =>
             {
-                var wdg = (ucProduct)ss;
+                var uc = (ucProduct)l;
                 bool isExist = false;
 
                 foreach (DataGridViewRow row in guna2DataGridView1.Rows)
                 {
-                    if (Convert.ToInt32(row.Cells["ProductID"].Value) == wdg.id)
+                    if (Convert.ToInt32(row.Cells["ProductID"].Value) == uc.id)
                     {
                         isExist = true;
 
                         row.Cells["dgvQty"].Value = Convert.ToInt32(row.Cells["dgvQty"].Value) + 1;
                         row.Cells["dgvAmount"].Value = Convert.ToInt32(row.Cells["dgvQty"].Value) * Convert.ToDouble(row.Cells["dgvPrice"].Value);
-
                         break;
                     }
                 }
-
                 if (!isExist)
                 {
                     guna2DataGridView1.Rows.Add(new object[]
                     {
-                guna2DataGridView1.Rows.Count + 1,  // Số thứ tự
-                wdg.id,                            // ProductID
-                wdg.name,                          // Tên sản phẩm
-                1,                                 // Số lượng mặc định = 1
-                wdg.price,                         // Giá sản phẩm
-                wdg.price                          // Tổng tiền ban đầu
+                        guna2DataGridView1.Rows.Count + 1,  // Số thứ tự
+                        uc.id,                            // ProductID
+                        uc.name,                          // Tên sản phẩm
+                        1,                                 // Số lượng mặc định = 1
+                        uc.price,                         // Giá sản phẩm
+                        uc.price                          // Tổng tiền ban đầu
                     });
                 }
 
@@ -112,47 +172,36 @@ namespace GUI
 
         private void LoadProduct()
         {
-            string qry = @"Select *from products";
-            DataTable dt = MainClass.GetData(qry);
-            foreach (DataRow row in dt.Rows)
+            panSanPham.Controls.Clear();
+
+            var allProducts = _productBUL.GetProducts();
+
+            foreach (var product in allProducts)
             {
-                string s = (string)dt.Rows[0]["Image"];
-                byte[] data = System.Text.Encoding.ASCII.GetBytes(s);
-
-
-                string img = row["Image"].ToString();
+                string img = product.Image;
                 if (!string.IsNullOrEmpty(img))
                 {
+                    // Đường dẫn đến ảnh của sản phẩm
                     string imagePath = Path.Combine(Application.StartupPath, "Images", img);
                     if (File.Exists(imagePath))
                     {
-                        AddItem(row["ProductID"].ToString(), row["ProductName"].ToString(),
-                             Image.FromFile(imagePath), Double.Parse(row["ProductPrice"].ToString()));
+                        // Thêm sản phẩm vào panel với ảnh
+                        AddItem(product.ProductID.ToString(), product.ProductName,
+                                Image.FromFile(imagePath), product.ProductPrice ?? 0); // Nếu giá trị null, mặc định là 0
                     }
                 }
                 else
                 {
-                    AddItem(row["ProductID"].ToString(), row["ProductName"].ToString(),
-                      Properties.Resources.save, Double.Parse(row["ProductPrice"].ToString()));
+                    // Thêm sản phẩm vào panel với ảnh mặc định
+                    AddItem(product.ProductID.ToString(), product.ProductName,
+                            Properties.Resources.save, product.ProductPrice ?? 0);
                 }
             }
+        }
 
-        }
-        private void getToltal()
-        {
-            double tot = 0;
-            lblTongTien.Text = "00";
-            foreach(DataGridViewRow row in guna2DataGridView1.Rows)
-            {
-                tot += double.Parse(row.Cells["dgvAmount"].Value.ToString());
-            }
-            lblTongTien.Text=tot.ToString();
-        }
         private void UpdateTotalAmount()
         {
             double total = 0;
-
-            // Tính tổng tiền từ cột `dgvAmount`
             foreach (DataGridViewRow row in guna2DataGridView1.Rows)
             {
                 if (row.Cells["dgvAmount"].Value != null)
@@ -160,7 +209,7 @@ namespace GUI
                     total += Convert.ToDouble(row.Cells["dgvAmount"].Value);
                 }
             }
-            lblTongTien.Text = total.ToString();
+            lblTongTien.Text = total.ToString("N0");
         }
         private void SaveOrderToDatabase()
         {
@@ -181,16 +230,16 @@ namespace GUI
                     string selectedUserName = cboKhachHang.SelectedValue.ToString();
                     // Tạo câu lệnh SQL để chèn dữ liệu vào bảng Orders
                     string query = @"
-                INSERT INTO Orders (TotalAmount, Status, DateCreated, UserName)
-                VALUES (@TotalAmount, @Status, @DateCreated, @UserName);
-                SELECT SCOPE_IDENTITY();";  // Trả về OrderID vừa được tạo
+                    INSERT INTO Orders (TotalAmount, Status, DateCreated, UserName)
+                    VALUES (@TotalAmount, @Status, @DateCreated, @UserName);
+                    SELECT SCOPE_IDENTITY();";  // Trả về OrderID vừa được tạo
 
                     // Khởi tạo đối tượng SqlCommand
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         // Thêm các tham số vào câu lệnh SQL
                         cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
-                        cmd.Parameters.AddWithValue("@Status", "Pending");  // Ví dụ Status có thể là "Pending"
+                        cmd.Parameters.AddWithValue("@Status", "Đã thanh toán");  
                         cmd.Parameters.AddWithValue("@DateCreated", DateTime.Now);
                         cmd.Parameters.AddWithValue("@UserName", selectedUserName);  // Sử dụng tên người dùng hiện tại nếu có
 

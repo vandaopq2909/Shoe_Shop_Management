@@ -113,11 +113,11 @@
     <Compile Include="frmManageListScreen.Designer.cs">
       <DependentUpon>frmManageListScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmManageOrders.cs">
+    <Compile Include="frmManagemnetOrder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmManageOrders.Designer.cs">
-      <DependentUpon>frmManageOrders.cs</DependentUpon>
+    <Compile Include="frmManagemnetOrder.Designer.cs">
+      <DependentUpon>frmManagemnetOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="frmManageProducts.cs">
       <SubType>Form</SubType>
@@ -196,8 +196,8 @@
     <EmbeddedResource Include="frmManageListScreen.resx">
       <DependentUpon>frmManageListScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmManageOrders.resx">
-      <DependentUpon>frmManageOrders.cs</DependentUpon>
+    <EmbeddedResource Include="frmManagemnetOrder.resx">
+      <DependentUpon>frmManagemnetOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmManageProducts.resx">
       <DependentUpon>frmManageProducts.cs</DependentUpon>

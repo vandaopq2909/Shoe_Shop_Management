@@ -90,5 +90,10 @@ namespace GUI
             form.MaNV = maNhanVien; 
             AddControl(form);
         }
+
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            AddControl(new frmManagemnetOrder());
+        }
     }
 }

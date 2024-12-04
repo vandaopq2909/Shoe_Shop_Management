@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            this.btnQuanLyNhapHang = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.btnQLKhachHang = new Guna.UI2.WinForms.Guna2Button();
             this.btnQLSanPham = new Guna.UI2.WinForms.Guna2Button();
             this.btnQLLoai = new Guna.UI2.WinForms.Guna2Button();
@@ -41,10 +44,6 @@
             this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
             this.lblNameAndRole = new System.Windows.Forms.Label();
             this.panelCenter = new Guna.UI2.WinForms.Guna2Panel();
-            this.btnQuanLyNhapHang = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
-            this.btnDoiMK = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2Panel2.SuspendLayout();
@@ -53,6 +52,7 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
+            this.guna2Panel1.Controls.Add(this.guna2Button2);
             this.guna2Panel1.Controls.Add(this.btnQuanLyNhapHang);
             this.guna2Panel1.Controls.Add(this.guna2Button1);
             this.guna2Panel1.Controls.Add(this.btnQLKhachHang);
@@ -67,6 +67,60 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(376, 711);
             this.guna2Panel1.TabIndex = 0;
+            // 
+            // guna2Button2
+            // 
+            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
+            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.guna2Button2.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button2.Location = new System.Drawing.Point(0, 593);
+            this.guna2Button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2Button2.Name = "guna2Button2";
+            this.guna2Button2.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
+            this.guna2Button2.Size = new System.Drawing.Size(376, 59);
+            this.guna2Button2.TabIndex = 7;
+            this.guna2Button2.Text = "Quản lý đơn hàng";
+            this.guna2Button2.Click += new System.EventHandler(this.guna2Button2_Click);
+            // 
+            // btnQuanLyNhapHang
+            // 
+            this.btnQuanLyNhapHang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnQuanLyNhapHang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnQuanLyNhapHang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnQuanLyNhapHang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnQuanLyNhapHang.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
+            this.btnQuanLyNhapHang.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnQuanLyNhapHang.ForeColor = System.Drawing.Color.Black;
+            this.btnQuanLyNhapHang.Location = new System.Drawing.Point(0, 530);
+            this.btnQuanLyNhapHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnQuanLyNhapHang.Name = "btnQuanLyNhapHang";
+            this.btnQuanLyNhapHang.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
+            this.btnQuanLyNhapHang.Size = new System.Drawing.Size(376, 59);
+            this.btnQuanLyNhapHang.TabIndex = 6;
+            this.btnQuanLyNhapHang.Text = "Quản lý nhập hàng";
+            this.btnQuanLyNhapHang.Click += new System.EventHandler(this.btnQuanLyNhapHang_Click);
+            // 
+            // guna2Button1
+            // 
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
+            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button1.Location = new System.Drawing.Point(0, 468);
+            this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
+            this.guna2Button1.Size = new System.Drawing.Size(376, 59);
+            this.guna2Button1.TabIndex = 6;
+            this.guna2Button1.Text = "POS";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // btnQLKhachHang
             // 
@@ -95,7 +149,6 @@
             this.btnQLSanPham.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
             this.btnQLSanPham.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnQLSanPham.ForeColor = System.Drawing.Color.Black;
-            this.btnQLSanPham.Location = new System.Drawing.Point(0, 405);
             this.btnQLSanPham.Location = new System.Drawing.Point(0, 402);
             this.btnQLSanPham.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQLSanPham.Name = "btnQLSanPham";
@@ -114,7 +167,6 @@
             this.btnQLLoai.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
             this.btnQLLoai.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnQLLoai.ForeColor = System.Drawing.Color.Black;
-            this.btnQLLoai.Location = new System.Drawing.Point(0, 338);
             this.btnQLLoai.Location = new System.Drawing.Point(0, 337);
             this.btnQLLoai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQLLoai.Name = "btnQLLoai";
@@ -202,23 +254,6 @@
             this.btnDoiMK.Text = "Đổi mật khẩu";
             this.btnDoiMK.Click += new System.EventHandler(this.btnDoiMK_Click);
             // 
-            // guna2Button1
-            // 
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button1.Location = new System.Drawing.Point(0, 468);
-            this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
-            this.guna2Button1.Size = new System.Drawing.Size(376, 59);
-            this.guna2Button1.TabIndex = 6;
-            this.guna2Button1.Text = "POS";
-            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // btnDangXuat
             // 
             this.btnDangXuat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -262,24 +297,6 @@
             this.panelCenter.Size = new System.Drawing.Size(1405, 667);
             this.panelCenter.TabIndex = 2;
             // 
-            // btnQuanLyNhapHang
-            // 
-            this.btnQuanLyNhapHang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnQuanLyNhapHang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnQuanLyNhapHang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnQuanLyNhapHang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnQuanLyNhapHang.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
-            this.btnQuanLyNhapHang.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.btnQuanLyNhapHang.ForeColor = System.Drawing.Color.Black;
-            this.btnQuanLyNhapHang.Location = new System.Drawing.Point(0, 530);
-            this.btnQuanLyNhapHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnQuanLyNhapHang.Name = "btnQuanLyNhapHang";
-            this.btnQuanLyNhapHang.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
-            this.btnQuanLyNhapHang.Size = new System.Drawing.Size(376, 59);
-            this.btnQuanLyNhapHang.TabIndex = 6;
-            this.btnQuanLyNhapHang.Text = "Quản lý nhập hàng";
-            this.btnQuanLyNhapHang.Click += new System.EventHandler(this.btnQuanLyNhapHang_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -321,5 +338,6 @@
         private Guna.UI2.WinForms.Guna2Button btnDangXuat;
         private Guna.UI2.WinForms.Guna2Button btnDoiMK;
         private Guna.UI2.WinForms.Guna2Button btnQuanLyNhapHang;
+        private Guna.UI2.WinForms.Guna2Button guna2Button2;
     }
 }

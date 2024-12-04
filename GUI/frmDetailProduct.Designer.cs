@@ -49,10 +49,10 @@
             // 
             // lblName
             // 
-            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(40, 278);
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(30, 345);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(187, 48);
+            this.lblName.Size = new System.Drawing.Size(277, 69);
             this.lblName.TabIndex = 1;
             this.lblName.Text = "Giày thể thao nam Nike";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -60,9 +60,9 @@
             // lblPrice
             // 
             this.lblPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrice.Location = new System.Drawing.Point(40, 350);
+            this.lblPrice.Location = new System.Drawing.Point(30, 440);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(173, 38);
+            this.lblPrice.Size = new System.Drawing.Size(277, 62);
             this.lblPrice.TabIndex = 2;
             this.lblPrice.Text = "100.000vnđ";
             this.lblPrice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -71,7 +71,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(324, 36);
+            this.label3.Location = new System.Drawing.Point(387, 38);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(112, 25);
             this.label3.TabIndex = 3;
@@ -81,7 +81,7 @@
             // 
             this.lblLoai.AutoSize = true;
             this.lblLoai.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLoai.Location = new System.Drawing.Point(447, 36);
+            this.lblLoai.Location = new System.Drawing.Point(510, 38);
             this.lblLoai.Name = "lblLoai";
             this.lblLoai.Size = new System.Drawing.Size(127, 25);
             this.lblLoai.TabIndex = 4;
@@ -91,7 +91,7 @@
             // 
             this.lblThuongHieu.AutoSize = true;
             this.lblThuongHieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblThuongHieu.Location = new System.Drawing.Point(447, 92);
+            this.lblThuongHieu.Location = new System.Drawing.Point(510, 94);
             this.lblThuongHieu.Name = "lblThuongHieu";
             this.lblThuongHieu.Size = new System.Drawing.Size(51, 25);
             this.lblThuongHieu.TabIndex = 6;
@@ -101,7 +101,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(290, 92);
+            this.label6.Location = new System.Drawing.Point(353, 94);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(146, 25);
             this.label6.TabIndex = 5;
@@ -111,7 +111,7 @@
             // 
             this.lblSize.AutoSize = true;
             this.lblSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSize.Location = new System.Drawing.Point(447, 148);
+            this.lblSize.Location = new System.Drawing.Point(510, 150);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(64, 25);
             this.lblSize.TabIndex = 8;
@@ -121,7 +121,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(368, 148);
+            this.label8.Location = new System.Drawing.Point(431, 150);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(68, 25);
             this.label8.TabIndex = 7;
@@ -131,7 +131,7 @@
             // 
             this.lblMauSac.AutoSize = true;
             this.lblMauSac.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMauSac.Location = new System.Drawing.Point(447, 204);
+            this.lblMauSac.Location = new System.Drawing.Point(510, 206);
             this.lblMauSac.Name = "lblMauSac";
             this.lblMauSac.Size = new System.Drawing.Size(48, 25);
             this.lblMauSac.TabIndex = 10;
@@ -141,7 +141,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(324, 204);
+            this.label10.Location = new System.Drawing.Point(387, 206);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(107, 25);
             this.label10.TabIndex = 9;
@@ -151,7 +151,7 @@
             // 
             this.lblTrangThai.AutoSize = true;
             this.lblTrangThai.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTrangThai.Location = new System.Drawing.Point(447, 260);
+            this.lblTrangThai.Location = new System.Drawing.Point(510, 262);
             this.lblTrangThai.Name = "lblTrangThai";
             this.lblTrangThai.Size = new System.Drawing.Size(98, 25);
             this.lblTrangThai.TabIndex = 12;
@@ -161,7 +161,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(308, 260);
+            this.label12.Location = new System.Drawing.Point(371, 262);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(123, 25);
             this.label12.TabIndex = 11;
@@ -170,9 +170,9 @@
             // lblMoTa
             // 
             this.lblMoTa.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoTa.Location = new System.Drawing.Point(447, 316);
+            this.lblMoTa.Location = new System.Drawing.Point(510, 318);
             this.lblMoTa.Name = "lblMoTa";
-            this.lblMoTa.Size = new System.Drawing.Size(253, 96);
+            this.lblMoTa.Size = new System.Drawing.Size(321, 136);
             this.lblMoTa.TabIndex = 14;
             this.lblMoTa.Text = "Giày thể thao nam thiết kế hiện đại, đế cao su, thoáng khí";
             // 
@@ -180,7 +180,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(352, 316);
+            this.label14.Location = new System.Drawing.Point(415, 318);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(79, 25);
             this.label14.TabIndex = 13;
@@ -189,9 +189,9 @@
             // pImage
             // 
             this.pImage.Image = global::GUI.Properties.Resources.save;
-            this.pImage.Location = new System.Drawing.Point(45, 36);
+            this.pImage.Location = new System.Drawing.Point(35, 21);
             this.pImage.Name = "pImage";
-            this.pImage.Size = new System.Drawing.Size(182, 225);
+            this.pImage.Size = new System.Drawing.Size(272, 280);
             this.pImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pImage.TabIndex = 0;
             this.pImage.TabStop = false;
@@ -201,7 +201,7 @@
             this.guna2ControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2ControlBox1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(152)))), ((int)(((byte)(166)))));
             this.guna2ControlBox1.IconColor = System.Drawing.Color.White;
-            this.guna2ControlBox1.Location = new System.Drawing.Point(675, 12);
+            this.guna2ControlBox1.Location = new System.Drawing.Point(828, 12);
             this.guna2ControlBox1.Name = "guna2ControlBox1";
             this.guna2ControlBox1.Size = new System.Drawing.Size(59, 35);
             this.guna2ControlBox1.TabIndex = 15;
@@ -210,7 +210,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 450);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(899, 547);
             this.Controls.Add(this.guna2ControlBox1);
             this.Controls.Add(this.lblMoTa);
             this.Controls.Add(this.label14);
@@ -229,6 +230,7 @@
             this.Controls.Add(this.pImage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmDetailProduct";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmDetailProduct";
             this.Load += new System.EventHandler(this.frmDetailProduct_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pImage)).EndInit();

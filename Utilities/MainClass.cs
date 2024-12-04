@@ -102,10 +102,10 @@ namespace Utilities
             Form Background=new Form();
             using (Model)
             {
-                Background.StartPosition = FormStartPosition.Manual;
+                Background.StartPosition = FormStartPosition.CenterScreen;
                 Background.FormBorderStyle = FormBorderStyle.None;
                 Background.Opacity  = 0.5d;
-                Background.BackColor = Color.Black;
+        
                 Background.ShowInTaskbar = false;
                 Background.Show();
                 Model.Owner = Background;
