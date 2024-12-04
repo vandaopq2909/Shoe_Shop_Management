@@ -21,10 +21,10 @@ namespace GUI
         }
         public int id { get;set;}
         public string cost {  get; set;}
-        public double price
+        public double ? price
         {
             get { return double.Parse(lblProductPrice.Text); }
-            set { lblProductPrice.Text = value.ToString("N0"); }
+            set { lblProductPrice.Text = value?.ToString("N0"); }
         }
         public string name {
             get { return lblProductName.Text; }

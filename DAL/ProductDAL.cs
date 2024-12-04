@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace DAL
         {
             return _context.Products;
         }
+       
         public Product getProductByID(int id)
         {
             return _context.Products.SingleOrDefault(pro => pro.ProductID == id);

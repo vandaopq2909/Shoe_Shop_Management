@@ -1,5 +1,6 @@
 ﻿using BUL;
 using DAL;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,8 @@ namespace GUI
     public partial class frmPOS : Form
     {
         private UsersBUL _usersBUL = new UsersBUL();
+        private CategoriesBUL _categoriesBUL;
+        private ProductBUL _productBUL;
         public frmPOS()
         {
             InitializeComponent();
@@ -27,6 +30,8 @@ namespace GUI
 
         private void frmPOS_Load(object sender, EventArgs e)
         {
+            _categoriesBUL = new CategoriesBUL();
+            _productBUL=new ProductBUL();
             LoadCategories();
             LoadProduct();
 
@@ -55,18 +60,73 @@ namespace GUI
         }
         private void LoadCategories()
         {
-            string qry = @"Select * from Categories";
-            DataTable dt = MainClass.GetData(qry);
-            foreach (DataRow row in dt.Rows)
+            var categories = _categoriesBUL.GetCategories();
+
+            foreach (var category in categories)
             {
                 Guna.UI2.WinForms.Guna2CheckBox ckb = new Guna.UI2.WinForms.Guna2CheckBox();
                 ckb.AutoSize = true;
-                ckb.Name = row["CategoryName"].ToString();
-                ckb.Text = row["CategoryName"].ToString();
-                panLoai.Controls.Add(ckb);
+                ckb.Name = category.CategoryName;
+                ckb.Text = category.CategoryName;
+                ckb.CheckedChanged += Ckb_CheckedChanged;
+                panLoai.Controls.Add(ckb);  // Thêm checkbox vào panel
             }
         }
-        private void AddItem(string id, string name, Image image, double price)
+        private void Ckb_CheckedChanged(object sender, EventArgs e)
+        {
+            // Lọc sản phẩm theo danh mục
+            FilterProductsByCategories();
+        }
+
+        private void FilterProductsByCategories()
+        {
+            var selectedCategories = panLoai.Controls.OfType<Guna.UI2.WinForms.Guna2CheckBox>()
+                                              .Where(ckb => ckb.Checked)
+                                              .Select(ckb => ckb.Name)
+                                              .ToList();
+            panSanPham.Controls.Clear();
+            // Nếu không chọn gì
+            if (selectedCategories.Count == 0)
+            {
+                LoadProduct(); // Load tất cả sản phẩm
+            }
+            else
+            {
+                var filteredProducts = _productBUL.GetProducts()
+                                                  .Where(p => selectedCategories.Contains(p.Category.CategoryName))
+                                                  .ToList();
+
+                LoadProductByCat(filteredProducts);
+            }
+         
+        }
+
+        private void LoadProductByCat(List<Product> filteredProducts)
+        {
+            panSanPham.Controls.Clear();
+
+            foreach (var product in filteredProducts)
+            {
+                string img = product.Image; 
+                if (!string.IsNullOrEmpty(img))
+                {
+                    string imagePath = Path.Combine(Application.StartupPath, "Images", img);
+                    if (File.Exists(imagePath))
+                    {
+                        AddItem(product.ProductID.ToString(), product.ProductName,
+                                Image.FromFile(imagePath), product.ProductPrice);
+                    }
+                }
+                else
+                {
+                    AddItem(product.ProductID.ToString(), product.ProductName,
+                            Properties.Resources.save, product.ProductPrice);
+                }
+            }
+        }
+
+
+        private void AddItem(string id, string name, Image image, double? price)
         {
             var pro = new ucProduct()
             {
@@ -93,7 +153,6 @@ namespace GUI
                         break;
                     }
                 }
-
                 if (!isExist)
                 {
                     guna2DataGridView1.Rows.Add(new object[]
@@ -113,32 +172,33 @@ namespace GUI
 
         private void LoadProduct()
         {
-            string qry = @"Select *from products";
-            DataTable dt = MainClass.GetData(qry);
-            foreach (DataRow row in dt.Rows)
+            panSanPham.Controls.Clear();
+
+            var allProducts = _productBUL.GetProducts();
+
+            foreach (var product in allProducts)
             {
-                string s = (string)dt.Rows[0]["Image"];
-                byte[] data = System.Text.Encoding.ASCII.GetBytes(s);
-
-
-                string img = row["Image"].ToString();
+                string img = product.Image;
                 if (!string.IsNullOrEmpty(img))
                 {
+                    // Đường dẫn đến ảnh của sản phẩm
                     string imagePath = Path.Combine(Application.StartupPath, "Images", img);
                     if (File.Exists(imagePath))
                     {
-                        AddItem(row["ProductID"].ToString(), row["ProductName"].ToString(),
-                             Image.FromFile(imagePath), Double.Parse(row["ProductPrice"].ToString()));
+                        // Thêm sản phẩm vào panel với ảnh
+                        AddItem(product.ProductID.ToString(), product.ProductName,
+                                Image.FromFile(imagePath), product.ProductPrice ?? 0); // Nếu giá trị null, mặc định là 0
                     }
                 }
                 else
                 {
-                    AddItem(row["ProductID"].ToString(), row["ProductName"].ToString(),
-                      Properties.Resources.save, Double.Parse(row["ProductPrice"].ToString()));
+                    // Thêm sản phẩm vào panel với ảnh mặc định
+                    AddItem(product.ProductID.ToString(), product.ProductName,
+                            Properties.Resources.save, product.ProductPrice ?? 0);
                 }
             }
-
         }
+
         private void UpdateTotalAmount()
         {
             double total = 0;
