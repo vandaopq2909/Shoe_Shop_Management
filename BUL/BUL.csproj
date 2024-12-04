@@ -35,6 +35,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,7 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoriesBUL.cs" />
-    <Compile Include="OrdersBUL.cs" />
+    <Compile Include="OrderBUL.cs" />
+    <Compile Include="OrderDetailBUL.cs" />
     <Compile Include="PRDetailsBUL.cs" />
     <Compile Include="ProductBUL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

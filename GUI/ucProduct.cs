@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace GUI
         public double price
         {
             get { return double.Parse(lblProductPrice.Text); }
-            set { lblProductPrice.Text = value.ToString(); }
+            set { lblProductPrice.Text = value.ToString("N0"); }
         }
         public string name {
             get { return lblProductName.Text; }

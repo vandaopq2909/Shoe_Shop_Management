@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace GUI
                 string qry = @"Select * from Products where ProductID = " + id;
                 DataTable dt = MainClass.GetData(qry);
                 foreach (DataRow row in dt.Rows) {
+                    lblName.Text = row["ProductName"].ToString();
+                    lblPrice.Text = Convert.ToDouble(row["ProductPrice"]).ToString("N0", CultureInfo.GetCultureInfo("vi-VN")) + " đ";
                     lblLoai.Text = row["CategoryID"].ToString();
                     lblThuongHieu.Text = row["Brand"].ToString();
                     lblSize.Text=row["Size"].ToString();
@@ -52,8 +55,6 @@ namespace GUI
                     {
                         img = "";
                     }
-
-                  
                 }
             }
         }

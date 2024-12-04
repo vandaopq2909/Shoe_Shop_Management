@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Text;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,7 @@ namespace GUI
         {
             LoadCategories();
             LoadProduct();
+
             SetupDataGridView();
             LoadComboboxKhachHang();
         }
@@ -75,20 +77,19 @@ namespace GUI
             };
 
             panSanPham.Controls.Add(pro);
-            pro.onSelect += (ss, ee) =>
+            pro.onSelect += (l, ee) =>
             {
-                var wdg = (ucProduct)ss;
+                var uc = (ucProduct)l;
                 bool isExist = false;
 
                 foreach (DataGridViewRow row in guna2DataGridView1.Rows)
                 {
-                    if (Convert.ToInt32(row.Cells["ProductID"].Value) == wdg.id)
+                    if (Convert.ToInt32(row.Cells["ProductID"].Value) == uc.id)
                     {
                         isExist = true;
 
                         row.Cells["dgvQty"].Value = Convert.ToInt32(row.Cells["dgvQty"].Value) + 1;
                         row.Cells["dgvAmount"].Value = Convert.ToInt32(row.Cells["dgvQty"].Value) * Convert.ToDouble(row.Cells["dgvPrice"].Value);
-
                         break;
                     }
                 }
@@ -97,12 +98,12 @@ namespace GUI
                 {
                     guna2DataGridView1.Rows.Add(new object[]
                     {
-                guna2DataGridView1.Rows.Count + 1,  // Số thứ tự
-                wdg.id,                            // ProductID
-                wdg.name,                          // Tên sản phẩm
-                1,                                 // Số lượng mặc định = 1
-                wdg.price,                         // Giá sản phẩm
-                wdg.price                          // Tổng tiền ban đầu
+                        guna2DataGridView1.Rows.Count + 1,  // Số thứ tự
+                        uc.id,                            // ProductID
+                        uc.name,                          // Tên sản phẩm
+                        1,                                 // Số lượng mặc định = 1
+                        uc.price,                         // Giá sản phẩm
+                        uc.price                          // Tổng tiền ban đầu
                     });
                 }
 
@@ -138,21 +139,9 @@ namespace GUI
             }
 
         }
-        private void getToltal()
-        {
-            double tot = 0;
-            lblTongTien.Text = "00";
-            foreach(DataGridViewRow row in guna2DataGridView1.Rows)
-            {
-                tot += double.Parse(row.Cells["dgvAmount"].Value.ToString());
-            }
-            lblTongTien.Text=tot.ToString();
-        }
         private void UpdateTotalAmount()
         {
             double total = 0;
-
-            // Tính tổng tiền từ cột `dgvAmount`
             foreach (DataGridViewRow row in guna2DataGridView1.Rows)
             {
                 if (row.Cells["dgvAmount"].Value != null)
@@ -160,7 +149,7 @@ namespace GUI
                     total += Convert.ToDouble(row.Cells["dgvAmount"].Value);
                 }
             }
-            lblTongTien.Text = total.ToString();
+            lblTongTien.Text = total.ToString("N0");
         }
         private void SaveOrderToDatabase()
         {
@@ -181,16 +170,16 @@ namespace GUI
                     string selectedUserName = cboKhachHang.SelectedValue.ToString();
                     // Tạo câu lệnh SQL để chèn dữ liệu vào bảng Orders
                     string query = @"
-                INSERT INTO Orders (TotalAmount, Status, DateCreated, UserName)
-                VALUES (@TotalAmount, @Status, @DateCreated, @UserName);
-                SELECT SCOPE_IDENTITY();";  // Trả về OrderID vừa được tạo
+                    INSERT INTO Orders (TotalAmount, Status, DateCreated, UserName)
+                    VALUES (@TotalAmount, @Status, @DateCreated, @UserName);
+                    SELECT SCOPE_IDENTITY();";  // Trả về OrderID vừa được tạo
 
                     // Khởi tạo đối tượng SqlCommand
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         // Thêm các tham số vào câu lệnh SQL
                         cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
-                        cmd.Parameters.AddWithValue("@Status", "Pending");  // Ví dụ Status có thể là "Pending"
+                        cmd.Parameters.AddWithValue("@Status", "Đã thanh toán");  
                         cmd.Parameters.AddWithValue("@DateCreated", DateTime.Now);
                         cmd.Parameters.AddWithValue("@UserName", selectedUserName);  // Sử dụng tên người dùng hiện tại nếu có
 
