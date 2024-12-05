@@ -91,9 +91,9 @@ namespace GUI
             AddControl(form);
         }
 
-        private void guna2Button2_Click(object sender, EventArgs e)
+        private void btnThongKeBaoCao_Click(object sender, EventArgs e)
         {
-            AddControl(new frmManagemnetOrder());
+            AddControl(new frmReportStatistics());
         }
     }
 }
