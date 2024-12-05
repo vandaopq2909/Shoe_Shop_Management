@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities;
 
 namespace GUI
 {
@@ -16,6 +17,7 @@ namespace GUI
         public OrdersBUL _ordersBUL = new OrdersBUL();
         public int year = DateTime.Now.Year;
         public int month = DateTime.Now.Month;
+        public double tongDoanhThu = 0;
         public frmReportStatistics()
         {
             InitializeComponent();
@@ -89,8 +91,8 @@ namespace GUI
                     dgvThongKe.Columns["TotalRevenue"].HeaderText = "Tổng doanh thu";
                 dgvThongKe.Columns["TotalRevenue"].DefaultCellStyle.Format = "N0";
 
-                var tongTien = _ordersBUL.GetTotalRevenueForWeek(date);
-                lblTongTien.Text = tongTien.ToString("N0") + " đ";
+                tongDoanhThu = _ordersBUL.GetTotalRevenueForWeek(date);
+                lblTongTien.Text = tongDoanhThu.ToString("N0") + " đ";
             }
             else
             {
@@ -115,7 +117,7 @@ namespace GUI
                 dgvThongKe.Columns["Date"].DefaultCellStyle.Format = "dd/MM/yyyy";
                 dgvThongKe.Columns["TotalRevenue"].DefaultCellStyle.Format = "N0";
 
-                var tongDoanhThu = _ordersBUL.GetTotalRevenueForMonth(month, year);
+                tongDoanhThu = _ordersBUL.GetTotalRevenueForMonth(month, year);
                 lblTongTien.Text = tongDoanhThu.ToString("N0") + " đ";
             }
             else
@@ -143,13 +145,55 @@ namespace GUI
 
                 dgvThongKe.Columns["TotalRevenue"].DefaultCellStyle.Format = "N0";
 
-                var tongDoanhThu = _ordersBUL.GetTotalRevenueForYear(year);
+                tongDoanhThu = _ordersBUL.GetTotalRevenueForYear(year);
                 lblTongTien.Text = tongDoanhThu.ToString("N0") + " đ";
             }
             else
             {
                 lblTongTien.Text = "0 đ";
             }
+        }
+
+        private void btnInTK_Click(object sender, EventArgs e)
+        {
+            ExportExcel exportExcel = new ExportExcel();
+
+            // Tạo một DataTable mới
+            DataTable dataTable = new DataTable();
+
+            // Thêm các cột vào DataTable dựa trên DataGridView
+            foreach (DataGridViewColumn column in dgvThongKe.Columns)
+            {
+                if (column.Visible) // Chỉ thêm các cột hiện
+                {
+                    // Kiểm tra nếu ValueType là Nullable và lấy kiểu cơ bản
+                    Type columnType = column.ValueType;
+                    if (columnType != null && columnType.IsGenericType && columnType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    {
+                        columnType = Nullable.GetUnderlyingType(columnType); // Lấy kiểu không nullable
+                    }
+
+                    dataTable.Columns.Add(column.HeaderText, columnType ?? typeof(string));
+                }
+            }
+
+            // Thêm các dòng vào DataTable
+            foreach (DataGridViewRow row in dgvThongKe.Rows)
+            {
+                if (!row.IsNewRow) // Bỏ qua dòng trống cuối cùng
+                {
+                    DataRow dataRow = dataTable.NewRow();
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        if (cell.Visible) // Chỉ thêm giá trị từ cột hiện
+                        {
+                            dataRow[cell.OwningColumn.HeaderText] = cell.Value ?? DBNull.Value;
+                        }
+                    }
+                    dataTable.Rows.Add(dataRow);
+                }
+            }
+            exportExcel.ExportFile(dataTable, "thong_ke", "THỐNG KÊ DOANH THU", tongDoanhThu);
         }
     }
 }
