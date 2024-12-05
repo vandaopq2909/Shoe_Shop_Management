@@ -48,6 +48,7 @@
     <Compile Include="CategoriesBUL.cs" />
     <Compile Include="OrderBUL.cs" />
     <Compile Include="OrderDetailBUL.cs" />
+    <Compile Include="OrdersBUL.cs" />
     <Compile Include="PRDetailsBUL.cs" />
     <Compile Include="ProductBUL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

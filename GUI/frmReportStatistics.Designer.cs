@@ -292,6 +292,7 @@
             this.btnInTK.Size = new System.Drawing.Size(260, 59);
             this.btnInTK.TabIndex = 65;
             this.btnInTK.Text = "In thống kê";
+            this.btnInTK.Click += new System.EventHandler(this.btnInTK_Click);
             // 
             // lblTongTien
             // 

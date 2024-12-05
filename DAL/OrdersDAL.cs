@@ -14,10 +14,45 @@ namespace DAL
         {
             DBContext = new ShoeStoreDataContext();
         }
+
+        public void AddPR(Order order)
+        {
+            DBContext.Orders.InsertOnSubmit(order);
+            DBContext.SubmitChanges();
+        }
+
+        public void DeleteORD(int ma)
+        {
+            var listOrders = DBContext.Orders.Where(x => x.OrderID == ma).ToList();
+
+            if (listOrders.Any())
+            {
+                DBContext.Orders.DeleteAllOnSubmit(listOrders);
+            }
+
+            var order = DBContext.Orders.FirstOrDefault(x => x.OrderID == ma);
+
+            if (order != null)
+            {
+                DBContext.Orders.DeleteOnSubmit(order);
+            }
+            DBContext.SubmitChanges();
+        }
+
+        public List<Order> GetAllOrder()
+        {
+            return DBContext.Orders.ToList();
+        }
+
         public List<OrdersDTO> getListOrders()
         {
             List<OrdersDTO> l = new List<OrdersDTO>() { new OrdersDTO(DateTime.Now, 20000, "hoạt động", "hihi", "admin") };
             return l;
+        }
+
+        public Order GetOrderByID(int ma)
+        {
+            return DBContext.Orders.Where(x => x.OrderID == ma).FirstOrDefault();
         }
 
         public int GetProQuantity(int orderID)
@@ -227,6 +262,11 @@ namespace DAL
             {
                 throw new Exception("Lỗi khi tính doanh thu theo tuần", ex);
             }
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            DBContext.SubmitChanges();
         }
     }
 }
