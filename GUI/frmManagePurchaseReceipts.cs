@@ -55,6 +55,8 @@ namespace GUI
 
         private void LoadPR()
         {
+            dgvPR.DataSource = null;
+
             dgvPR.DataSource = _purchaseReceiptsBUL.GetAllPR()
             .Select(pr => new {
                 pr.PReceiptID,
@@ -64,7 +66,15 @@ namespace GUI
                 CreatedBy = pr.User.FullName,
                 pr.SupplierID
             }).ToList();
+
+            dgvPR.Columns["PReceiptID"].HeaderText = "Mã phiếu nhập";
+            dgvPR.Columns["DateCreated"].HeaderText = "Ngày nhập";
+            dgvPR.Columns["TotalAmount"].HeaderText = "Tổng tiền";
+            dgvPR.Columns["SupplierName"].HeaderText = "Tên nhà cung cấp";
+            dgvPR.Columns["CreatedBy"].HeaderText = "Tạo bởi";
             dgvPR.Columns["SupplierID"].Visible = false;
+
+            dgvPR.Refresh();
         }
 
         private void LoadSuppliers()
@@ -139,6 +149,8 @@ namespace GUI
             int maPN = PRID;
             _purchaseReceiptsBUL.DeletePR(maPN);
             LoadPR();
+            dgvPRDetail.DataSource = null;
+            dgvPR.Refresh();
             MessageBox.Show("Đã xóa thành công!");
         }
 
@@ -181,10 +193,15 @@ namespace GUI
              .Select(pr => new {
                  pr.PReceiptID,
                  pr.ProductID,
+                 ProductName = pr.Product.ProductName,
                  pr.Price,
-                 pr.Quantity,
-                 pr.Product.ProductName
+                 pr.Quantity
              }).ToList();
+
+            dgvPRDetail.Columns["PReceiptID"].HeaderText = "Mã CT phiếu nhập";
+            dgvPRDetail.Columns["Price"].HeaderText = "Đơn giá";
+            dgvPRDetail.Columns["Quantity"].HeaderText = "Số lượng";
+            dgvPRDetail.Columns["ProductName"].HeaderText = "Tên sản phẩm";
             dgvPRDetail.Columns["ProductID"].Visible = false;
         }
 

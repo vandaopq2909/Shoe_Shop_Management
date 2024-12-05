@@ -90,5 +90,10 @@ namespace GUI
             form.MaNV = maNhanVien; 
             AddControl(form);
         }
+
+        private void btnThongKeBaoCao_Click(object sender, EventArgs e)
+        {
+            AddControl(new frmReportStatistics());
+        }
     }
 }

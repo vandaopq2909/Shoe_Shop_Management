@@ -32,8 +32,20 @@ namespace DAL
                 prd.Quantity += prdetails.Quantity;
                 db.SubmitChanges();
                 UpdateTotalAmount(prdetails.PReceiptID);
+                UpdateQuantityProduct(prdetails);
             }
         }
+
+        private void UpdateQuantityProduct(PurchaseReceiptDetail prd)
+        {
+            var pro = db.Products.Where(x=> x.ProductID == prd.ProductID).FirstOrDefault();
+            if(pro != null)
+            {
+                pro.Quantity += prd.Quantity;
+            }
+            db.SubmitChanges();
+        }
+
         public void UpdateTotalAmount(int maPN)
         {
             // Tính tổng tiền của phiếu nhập
@@ -45,6 +57,12 @@ namespace DAL
             var purchaseReceipt = db.PurchaseReceipts.SingleOrDefault(pr => pr.PReceiptID == maPN);
             if (purchaseReceipt != null)
             {
+                if(totalAmount == null)
+                {
+                    purchaseReceipt.TotalAmount = 0;
+                    db.SubmitChanges();
+                    return;
+                }
                 purchaseReceipt.TotalAmount = totalAmount;
 
                 db.SubmitChanges();

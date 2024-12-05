@@ -43,9 +43,9 @@ namespace DAL
             return db.PurchaseReceipts.ToList();
         }
 
-        public PurchaseReceipt GetPRByID(int maNCC)
+        public PurchaseReceipt GetPRByID(int maPN)
         {
-            return db.PurchaseReceipts.Where(x=> x.PReceiptID == maNCC).FirstOrDefault();
+            return db.PurchaseReceipts.Where(x=> x.PReceiptID == maPN).FirstOrDefault();
         }
 
         public void UpdatePR(PurchaseReceipt receipt)

@@ -32,8 +32,36 @@ namespace GUI
 
         void Load_Product()
         {
-            var pro = _productBUL.GetProducts().ToList();
+            var pro = _productBUL.GetProducts().Select(pro => new
+            {
+                pro.ProductID,
+                pro.ProductName,
+                pro.ProductPrice,
+                pro.Brand,
+                pro.Description,
+                pro.Color,
+                pro.Quantity,
+                pro.Size,
+                CategoryName = pro.Category.CategoryName,
+                pro.Status,
+                pro.CategoryID,
+                pro.Image
+            }).ToList();
             dgvProducts.DataSource = pro;
+
+            dgvProducts.Columns["ProductID"].HeaderText = "Mã sản phẩm";
+            dgvProducts.Columns["ProductName"].HeaderText = "Tên sản phẩm";
+            dgvProducts.Columns["ProductPrice"].HeaderText = "Giá";
+            dgvProducts.Columns["Brand"].HeaderText = "Thương hiệu";
+            dgvProducts.Columns["Color"].HeaderText = "Màu sắc";
+            dgvProducts.Columns["Size"].HeaderText = "Kích thước";
+            dgvProducts.Columns["Quantity"].HeaderText = "Tồn kho";
+            dgvProducts.Columns["CategoryName"].HeaderText = "Tên loại";
+            dgvProducts.Columns["Description"].HeaderText = "Mô tả";
+
+            dgvProducts.Columns["Status"].Visible = false;
+            dgvProducts.Columns["CategoryID"].Visible = false;
+            dgvProducts.Columns["Image"].Visible = false;
         }
 
         void Load_ComboBox()
