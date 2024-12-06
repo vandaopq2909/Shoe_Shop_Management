@@ -95,5 +95,10 @@ namespace GUI
         {
             AddControl(new frmReportStatistics());
         }
+
+        private void btnQLDonHang_Click(object sender, EventArgs e)
+        {
+            AddControl(new frmManagemnetOrder());
+        }
     }
 }

@@ -29,30 +29,11 @@ namespace GUI
         private void frmManagePurchaseReceipts_Load(object sender, EventArgs e)
         {
             dtpNgayNhap.Value = DateTime.Now;
-            LoadSuppliers();
-            LoadCboChonSP();
+    
             LoadOrder();
         }
 
-        private void LoadCboChonSP()
-        {
-            var listSP = _productBUL.GetProducts();
-            cboChonSP.DataSource = listSP;
-            cboChonSP.DisplayMember = "ProductName";
-            cboChonSP.ValueMember = "ProductID";
-
-            // Thiết lập AutoComplete
-            cboChonSP.AutoCompleteMode = AutoCompleteMode.SuggestAppend; // Gợi ý và cho phép nhập
-            cboChonSP.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            // Thêm danh sách sản phẩm vào AutoComplete
-            AutoCompleteStringCollection autoComplete = new AutoCompleteStringCollection();
-            foreach (var row in listSP)
-            {
-                autoComplete.Add(row.ProductName);
-            }
-            cboChonSP.AutoCompleteCustomSource = autoComplete;
-        }
+     
 
         private void LoadOrder()
         {
@@ -68,14 +49,6 @@ namespace GUI
             })
             .ToList();
         }
-
-        private void LoadSuppliers()
-        {
-            cboKH.DataSource = usersBUL.GetAllCustomers();
-            cboKH.DisplayMember = "FullName";
-            cboKH.ValueMember = "UserName";
-        }
-
         private void txtSearch_Click(object sender, EventArgs e)
         {
 
@@ -84,43 +57,6 @@ namespace GUI
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
         {
 
-        }
-
-        private void btnThemPN_Click(object sender, EventArgs e)
-        {
-            string makh = cboKH.SelectedValue.ToString();
-            DateTime ngayNhap = dtpNgayNhap.Value;
-            orderBUL.AddOrder(makh, ngayNhap);
-            MessageBox.Show("Thêm phiếu nhập thành công");
-            LoadOrder();
-        }
-
-        private void btnSuaPN_Click(object sender, EventArgs e)
-        {
-            int ma = ORDID;
-            string makh =cboKH.SelectedValue.ToString();
-            DateTime ngayNhap = dtpNgayNhap.Value;
-
-            if (ma == 0)
-            {
-                MessageBox.Show("Vui lòng chọn dòng cần sửa!");
-                return;
-            }
-            if (string.IsNullOrEmpty(makh.ToString()))
-            {
-                MessageBox.Show("Vui lòng chọn khách hàng!");
-                return;
-            }
-            try
-            {
-                orderBUL.UpdateOrder(ma, makh, ngayNhap);
-                MessageBox.Show("Đã sửa thành công!");
-                LoadOrder();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Sửa thất bại!" + ex);
-            }
         }
 
         private void dgvPR_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -133,7 +69,7 @@ namespace GUI
                 //ProductID = int.Parse(row.Cells["ProductID"].Value.ToString()) ;
                 //Quantity = int.Parse(row.Cells["Quantity"].Value.ToString());
                 
-                cboKH.SelectedValue = row.Cells["UserName"].Value.ToString();
+             
                 dtpNgayNhap.Value = (row.Cells["DateCreated"].Value as DateTime?) ?? DateTime.Now;
                 TotalAmount= double.Parse(row.Cells["TotalAmount"].Value.ToString());
                 LoadOrderDetails(ORDID);
@@ -205,15 +141,5 @@ namespace GUI
 
         }
 
-        private void btnXoaSP_Click(object sender, EventArgs e)
-        {
-            int ma = ORDID;
-            int maSP = int.Parse(cboChonSP.SelectedValue.ToString());
-            orderDetailBUL.DeleteOrderDetails(ma, maSP);
-            MessageBox.Show("Xóa thành công!");
-            LoadOrderDetails(ma);
-            LoadOrder();
-
-        }
     }
 }
