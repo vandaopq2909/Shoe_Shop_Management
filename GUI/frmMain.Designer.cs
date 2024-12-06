@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.btnQuanLyNhapHang = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.btnQLKhachHang = new Guna.UI2.WinForms.Guna2Button();
@@ -44,6 +43,7 @@
             this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
             this.lblNameAndRole = new System.Windows.Forms.Label();
             this.panelCenter = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnThongKeBaoCao = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2Panel2.SuspendLayout();
@@ -52,7 +52,6 @@
             // guna2Panel1
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
-            this.guna2Panel1.Controls.Add(this.guna2Button2);
             this.guna2Panel1.Controls.Add(this.btnQuanLyNhapHang);
             this.guna2Panel1.Controls.Add(this.guna2Button1);
             this.guna2Panel1.Controls.Add(this.btnQLKhachHang);
@@ -60,6 +59,7 @@
             this.guna2Panel1.Controls.Add(this.btnQLLoai);
             this.guna2Panel1.Controls.Add(this.guna2PictureBox1);
             this.guna2Panel1.Controls.Add(this.label2);
+            this.guna2Panel1.Controls.Add(this.btnThongKeBaoCao);
             this.guna2Panel1.Controls.Add(this.btnQLNhanVien);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
@@ -67,24 +67,6 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(376, 711);
             this.guna2Panel1.TabIndex = 0;
-            // 
-            // guna2Button2
-            // 
-            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
-            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.guna2Button2.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button2.Location = new System.Drawing.Point(0, 593);
-            this.guna2Button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
-            this.guna2Button2.Size = new System.Drawing.Size(376, 59);
-            this.guna2Button2.TabIndex = 7;
-            this.guna2Button2.Text = "Quản lý đơn hàng";
-            this.guna2Button2.Click += new System.EventHandler(this.guna2Button2_Click);
             // 
             // btnQuanLyNhapHang
             // 
@@ -95,7 +77,7 @@
             this.btnQuanLyNhapHang.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
             this.btnQuanLyNhapHang.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnQuanLyNhapHang.ForeColor = System.Drawing.Color.Black;
-            this.btnQuanLyNhapHang.Location = new System.Drawing.Point(0, 530);
+            this.btnQuanLyNhapHang.Location = new System.Drawing.Point(0, 451);
             this.btnQuanLyNhapHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQuanLyNhapHang.Name = "btnQuanLyNhapHang";
             this.btnQuanLyNhapHang.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
@@ -113,7 +95,7 @@
             this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.guna2Button1.ForeColor = System.Drawing.Color.Black;
-            this.guna2Button1.Location = new System.Drawing.Point(0, 468);
+            this.guna2Button1.Location = new System.Drawing.Point(0, 262);
             this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
@@ -131,7 +113,7 @@
             this.btnQLKhachHang.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
             this.btnQLKhachHang.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnQLKhachHang.ForeColor = System.Drawing.Color.Black;
-            this.btnQLKhachHang.Location = new System.Drawing.Point(0, 467);
+            this.btnQLKhachHang.Location = new System.Drawing.Point(0, 514);
             this.btnQLKhachHang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQLKhachHang.Name = "btnQLKhachHang";
             this.btnQLKhachHang.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
@@ -149,7 +131,7 @@
             this.btnQLSanPham.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
             this.btnQLSanPham.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnQLSanPham.ForeColor = System.Drawing.Color.Black;
-            this.btnQLSanPham.Location = new System.Drawing.Point(0, 402);
+            this.btnQLSanPham.Location = new System.Drawing.Point(0, 388);
             this.btnQLSanPham.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQLSanPham.Name = "btnQLSanPham";
             this.btnQLSanPham.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
@@ -167,7 +149,7 @@
             this.btnQLLoai.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
             this.btnQLLoai.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnQLLoai.ForeColor = System.Drawing.Color.Black;
-            this.btnQLLoai.Location = new System.Drawing.Point(0, 337);
+            this.btnQLLoai.Location = new System.Drawing.Point(0, 325);
             this.btnQLLoai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQLLoai.Name = "btnQLLoai";
             this.btnQLLoai.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
@@ -209,13 +191,13 @@
             this.btnQLNhanVien.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
             this.btnQLNhanVien.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.btnQLNhanVien.ForeColor = System.Drawing.Color.Black;
-            this.btnQLNhanVien.Location = new System.Drawing.Point(0, 272);
+            this.btnQLNhanVien.Location = new System.Drawing.Point(0, 577);
             this.btnQLNhanVien.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnQLNhanVien.Name = "btnQLNhanVien";
             this.btnQLNhanVien.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
             this.btnQLNhanVien.Size = new System.Drawing.Size(376, 59);
             this.btnQLNhanVien.TabIndex = 1;
-            this.btnQLNhanVien.Text = "Quản lý Nhân viên";
+            this.btnQLNhanVien.Text = "Quản lý nhân viên";
             this.btnQLNhanVien.Click += new System.EventHandler(this.btnQLNhanVien_Click);
             // 
             // guna2Panel2
@@ -297,6 +279,24 @@
             this.panelCenter.Size = new System.Drawing.Size(1405, 667);
             this.panelCenter.TabIndex = 2;
             // 
+            // btnThongKeBaoCao
+            // 
+            this.btnThongKeBaoCao.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnThongKeBaoCao.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnThongKeBaoCao.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnThongKeBaoCao.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnThongKeBaoCao.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
+            this.btnThongKeBaoCao.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.btnThongKeBaoCao.ForeColor = System.Drawing.Color.Black;
+            this.btnThongKeBaoCao.Location = new System.Drawing.Point(0, 640);
+            this.btnThongKeBaoCao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnThongKeBaoCao.Name = "btnThongKeBaoCao";
+            this.btnThongKeBaoCao.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
+            this.btnThongKeBaoCao.Size = new System.Drawing.Size(376, 59);
+            this.btnThongKeBaoCao.TabIndex = 1;
+            this.btnThongKeBaoCao.Text = "Thống kê báo cáo";
+            this.btnThongKeBaoCao.Click += new System.EventHandler(this.btnThongKeBaoCao_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -338,6 +338,6 @@
         private Guna.UI2.WinForms.Guna2Button btnDangXuat;
         private Guna.UI2.WinForms.Guna2Button btnDoiMK;
         private Guna.UI2.WinForms.Guna2Button btnQuanLyNhapHang;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2Button btnThongKeBaoCao;
     }
 }
