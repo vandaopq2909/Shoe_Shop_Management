@@ -280,8 +280,8 @@ namespace GUI
 
                     // Tạo câu lệnh SQL để chèn dữ liệu vào bảng OrderDetails
                     string query = @"
-                INSERT INTO OrderDetails (OrderID, ProductID, Quantity, Price, TotalAmount)
-                VALUES (@OrderID, @ProductID, @Quantity, @Price, @TotalAmount);";
+                    INSERT INTO OrderDetails (OrderID, ProductID, Quantity, Price, TotalAmount)
+                    VALUES (@OrderID, @ProductID, @Quantity, @Price, @TotalAmount);";
 
                     foreach (DataGridViewRow row in guna2DataGridView1.Rows)
                     {
