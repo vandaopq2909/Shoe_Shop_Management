@@ -14,14 +14,14 @@ namespace BUL
         OrdersDTO ordersDTO;
         public OrderBUL() { }
 
-        public void AddOrder(string makh, DateTime ngayNhap)
+        public void AddOrder(string makh, DateTime ngayNhap,string ghiChu)
         {
             var order = new Order
             {
                 DateCreated = ngayNhap,
                 UserName = makh,
                 TotalAmount = 0,
-                Status = ""
+                Status = "Đã thanh toán"
             };
 
             ordersDAL.AddPR(order);
@@ -34,7 +34,7 @@ namespace BUL
 
         public List<Order> GetAllOrder()
         {
-            return ordersDAL.GetAllOrder().OrderByDescending(x=>x.DateCreated).ToList();
+            return ordersDAL.GetAllOrder().ToList();
         }
 
         public void UpdateOrder(int ma, string makh, DateTime ngayNhap)

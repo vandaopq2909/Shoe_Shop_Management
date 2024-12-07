@@ -23,14 +23,14 @@ namespace DAL
 
         public void DeleteORD(int ma)
         {
-            var listOrders = DBContext.Orders.Where(x => x.OrderID == ma).ToList();
+            var orderDetails = DBContext.OrderDetails.Where(od => od.OrderID == ma).ToList();
 
-            if (listOrders.Any())
+            if (orderDetails.Any())
             {
-                DBContext.Orders.DeleteAllOnSubmit(listOrders);
+                DBContext.OrderDetails.DeleteAllOnSubmit(orderDetails);
             }
 
-            var order = DBContext.Orders.FirstOrDefault(x => x.OrderID == ma);
+            var order = DBContext.Orders.FirstOrDefault(o => o.OrderID == ma);
 
             if (order != null)
             {
@@ -38,6 +38,7 @@ namespace DAL
             }
             DBContext.SubmitChanges();
         }
+
 
         public List<Order> GetAllOrder()
         {

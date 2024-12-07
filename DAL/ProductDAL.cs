@@ -18,7 +18,11 @@ namespace DAL
         {
             return _context.Products;
         }
-       
+        public IQueryable<Product> getProductByName(string pName)
+        {
+            return _context.Products.Where(x=>x.ProductName==pName);
+        }
+
         public Product getProductByID(int id)
         {
             return _context.Products.SingleOrDefault(pro => pro.ProductID == id);

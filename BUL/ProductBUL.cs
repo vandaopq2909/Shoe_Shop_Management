@@ -21,6 +21,10 @@ namespace BUL
         {
             return _productDAL.getProduct();
         }
+        public IQueryable<Product> GetProductsByName(string pName)
+        {
+            return _productDAL.getProductByName(pName);
+        }
         public Product getProductByID(int id) {
             return _productDAL.getProductByID(id);
         }

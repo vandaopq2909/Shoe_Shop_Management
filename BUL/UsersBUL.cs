@@ -24,7 +24,10 @@ namespace BUL
         {
             return usersDAL.isDuplicated(userName);
         }
-
+        public string getDislayName(string userName)
+        {
+            return usersDAL.getDislayName(userName);
+        }
         public void AddCustomer(string maKH, string hoTen, string gioiTinh, string sDT, DateTime ngaySinh, string email, string diaChi, int trangThai, string image)
         {
             var customer = new User
