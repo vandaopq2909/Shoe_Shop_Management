@@ -34,11 +34,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.btnLamMoiPN = new Guna.UI2.WinForms.Guna2Button();
+            this.btnInHoaDon = new Guna.UI2.WinForms.Guna2Button();
             this.btnXoaPN = new Guna.UI2.WinForms.Guna2Button();
-            this.dtpNgayNhap = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
             this.dgvOrder = new Guna.UI2.WinForms.Guna2DataGridView();
             this.guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
@@ -90,32 +88,19 @@
             this.txtSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PasswordChar = '\0';
-            this.txtSearch.PlaceholderText = "Tìm kiếm đơn hàng";
+            this.txtSearch.PlaceholderText = "Tìm kiếm đơn hàng theo tên khách hàng";
             this.txtSearch.SelectedText = "";
             this.txtSearch.Size = new System.Drawing.Size(501, 58);
             this.txtSearch.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
-            this.label3.Location = new System.Drawing.Point(28, 28);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 29);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Ngày";
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Controls.Add(this.btnLamMoiPN);
+            this.panel2.Controls.Add(this.btnInHoaDon);
             this.panel2.Controls.Add(this.btnXoaPN);
-            this.panel2.Controls.Add(this.dtpNgayNhap);
             this.panel2.Controls.Add(this.guna2GroupBox2);
             this.panel2.Controls.Add(this.guna2GroupBox1);
-            this.panel2.Controls.Add(this.label3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 70);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
@@ -123,27 +108,27 @@
             this.panel2.Size = new System.Drawing.Size(1645, 840);
             this.panel2.TabIndex = 3;
             // 
-            // btnLamMoiPN
+            // btnInHoaDon
             // 
-            this.btnLamMoiPN.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
-            this.btnLamMoiPN.BorderRadius = 10;
-            this.btnLamMoiPN.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            this.btnLamMoiPN.BorderThickness = 2;
-            this.btnLamMoiPN.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnLamMoiPN.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnLamMoiPN.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnLamMoiPN.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnLamMoiPN.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
-            this.btnLamMoiPN.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLamMoiPN.ForeColor = System.Drawing.Color.Black;
-            this.btnLamMoiPN.Location = new System.Drawing.Point(1373, 28);
-            this.btnLamMoiPN.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnLamMoiPN.Name = "btnLamMoiPN";
-            this.btnLamMoiPN.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
-            this.btnLamMoiPN.Size = new System.Drawing.Size(260, 59);
-            this.btnLamMoiPN.TabIndex = 57;
-            this.btnLamMoiPN.Text = "In hóa đơn";
-            this.btnLamMoiPN.Click += new System.EventHandler(this.btnLamMoiPN_Click);
+            this.btnInHoaDon.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
+            this.btnInHoaDon.BorderRadius = 10;
+            this.btnInHoaDon.BorderStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            this.btnInHoaDon.BorderThickness = 2;
+            this.btnInHoaDon.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnInHoaDon.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnInHoaDon.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnInHoaDon.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnInHoaDon.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
+            this.btnInHoaDon.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInHoaDon.ForeColor = System.Drawing.Color.Black;
+            this.btnInHoaDon.Location = new System.Drawing.Point(1373, 28);
+            this.btnInHoaDon.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnInHoaDon.Name = "btnInHoaDon";
+            this.btnInHoaDon.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
+            this.btnInHoaDon.Size = new System.Drawing.Size(260, 59);
+            this.btnInHoaDon.TabIndex = 57;
+            this.btnInHoaDon.Text = "In hóa đơn";
+            this.btnInHoaDon.Click += new System.EventHandler(this.btnInHoaDon_Click);
             // 
             // btnXoaPN
             // 
@@ -166,26 +151,6 @@
             this.btnXoaPN.TabIndex = 54;
             this.btnXoaPN.Text = "Xóa đơn hàng";
             this.btnXoaPN.Click += new System.EventHandler(this.btnXoaPN_Click);
-            // 
-            // dtpNgayNhap
-            // 
-            this.dtpNgayNhap.BackColor = System.Drawing.SystemColors.Control;
-            this.dtpNgayNhap.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
-            this.dtpNgayNhap.BorderRadius = 10;
-            this.dtpNgayNhap.BorderThickness = 2;
-            this.dtpNgayNhap.Checked = true;
-            this.dtpNgayNhap.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.dtpNgayNhap.FillColor = System.Drawing.Color.White;
-            this.dtpNgayNhap.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.dtpNgayNhap.Format = System.Windows.Forms.DateTimePickerFormat.Long;
-            this.dtpNgayNhap.Location = new System.Drawing.Point(104, 18);
-            this.dtpNgayNhap.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpNgayNhap.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.dtpNgayNhap.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.dtpNgayNhap.Name = "dtpNgayNhap";
-            this.dtpNgayNhap.Size = new System.Drawing.Size(549, 51);
-            this.dtpNgayNhap.TabIndex = 52;
-            this.dtpNgayNhap.Value = new System.DateTime(2024, 11, 20, 13, 50, 31, 229);
             // 
             // guna2GroupBox2
             // 
@@ -339,7 +304,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.guna2GroupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).EndInit();
             this.guna2GroupBox1.ResumeLayout(false);
@@ -353,12 +317,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2TextBox txtSearch;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel2;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox1;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox2;
-        private Guna.UI2.WinForms.Guna2DateTimePicker dtpNgayNhap;
-        private Guna.UI2.WinForms.Guna2Button btnLamMoiPN;
+        private Guna.UI2.WinForms.Guna2Button btnInHoaDon;
         private Guna.UI2.WinForms.Guna2Button btnXoaPN;
         private Guna.UI2.WinForms.Guna2DataGridView dgvOrder;
         private Guna.UI2.WinForms.Guna2DataGridView dgvPRDetail;

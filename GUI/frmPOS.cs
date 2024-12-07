@@ -22,6 +22,7 @@ namespace GUI
     {
         private UsersBUL _usersBUL = new UsersBUL();
         private CategoriesBUL _categoriesBUL;
+        private OrderBUL _orderBUL;
         private ProductBUL _productBUL;
         public frmPOS()
         {
@@ -32,6 +33,7 @@ namespace GUI
         {
             _categoriesBUL = new CategoriesBUL();
             _productBUL=new ProductBUL();
+            _orderBUL = new OrderBUL();
             LoadCategories();
             LoadProduct();
 
@@ -40,24 +42,33 @@ namespace GUI
         }
         private void SetupDataGridView()
         {
-            // Kiểm tra xem các cột đã tồn tại chưa, nếu chưa thì thêm vào
-            if (!guna2DataGridView1.Columns.Contains("ProductID"))
+            dgvOrder.AllowUserToAddRows = false;
+
+            if (!dgvOrder.Columns.Contains("ProductID"))
             {
-                guna2DataGridView1.Columns.Add("ProductID", "Mã sản phẩm");
-                guna2DataGridView1.Columns.Add("ProductName", "Tên sản phẩm");
-                guna2DataGridView1.Columns.Add("dgvQty", "Số lượng");
-                guna2DataGridView1.Columns.Add("dgvPrice", "Giá");
-                guna2DataGridView1.Columns.Add("dgvAmount", "Tổng tiền");
+                dgvOrder.Columns.Add("ProductID", "Mã sản phẩm");
+                dgvOrder.Columns.Add("ProductName", "Tên sản phẩm");
+                dgvOrder.Columns.Add("dgvQty", "Số lượng");
+                dgvOrder.Columns.Add("dgvPrice", "Giá");
+                dgvOrder.Columns.Add("dgvAmount", "Tổng tiền");
+                dgvOrder.RowTemplate.Height = 40;
             }
         }
         void LoadComboboxKhachHang()
         {
-            var customer = _usersBUL.GetAllCustomers().ToList();
+            var customers = _usersBUL.GetAllCustomers()
+                                     .Select(c => new
+                                     {
+                                         UserName = c.UserName,
+                                         DisplayName = $"({c.UserName}) {c.FullName}" 
+                                     })
+                                     .ToList();
 
-            cboKhachHang.DataSource = customer;
-            cboKhachHang.DisplayMember = "FullName";
-            cboKhachHang.ValueMember = "UserName";
+            cboKhachHang.DataSource = customers;
+            cboKhachHang.DisplayMember = "DisplayName"; 
+            cboKhachHang.ValueMember = "UserName";    
         }
+
         private void LoadCategories()
         {
             var categories = _categoriesBUL.GetCategories();
@@ -77,7 +88,7 @@ namespace GUI
             // Lọc sản phẩm theo danh mục
             FilterProductsByCategories();
         }
-
+     
         private void FilterProductsByCategories()
         {
             var selectedCategories = panLoai.Controls.OfType<Guna.UI2.WinForms.Guna2CheckBox>()
@@ -85,7 +96,6 @@ namespace GUI
                                               .Select(ckb => ckb.Name)
                                               .ToList();
             panSanPham.Controls.Clear();
-            // Nếu không chọn gì
             if (selectedCategories.Count == 0)
             {
                 LoadProduct(); // Load tất cả sản phẩm
@@ -142,7 +152,7 @@ namespace GUI
                 var uc = (ucProduct)l;
                 bool isExist = false;
 
-                foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+                foreach (DataGridViewRow row in dgvOrder.Rows)
                 {
                     if (Convert.ToInt32(row.Cells["ProductID"].Value) == uc.id)
                     {
@@ -155,9 +165,9 @@ namespace GUI
                 }
                 if (!isExist)
                 {
-                    guna2DataGridView1.Rows.Add(new object[]
+                    dgvOrder.Rows.Add(new object[]
                     {
-                        guna2DataGridView1.Rows.Count + 1,  // Số thứ tự
+                        dgvOrder.Rows.Count + 1,  // Số thứ tự
                         uc.id,                            // ProductID
                         uc.name,                          // Tên sản phẩm
                         1,                                 // Số lượng mặc định = 1
@@ -166,7 +176,7 @@ namespace GUI
                     });
                 }
 
-                UpdateTotalAmount(); // Cập nhật tổng tiền
+                UpdateTotalAmount(); 
             };
         }
 
@@ -181,7 +191,6 @@ namespace GUI
                 string img = product.Image;
                 if (!string.IsNullOrEmpty(img))
                 {
-                    // Đường dẫn đến ảnh của sản phẩm
                     string imagePath = Path.Combine(Application.StartupPath, "Images", img);
                     if (File.Exists(imagePath))
                     {
@@ -202,7 +211,7 @@ namespace GUI
         private void UpdateTotalAmount()
         {
             double total = 0;
-            foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+            foreach (DataGridViewRow row in dgvOrder.Rows)
             {
                 if (row.Cells["dgvAmount"].Value != null)
                 {
@@ -215,44 +224,46 @@ namespace GUI
         {
             try
             {
-                // Mở kết nối tới cơ sở dữ liệu
+                DateTime dateTime = DateTime.Now;
                 using (SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=ShoeShop;Integrated Security=True"))
                 {
                     conn.Open();
 
-                    // Kiểm tra và chuyển đổi TotalAmount
-                    double totalAmount = 0;
-                    if (!double.TryParse(lblTongTien.Text, out totalAmount))
+                    if (!double.TryParse(lblTongTien.Text, out double totalAmount))
                     {
                         MessageBox.Show("Tổng tiền không hợp lệ.");
                         return;
                     }
-                    string selectedUserName = cboKhachHang.SelectedValue.ToString();
-                    // Tạo câu lệnh SQL để chèn dữ liệu vào bảng Orders
-                    string query = @"
-                    INSERT INTO Orders (TotalAmount, Status, DateCreated, UserName)
-                    VALUES (@TotalAmount, @Status, @DateCreated, @UserName);
-                    SELECT SCOPE_IDENTITY();";  // Trả về OrderID vừa được tạo
 
-                    // Khởi tạo đối tượng SqlCommand
+                    string description = txtGhiChu.Text.Trim();
+                    string selectedUserName = cboKhachHang.SelectedValue.ToString();
+
+                    string query = @"
+                        INSERT INTO Orders (TotalAmount, Status, DateCreated, UserName, Description)
+                        VALUES (@TotalAmount, @Status, @DateCreated, @UserName, @Description);
+                        SELECT SCOPE_IDENTITY();";  
+
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        // Thêm các tham số vào câu lệnh SQL
                         cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
-                        cmd.Parameters.AddWithValue("@Status", "Đã thanh toán");  
+                        cmd.Parameters.AddWithValue("@Status", "Đã thanh toán");
                         cmd.Parameters.AddWithValue("@DateCreated", DateTime.Now);
-                        cmd.Parameters.AddWithValue("@UserName", selectedUserName);  // Sử dụng tên người dùng hiện tại nếu có
+                        cmd.Parameters.AddWithValue("@UserName", selectedUserName);
+                        cmd.Parameters.AddWithValue("@Description", description); 
 
-                        // Thực thi câu lệnh và lấy OrderID vừa được tạo
                         var result = cmd.ExecuteScalar();
 
-                        // Kiểm tra kết quả trả về từ ExecuteScalar
                         if (result != DBNull.Value)
                         {
-                            int orderId = Convert.ToInt32(result);  // Lấy OrderID vừa được tạo
+                            int orderId = Convert.ToInt32(result); 
 
-                            // Sau khi lấy OrderID, tiếp tục thêm chi tiết đơn hàng vào OrderDetails
                             AddOrderDetails(orderId);
+
+                            dgvOrder.DataSource = null;
+                            dgvOrder.Rows.Clear();
+
+                            lblTongTien.Text = "0";
+                            txtGhiChu.Text = ""; 
                             MessageBox.Show("Đơn hàng đã được lưu thành công!");
                         }
                         else
@@ -269,7 +280,6 @@ namespace GUI
         }
 
 
-        // Hàm để thêm chi tiết đơn hàng vào bảng OrderDetails
         private void AddOrderDetails(int orderId)
         {
             try
@@ -277,13 +287,11 @@ namespace GUI
                 using (SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=ShoeShop;Integrated Security=True"))
                 {
                     conn.Open();
-
-                    // Tạo câu lệnh SQL để chèn dữ liệu vào bảng OrderDetails
                     string query = @"
                     INSERT INTO OrderDetails (OrderID, ProductID, Quantity, Price, TotalAmount)
                     VALUES (@OrderID, @ProductID, @Quantity, @Price, @TotalAmount);";
 
-                    foreach (DataGridViewRow row in guna2DataGridView1.Rows)
+                    foreach (DataGridViewRow row in dgvOrder.Rows)
                     {
                         if (row.Cells["ProductID"].Value != null)
                         {
@@ -305,8 +313,6 @@ namespace GUI
                                 MessageBox.Show("Tổng tiền sản phẩm không hợp lệ.");
                                 return;
                             }
-
-                            // Tạo đối tượng SqlCommand để chèn chi tiết đơn hàng
                             using (SqlCommand cmd = new SqlCommand(query, conn))
                             {
                                 cmd.Parameters.AddWithValue("@OrderID", orderId);
@@ -315,7 +321,6 @@ namespace GUI
                                 cmd.Parameters.AddWithValue("@Price", price);
                                 cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
 
-                                // Thực thi câu lệnh chèn dữ liệu vào OrderDetails
                                 cmd.ExecuteNonQuery();
                             }
                         }
@@ -331,7 +336,46 @@ namespace GUI
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (dgvOrder.Rows.Count == 0)
+            {
+                MessageBox.Show("Chưa có sản phẩm nào được thêm vào đơn hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             SaveOrderToDatabase();
+        }
+
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            string searchKeyword = guna2TextBox1.Text.Trim().ToLower();
+
+            var filteredProducts = _productBUL.GetProducts()
+                                              .Where(p => p.ProductName.ToLower().Contains(searchKeyword))
+                                              .ToList();
+            LoadProductByName(filteredProducts);
+        }
+
+        private void LoadProductByName(List<Product> products)
+        {
+            panSanPham.Controls.Clear();
+
+            foreach (var product in products)
+            {
+                string img = product.Image;
+                if (!string.IsNullOrEmpty(img))
+                {
+                    string imagePath = Path.Combine(Application.StartupPath, "Images", img);
+                    if (File.Exists(imagePath))
+                    {
+                        AddItem(product.ProductID.ToString(), product.ProductName,
+                                Image.FromFile(imagePath), product.ProductPrice ?? 0); 
+                    }
+                }
+                else
+                {
+                    AddItem(product.ProductID.ToString(), product.ProductName,
+                            Properties.Resources.save, product.ProductPrice ?? 0);
+                }
+            }
         }
     }
 }

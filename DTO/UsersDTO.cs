@@ -35,5 +35,9 @@ namespace DTO
             Password = password;
             RoleID = roleID;
         }
+        public string DisplayName
+        {
+            get { return $"({UserName}) {FullName}"; }
+        }
     }
 }

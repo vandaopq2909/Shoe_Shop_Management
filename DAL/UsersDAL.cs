@@ -37,7 +37,25 @@ namespace DAL
                 conn.Close();
             return kq > 0;
         }
-
+        public string getDislayName(string userName)
+        {
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            string query = "Select FullName from Users where UserName = "+userName;
+            SqlCommand cmd = new SqlCommand(query, conn);
+            string fullname = cmd.ExecuteScalar().ToString();
+            string displayName = "( " + userName + " ) " + fullname;
+            if (conn.State == ConnectionState.Open)
+                conn.Close();
+            if (displayName != null)
+            {
+                return displayName;
+            }
+            else
+            {
+                return null; 
+            }
+        }
         public void AddUser(User user)
         {
             db.Users.InsertOnSubmit(user);
