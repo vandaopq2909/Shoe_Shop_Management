@@ -50,6 +50,15 @@ namespace GUI
         {
             var emps = _usersBUL.GetAllEmployees();
             dgvEmployees.DataSource = emps;
+
+            dgvEmployees.Columns["UserName"].HeaderText = "Mã nhân viên";
+            dgvEmployees.Columns["FullName"].HeaderText = "Họ tên";
+            dgvEmployees.Columns["PhoneNumber"].HeaderText = "Số điện thoại";
+            dgvEmployees.Columns["Gender"].HeaderText = "Giới tính";
+            dgvEmployees.Columns["DateOfBirth"].HeaderText = "Ngày sinh";
+            dgvEmployees.Columns["Address"].HeaderText = "Địa chỉ";
+            dgvEmployees.Columns["isActive"].HeaderText = "Trạng thái";
+
             // Ẩn cột không cần thiết
             dgvEmployees.Columns["DateOfBirth"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvEmployees.Columns["Password"].Visible = false;

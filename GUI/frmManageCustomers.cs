@@ -143,6 +143,15 @@ namespace GUI
         {
             var customers = _usersBUL.GetAllCustomers();
             dgvCustomers.DataSource = customers;
+
+            dgvCustomers.Columns["UserName"].HeaderText = "Mã nhân viên";
+            dgvCustomers.Columns["FullName"].HeaderText = "Họ tên";
+            dgvCustomers.Columns["PhoneNumber"].HeaderText = "Số điện thoại";
+            dgvCustomers.Columns["Gender"].HeaderText = "Giới tính";
+            dgvCustomers.Columns["DateOfBirth"].HeaderText = "Ngày sinh";
+            dgvCustomers.Columns["Address"].HeaderText = "Địa chỉ";
+            dgvCustomers.Columns["isActive"].HeaderText = "Trạng thái";
+
             // Ẩn cột không cần thiết
             dgvCustomers.Columns["DateOfBirth"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dgvCustomers.Columns["Password"].Visible = false;

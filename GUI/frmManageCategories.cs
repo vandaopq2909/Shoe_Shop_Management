@@ -31,6 +31,9 @@ namespace GUI
         {
             var cat = _categoriesBUL.GetCategories().ToList();
             dgvCategories.DataSource = cat;
+
+            dgvCategories.Columns["CategoryID"].HeaderText = "Mã loại";
+            dgvCategories.Columns["CategoryName"].HeaderText = "Tên loại";
         }
         void clearText()
         {

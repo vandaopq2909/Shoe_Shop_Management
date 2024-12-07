@@ -16,6 +16,7 @@ namespace GUI
     {
         public string maNhanVien {  get; set; }
         public UsersBUL _userBUL = new UsersBUL();
+        public int roleId = 1;
         public frmMain()
         {
             InitializeComponent();
@@ -56,12 +57,17 @@ namespace GUI
         private void frmMain_Load(object sender, EventArgs e)
         {
             LoadInfoUser();
+            if (roleId == 2) { 
+                btnQLNhanVien.Visible = false;
+                btnThongKeBaoCao.Visible = false;
+            }
         }
 
         private void LoadInfoUser()
         {
             User user = _userBUL.LoadInfoUserByMaNV(maNhanVien);
             lblNameAndRole.Text = user.FullName + " - " + user.Role.RoleName;
+            roleId = user.RoleID ?? 1;
         }
 
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
