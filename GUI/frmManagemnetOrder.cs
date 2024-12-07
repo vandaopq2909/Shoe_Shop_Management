@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utilities;
 
 namespace GUI
 {
@@ -88,10 +89,7 @@ namespace GUI
             MessageBox.Show("Đã xóa thành công!");
         }
 
-        private void btnLamMoiPN_Click(object sender, EventArgs e)
-        {
-            LoadOrder();
-        }
+
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
@@ -138,6 +136,48 @@ namespace GUI
             dgvOrder.Refresh();
         }
 
+        private void btnInHoaDon_Click(object sender, EventArgs e)
+        {
+            PrintOrderByOrderID(ORDID);
+        }
+
+        private void PrintOrderByOrderID(int oRDID)
+        {
+            var orderDetails = orderDetailBUL.GetAllDetails(oRDID).Select(pr => new
+            {
+                pr.OrderID,
+                pr.Product.ProductName,
+                pr.Quantity,
+                pr.Price,
+                pr.TotalAmount
+            }).ToList();
+
+            var order = orderBUL.GetAllOrder().FirstOrDefault(o => o.OrderID == oRDID);
+            if (order == null || orderDetails.Count == 0)
+            {
+                MessageBox.Show("Không có chi tiết đơn hàng nào!");
+                return;
+            }
+
+            string totalAmount = string.Format(new CultureInfo("vi-VN"), "{0:C0}", order.TotalAmount);
+            Dictionary<string, string> dic = new Dictionary<string, string>
+                    {
+                        { "OrderID", order.OrderID.ToString() },
+                        { "CustomerName", order.User.FullName },
+                        { "DateCreated", order.DateCreated?.ToString("dd/MM/yyyy") },
+                        { "Description", order?.Description ?? "" },
+                        { "TotalAmount", totalAmount}
+
+                    };
+
+            DataTable tblOrderDetails = ConvertUltil.ConvertListToDataTable(orderDetails);
+
+            WordExport wd = new WordExport(Application.StartupPath + "/Template/HoaDonTemplate.dotx", true);
+            wd.WriteFields(dic);
+            wd.WriteTable(tblOrderDetails, 1);
+            MessageBox.Show("In hóa đơn thành công!");
+
+        }
 
         private void btnThemSP_Click(object sender, EventArgs e)
         {
