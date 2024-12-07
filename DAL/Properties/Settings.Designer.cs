@@ -12,7 +12,7 @@ namespace DAL.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.11.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -20,17 +20,6 @@ namespace DAL.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.;Initial Catalog=ShoeShop;Persist Security Info=True;User ID=sa;Pass" +
-            "word=123;Encrypt=True;TrustServerCertificate=True")]
-        public string ShoeShopConnectionString {
-            get {
-                return ((string)(this["ShoeShopConnectionString"]));
             }
         }
         
@@ -47,11 +36,33 @@ namespace DAL.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HUNGGA\\HUNGGA;Initial Catalog=ShoeShop;Integrated Security=True;Trust" +
-            "ServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=;Initial Catalog=ShoeShop;Persist Security Info=True;User ID=sa;Passw" +
+            "ord=123;Encrypt=True;TrustServerCertificate=True")]
+        public string ShoeShopConnectionString {
+            get {
+                return ((string)(this["ShoeShopConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-K6TE4RL\\VANDAO;Initial Catalog=ShoeShop;Integrated Security=T" +
+            "rue;TrustServerCertificate=True")]
         public string ShoeShopConnectionString2 {
             get {
                 return ((string)(this["ShoeShopConnectionString2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-K6TE4RL\\VANDAO;Initial Catalog=ShoeShop;User ID=sa;Password=1" +
+            "23;Encrypt=False;TrustServerCertificate=True")]
+        public string ShoeShopConnectionString3 {
+            get {
+                return ((string)(this["ShoeShopConnectionString3"]));
             }
         }
     }

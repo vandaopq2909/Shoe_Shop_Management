@@ -1,10 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ShoeShop" Class="ShoeStoreDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=HUNGGA\HUNGGA;Initial Catalog=ShoeShop;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="ShoeShopConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-K6TE4RL\VANDAO;Initial Catalog=ShoeShop;User ID=sa;Encrypt=False;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="ShoeShopConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Categories" Member="Categories">
     <Type Name="Category">
       <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="CategoryName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
       <Association Name="Category_Product" Member="Products" ThisKey="CategoryID" OtherKey="CategoryID" Type="Product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="isActive" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Image" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="User_Order" Member="Orders" ThisKey="UserName" OtherKey="UserName" Type="Order" />
+      <Association Name="User_PurchaseReceipt" Member="PurchaseReceipts" ThisKey="UserName" OtherKey="UserName" Type="PurchaseReceipt" />
+      <Association Name="Role_User" Member="Role" ThisKey="RoleID" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.OrderDetails" Member="OrderDetails">
@@ -67,8 +85,8 @@
       <Column Name="UserName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="SupplierID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="PurchaseReceipt_PurchaseReceiptDetail" Member="PurchaseReceiptDetails" ThisKey="PReceiptID" OtherKey="PReceiptID" Type="PurchaseReceiptDetail" />
-      <Association Name="Supplier_PurchaseReceipt" Member="Supplier" ThisKey="SupplierID" OtherKey="SupplierID" Type="Supplier" IsForeignKey="true" />
       <Association Name="User_PurchaseReceipt" Member="User" ThisKey="UserName" OtherKey="UserName" Type="User" IsForeignKey="true" />
+      <Association Name="Supplier_PurchaseReceipt" Member="Supplier" ThisKey="SupplierID" OtherKey="SupplierID" Type="Supplier" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Role" Member="Roles">
@@ -87,24 +105,6 @@
       <Column Name="Email" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="Supplier_PurchaseReceipt" Member="PurchaseReceipts" ThisKey="SupplierID" OtherKey="SupplierID" Type="PurchaseReceipt" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="UserName" Type="System.String" DbType="NVarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Password" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="FullName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Gender" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="DateOfBirth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Address" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="isActive" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="RoleID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Image" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Association Name="User_Order" Member="Orders" ThisKey="UserName" OtherKey="UserName" Type="Order" />
-      <Association Name="User_PurchaseReceipt" Member="PurchaseReceipts" ThisKey="UserName" OtherKey="UserName" Type="PurchaseReceipt" />
-      <Association Name="Role_User" Member="Role" ThisKey="RoleID" OtherKey="RoleID" Type="Role" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
