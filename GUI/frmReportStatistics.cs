@@ -77,7 +77,7 @@ namespace GUI
             dtpChonTG.Enabled = false;
             dtpChonTG.Value = DateTime.Now;
 
-            var date = DateTime.Now.Day;
+            var date = DateTime.Today;
             var data = _ordersBUL.ThongKeTheoTuan(date);
 
             dgvThongKe.DataSource = data;

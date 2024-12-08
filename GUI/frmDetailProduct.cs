@@ -24,15 +24,21 @@ namespace GUI
         {
             if (id > 0)
             {
-                string qry = @"Select * from Products where ProductID = " + id;
+                string qry = @"
+               SELECT p.*, c.CategoryName 
+               FROM Products p 
+               LEFT JOIN Categories c ON p.CategoryID = c.CategoryID 
+               WHERE p.ProductID = " + id;
+
                 DataTable dt = MainClass.GetData(qry);
-                foreach (DataRow row in dt.Rows) {
+                foreach (DataRow row in dt.Rows)
+                {
                     lblName.Text = row["ProductName"].ToString();
                     lblPrice.Text = Convert.ToDouble(row["ProductPrice"]).ToString("N0", CultureInfo.GetCultureInfo("vi-VN")) + " đ";
-                    lblLoai.Text = row["CategoryID"].ToString();
+                    lblLoai.Text = row["CategoryName"].ToString();
                     lblThuongHieu.Text = row["Brand"].ToString();
-                    lblSize.Text=row["Size"].ToString();
-                    lblMauSac.Text = row["Color"].ToString() ;
+                    lblSize.Text = row["Size"].ToString();
+                    lblMauSac.Text = row["Color"].ToString();
                     lblTrangThai.Text = row["Status"].ToString();
                     lblMoTa.Text = row["Description"].ToString();
 

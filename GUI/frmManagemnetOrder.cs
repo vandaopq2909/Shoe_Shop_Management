@@ -143,9 +143,9 @@ namespace GUI
 
         private void PrintOrderByOrderID(int oRDID)
         {
-            var orderDetails = orderDetailBUL.GetAllDetails(oRDID).Select(pr => new
+            var orderDetails = orderDetailBUL.GetAllDetails(oRDID).Select((pr, index) => new
             {
-                pr.OrderID,
+                STT = index + 1, // Thêm cột STT (số thứ tự, bắt đầu từ 1)
                 pr.Product.ProductName,
                 pr.Quantity,
                 pr.Price,
@@ -161,14 +161,14 @@ namespace GUI
 
             string totalAmount = string.Format(new CultureInfo("vi-VN"), "{0:C0}", order.TotalAmount);
             Dictionary<string, string> dic = new Dictionary<string, string>
-                    {
-                        { "OrderID", order.OrderID.ToString() },
-                        { "CustomerName", order.User.FullName },
-                        { "DateCreated", order.DateCreated?.ToString("dd/MM/yyyy") },
-                        { "Description", order?.Description ?? "" },
-                        { "TotalAmount", totalAmount}
+             {
+                 { "OrderID", order.OrderID.ToString() },
+                 { "CustomerName", order.User.FullName },
+                 { "DateCreated", order.DateCreated?.ToString("dd/MM/yyyy") },
+                 { "Description", order?.Description ?? "" },
+                 { "TotalAmount", totalAmount}
 
-                    };
+             };
 
             DataTable tblOrderDetails = ConvertUltil.ConvertListToDataTable(orderDetails);
 
@@ -178,7 +178,6 @@ namespace GUI
             MessageBox.Show("In hóa đơn thành công!");
 
         }
-
         private void btnThemSP_Click(object sender, EventArgs e)
         {
           

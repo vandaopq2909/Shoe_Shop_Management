@@ -96,7 +96,8 @@ namespace DAL
 
         public bool IsExistEmployee(string maNV, string matKhau)
         {
-            return db.Users.Where(x=> x.UserName == maNV && x.Password == matKhau).Any();
+            return db.Users.Where(x=> x.UserName == maNV && x.Password == matKhau &&
+                                    (x.RoleID == 1 || x.RoleID == 2 )).Any();
         }
 
         public User LoadInfoUserByMaNV(string maNhanVien)
