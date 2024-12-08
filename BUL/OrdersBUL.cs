@@ -26,7 +26,7 @@ namespace BUL
             return dal.GetTotalRevenueForMonth(month, year);    
         }
 
-        public double GetTotalRevenueForWeek(int date)
+        public double GetTotalRevenueForWeek(DateTime date)
         {
             return dal.GetTotalRevenueForWeek(date);
         }
@@ -51,7 +51,7 @@ namespace BUL
             return dal.ThongKeTheoThang(month, year);
         }
 
-        public List<dynamic> ThongKeTheoTuan(int date)
+        public List<dynamic> ThongKeTheoTuan(DateTime date)
         {
             return dal.ThongKeTheoTuan(date);
         }

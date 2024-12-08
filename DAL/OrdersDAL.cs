@@ -89,25 +89,27 @@ namespace DAL
             }
         }
 
-        public double GetTotalRevenueForWeek(int date)
+        public double GetTotalRevenueForWeek(DateTime currentDate)
         {
             try
             {
-                // Lấy ngày bắt đầu của tuần (thứ Hai) và ngày kết thúc của tuần (Chủ Nhật)
-                DateTime today = DateTime.Now;
-                DateTime startOfWeek = today.AddDays(DayOfWeek.Monday - today.DayOfWeek);
-                DateTime endOfWeek = startOfWeek.AddDays(6); // Thêm 6 ngày để có Chủ Nhật
+                // Xác định ngày bắt đầu tuần (thứ Hai) và ngày kết thúc tuần (Chủ Nhật)
+                int daysSinceMonday = (7 + (currentDate.DayOfWeek - DayOfWeek.Monday)) % 7;
+                DateTime startOfWeek = currentDate.Date.AddDays(-daysSinceMonday);
+                DateTime endOfWeek = startOfWeek.AddDays(6);
 
-                // Lọc các đơn hàng có ngày tạo nằm trong tuần này
-                var totalRevenue = DBContext.Orders
-                    .Where(o => o.DateCreated.HasValue && o.DateCreated.Value >= startOfWeek && o.DateCreated.Value <= endOfWeek)
-                    .Sum(o => o.TotalAmount ?? 0); // Tính tổng doanh thu
+                // Tính tổng doanh thu từ cơ sở dữ liệu trong khoảng thời gian tuần
+                double totalRevenue = DBContext.Orders
+                    .Where(o => o.DateCreated.HasValue &&
+                                o.DateCreated.Value.Date >= startOfWeek &&
+                                o.DateCreated.Value.Date <= endOfWeek)
+                    .Sum(o => o.TotalAmount ?? 0);
 
                 return totalRevenue;
             }
             catch (Exception ex)
             {
-                throw new Exception("Lỗi khi tính tổng doanh thu trong tuần", ex);
+                throw new Exception("Lỗi khi tính tổng doanh thu trong tuần: " + ex.Message, ex);
             }
         }
 
@@ -228,34 +230,42 @@ namespace DAL
             }
         }
 
-        public List<dynamic> ThongKeTheoTuan(int date)
+        public List<dynamic> ThongKeTheoTuan(DateTime currentDate)
         {
             try
             {
-                DateTime today = DateTime.Today;
+                // Xác định ngày bắt đầu tuần (thứ Hai) và ngày kết thúc tuần (Chủ Nhật)
+                int daysSinceMonday = (7 + (currentDate.DayOfWeek - DayOfWeek.Monday)) % 7;
+                DateTime startOfWeek = currentDate.Date.AddDays(-daysSinceMonday);
+                DateTime endOfWeek = startOfWeek.AddDays(6);
 
-                // Xác định ngày bắt đầu tuần (thứ Hai gần nhất)
-                int daysSinceMonday = (int)today.DayOfWeek - (int)DayOfWeek.Monday;
-                DateTime startOfWeek = today.AddDays(-daysSinceMonday < 0 ? -6 : -daysSinceMonday).Date;
-
-                // Xác định ngày cuối tuần (Chủ Nhật)
-                DateTime endOfWeek = startOfWeek.AddDays(6).Date;
-
-                // Lấy dữ liệu thô từ DB
+                // Lấy tất cả các đơn hàng trong tuần từ cơ sở dữ liệu
                 var rawData = DBContext.Orders
-                    .Where(o => o.DateCreated.HasValue && o.DateCreated >= startOfWeek && o.DateCreated <= endOfWeek)
-                    .ToList(); // Thực thi truy vấn và tải dữ liệu vào bộ nhớ
+                    .Where(o => o.DateCreated.HasValue &&
+                                o.DateCreated.Value.Date >= startOfWeek &&
+                                o.DateCreated.Value.Date <= endOfWeek)
+                    .ToList();
 
-                // Xử lý tính toán và định dạng phía C#
-                var weeklyRevenue = rawData
-                    .GroupBy(o => o.DateCreated.Value.Date) // Nhóm theo ngày
-                    .Select(g => new
+                // Tạo danh sách chứa doanh thu từng ngày trong tuần
+                List<dynamic> weeklyRevenue = new List<dynamic>();
+
+                for (int i = 0; i < 7; i++)
+                {
+                    DateTime currentDay = startOfWeek.AddDays(i);
+
+                    // Tính tổng doanh thu trong ngày
+                    var dailyRevenue = rawData
+                        .Where(o => o.DateCreated.Value.Date == currentDay)
+                        .Sum(o => o.TotalAmount ?? 0);
+
+                    // Thêm kết quả vào danh sách
+                    weeklyRevenue.Add(new
                     {
-                        DayOfWeek = g.Key.ToString("dddd"),  // Thực hiện định dạng ở C#
-                        Date = g.Key,
-                        TotalRevenue = g.Sum(o => o.TotalAmount ?? 0)
-                    })
-                    .ToList<dynamic>();
+                        DayOfWeek = currentDay.ToString("dddd", new System.Globalization.CultureInfo("vi-VN")),
+                        Date = currentDay.ToString("dd/MM/yyyy"),
+                        TotalRevenue = dailyRevenue
+                    });
+                }
 
                 return weeklyRevenue;
             }

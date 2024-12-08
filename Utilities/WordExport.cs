@@ -20,6 +20,7 @@ namespace Utilities
             _app = new Word.Application();
             _app.Visible = vCreateApp;
             object ob = System.Reflection.Missing.Value;
+
             _doc = _app.Documents.Add(ref _pathFile, ref ob, ref ob, ref ob);
         }
         public void WriteFields(Dictionary<string, string> vValues)
@@ -41,13 +42,20 @@ namespace Utilities
             int lencol = vDataTable.Columns.Count;
             for (int i = 0; i < lenrow; ++i)
             {
-                object ob = System.Reflection.Missing.Value;
-                tbl.Rows.Add(ref ob);
+                if (tbl.Rows.Count < i + 2) // Kiểm tra và thêm hàng nếu cần
+                {
+                    object ob = System.Reflection.Missing.Value;
+                    tbl.Rows.Add(ref ob);
+                }
                 for (int j = 0; j < lencol; ++j)
                 {
-                    tbl.Cell(i + 2, j + 1).Range.Text = vDataTable.Rows[i][j].ToString();
+                    if (j + 1 <= tbl.Columns.Count) // Kiểm tra cột hợp lệ
+                    {
+                        tbl.Cell(i + 2, j + 1).Range.Text = vDataTable.Rows[i][j]?.ToString();
+                    }
                 }
             }
+
         }
     }
 }
