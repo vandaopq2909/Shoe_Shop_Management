@@ -50,11 +50,11 @@
             this.btnDangNhap.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
             this.btnDangNhap.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDangNhap.ForeColor = System.Drawing.Color.White;
-            this.btnDangNhap.Location = new System.Drawing.Point(18, 266);
-            this.btnDangNhap.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDangNhap.Location = new System.Drawing.Point(14, 216);
+            this.btnDangNhap.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDangNhap.Name = "btnDangNhap";
             this.btnDangNhap.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnDangNhap.Size = new System.Drawing.Size(191, 54);
+            this.btnDangNhap.Size = new System.Drawing.Size(205, 44);
             this.btnDangNhap.TabIndex = 57;
             this.btnDangNhap.Text = "Đăng nhập";
             this.btnDangNhap.Click += new System.EventHandler(this.btnDangNhap_Click);
@@ -72,11 +72,11 @@
             this.btnNhapLai.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(139)))), ((int)(((byte)(81)))));
             this.btnNhapLai.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNhapLai.ForeColor = System.Drawing.Color.White;
-            this.btnNhapLai.Location = new System.Drawing.Point(297, 266);
-            this.btnNhapLai.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnNhapLai.Location = new System.Drawing.Point(223, 216);
+            this.btnNhapLai.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNhapLai.Name = "btnNhapLai";
             this.btnNhapLai.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(96)))), ((int)(((byte)(64)))));
-            this.btnNhapLai.Size = new System.Drawing.Size(191, 54);
+            this.btnNhapLai.Size = new System.Drawing.Size(143, 44);
             this.btnNhapLai.TabIndex = 56;
             this.btnNhapLai.Text = "Nhập lại";
             this.btnNhapLai.Click += new System.EventHandler(this.btnNhapLai_Click);
@@ -90,9 +90,10 @@
             this.chkHienThiMK.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.chkHienThiMK.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.chkHienThiMK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
-            this.chkHienThiMK.Location = new System.Drawing.Point(18, 214);
+            this.chkHienThiMK.Location = new System.Drawing.Point(14, 174);
+            this.chkHienThiMK.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkHienThiMK.Name = "chkHienThiMK";
-            this.chkHienThiMK.Size = new System.Drawing.Size(218, 33);
+            this.chkHienThiMK.Size = new System.Drawing.Size(174, 28);
             this.chkHienThiMK.TabIndex = 55;
             this.chkHienThiMK.Text = "Hiển thị mật khẩu";
             this.chkHienThiMK.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -106,10 +107,9 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
-            this.label8.Location = new System.Drawing.Point(46, 115);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(34, 103);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(109, 29);
+            this.label8.Size = new System.Drawing.Size(86, 24);
             this.label8.TabIndex = 54;
             this.label8.Text = "Mật khẩu";
             // 
@@ -128,13 +128,13 @@
             this.txtMK.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtMK.ForeColor = System.Drawing.Color.Black;
             this.txtMK.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMK.Location = new System.Drawing.Point(20, 151);
-            this.txtMK.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtMK.Location = new System.Drawing.Point(15, 123);
+            this.txtMK.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtMK.Name = "txtMK";
             this.txtMK.PasswordChar = '\0';
             this.txtMK.PlaceholderText = "";
             this.txtMK.SelectedText = "";
-            this.txtMK.Size = new System.Drawing.Size(470, 62);
+            this.txtMK.Size = new System.Drawing.Size(352, 50);
             this.txtMK.TabIndex = 53;
             // 
             // label7
@@ -142,10 +142,9 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(113)))), ((int)(((byte)(128)))));
-            this.label7.Location = new System.Drawing.Point(46, 21);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(34, 17);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(154, 29);
+            this.label7.Size = new System.Drawing.Size(124, 24);
             this.label7.TabIndex = 52;
             this.label7.Text = "Mã nhân viên";
             // 
@@ -164,19 +163,20 @@
             this.txtMaNV.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtMaNV.ForeColor = System.Drawing.Color.Black;
             this.txtMaNV.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMaNV.Location = new System.Drawing.Point(20, 44);
-            this.txtMaNV.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.txtMaNV.Location = new System.Drawing.Point(15, 36);
+            this.txtMaNV.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.PasswordChar = '\0';
             this.txtMaNV.PlaceholderText = "";
             this.txtMaNV.SelectedText = "";
-            this.txtMaNV.Size = new System.Drawing.Size(470, 62);
+            this.txtMaNV.Size = new System.Drawing.Size(352, 50);
             this.txtMaNV.TabIndex = 51;
             // 
             // UserControl1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.btnDangNhap);
             this.Controls.Add(this.btnNhapLai);
             this.Controls.Add(this.chkHienThiMK);
@@ -184,8 +184,9 @@
             this.Controls.Add(this.txtMK);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtMaNV);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "UserControl1";
-            this.Size = new System.Drawing.Size(508, 340);
+            this.Size = new System.Drawing.Size(381, 276);
             this.Load += new System.EventHandler(this.UserControl1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
